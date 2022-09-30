@@ -1,0 +1,139 @@
+       ; reason
+       ; 1 - move speed hack
+       ; 2 - staminahack
+       ; 3 - damagehack
+       ; 4 - shophack
+
+INSERT INTO k_banned_cheaters (ip_address, nickname, ban_reason_id, banned_srv_name, banned_srv_ver)
+VALUES('178.93.97.190', '[ПУЛЯ-Х-ЭЛИТА]',1,'!!!...i-ii-iii-ii-i...!!!','8.27D');
+
+select * from k_banned_cheaters
+
+delete from k_banned_cheaters where ip_address = '77.79.137.181'
+delete from k_banned_cheaters where banned_srv_ver = '8.29B'
+
+UPDATE k_banned_cheaters
+SET banned_srv_name = '[stаlkеr-lifе.cоm] Х-rаy'
+WHERE ip_address = '80.234.3.205';
+
+UPDATE k_banned_cheaters
+SET banned_srv_name = '[stаlkеr-lifе.cоm] Х-rаy'
+WHERE banned_srv_name = 'life';
+
+UPDATE k_banned_cheaters
+SET banned_srv_name = 'arena spb'
+WHERE ip_address = '109.106.143.126';
+
+UPDATE k_banned_cheaters
+SET banned_srv_name = '#urаl#stаgilа.ru [tdm]'
+WHERE ip_address = '159.89.26.167';
+
+
+
+select * from k_players
+
+INSERT INTO k_players (name, ip_address,ident)
+VALUES('u','0.0.1.2',1);
+
+
+select * from k_active_sessions
+
+select * from k_active_sessions where name = 'user3';
+
+UPDATE k_active_sessions
+SET is_admin = false
+WHERE is_admin is null;
+
+select * from k_admins
+select * from k_players
+
+INSERT INTO k_admins (login, psw)
+VALUES('vovan[perm]','209902123');
+
+INSERT INTO k_admins (login, psw)
+VALUES('host','209902321');
+
+INSERT INTO k_admins (login, psw)
+VALUES('agan','309902323');
+
+ezekiel
+пароль 2033777
+
+UPDATE k_admins
+SET psw = '123456'
+WHERE login = 'user3';
+
+
+select * from k_nicknames where position(LOWER('ВИКТОР') in LOWER(nickname))>0;
+
+select * from k_players where player_id IN
+(select player_id from k_nicknames where position('dark' in nickname)>0);
+
+use kontora;
+
+select * from k_bill
+
+CREATE VIEW k_contract1
+AS
+SELECT k_contract.contract_num, k_contract.contract_date,
+    k_contract.contract_type, k_contract.k_firm_firn_num,
+    k_staff.staff_name
+FROM k_contract INNER JOIN
+    k_staff ON k_contract.k_staff_staff_num = k_staff.staff_num
+WHERE k_dept_dept_num = 1
+
+select * from k_contract1
+
+UPDATE k_contract1 SET contract_date='2011-11-02'
+WHERE contract_num=1
+
+
+CREATE VIEW k_pay_sum
+AS
+SELECT k_bill_bill_num, SUM(payment_sum) AS pay_sum
+FROM k_payment
+GROUP BY k_bill_bill_num
+
+select * from k_pay_sum
+
+UPDATE k_pay_sum SET pay_sum=1500 WHERE k_bill_bill_num=1
+
+select * from k_staff
+select * from k_price
+
+-- my views
+create view k_managers
+as
+select * from k_staff where staff_post = 'Manager'
+
+select * from k_managers
+
+
+create view k_managers_names
+as
+select staff_name as managers_names from k_managers
+
+select * from k_managers_names
+
+create view k_kontracts_bill_price_type_t
+as
+SELECT * FROM k_contract WHERE contract_num IN
+	(SELECT k_contract_contract_num FROM k_bill WHERE bill_num IN
+		(SELECT k_bill_bill_num FROM k_protokol where k_price_price_num IN
+			(SELECT price_num FROM k_price where price_type = 't')))
+
+select * from k_kontracts_bill_price_type_t
+
+
+CREATE function get_player_games(player_id_arg integer) RETURNS TABLE(srv_name text, game_date date)
+LANGUAGE SQL
+AS $$
+	select srv_name,game_date from k_server_names
+	inner join
+	(select srv_name_id,game_date from k_games where game_id in (select game_id from k_player_game where player_id = player_id_arg)) as tbl
+	on tbl.srv_name_id = k_server_names.srv_name_id;
+$$;
+
+select * from get_player_games(9)
+
+
