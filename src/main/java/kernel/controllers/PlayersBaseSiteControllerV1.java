@@ -1,5 +1,6 @@
 package kernel.controllers;
 
+import kernel.controllers.RequestsLogger.BaseRequestLogger;
 import kernel.entity.*;
 import kernel.repository.*;
 import kernel.services.PlayersBase;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +21,12 @@ import static java.lang.System.in;
 
 @RestController
 @RequestMapping("PlayersSite/v1")
-public class PlayersBaseControllerV1Site
+public class PlayersBaseSiteControllerV1
 {
+    @Autowired
+    @Qualifier("SiteReqLogger")
+    private BaseRequestLogger requestsLogger;
+
     @Autowired
     private PlayersBase playersBase;
 
@@ -44,7 +51,8 @@ public class PlayersBaseControllerV1Site
     @GetMapping("/MyName")
     public String myName(@RequestParam("key") Integer key, HttpServletRequest request)
     {
-        System.out.println(request.getRemoteAddr() + " requests site MyName for key: "+key);
+        String params = "Key: " + key;
+        requestsLogger.Log(request,params, "MyName");
 
         ActiveSession session = sessionManager.GetSession(key);
 
@@ -52,48 +60,6 @@ public class PlayersBaseControllerV1Site
             return notLogged;
 
         return session.getName();
-    }
-
-    @CrossOrigin(origins = "*")
-    @GetMapping("/ListPlayers")
-    public List<Player> listPlayers(HttpServletRequest request)
-    {
-        System.out.println(request.getRemoteAddr() + " requests ListPlayers site");
-        List<Player> lst = playersBase.GetAllPlayers();
-
-        int k = lst.size();
-        if ( k > 100 )
-            lst.subList(100, k).clear();
-
-        return lst;
-    }
-
-    private boolean StringContains(String str, String pattern)
-    {
-        //return str.contains(pattern);
-        return str.toLowerCase().contains(pattern.toLowerCase());
-    }
-
-    private boolean PlayerMatch(Player player, String search)
-    {
-        Set<Nickname> nicknames = player.getNicknames();
-        for(Nickname name: nicknames)
-        {
-            if(StringContains(name.getNickname(), search))
-                return true;
-        }
-
-//        Set<IpAddress> addresses = player.getAddresses();
-//        for(IpAddress address: addresses)
-//        {
-//            if(StringContains(address.getAddress(), search))
-//                return true;
-//        }
-//
-//        if(StringContains(player.getHwid(), search))
-//            return true;
-
-        return false;
     }
 
     private List<Integer> RemoveDuplicates(List<Integer> list)
@@ -221,7 +187,9 @@ public class PlayersBaseControllerV1Site
                                       @RequestParam("page") Integer page,
                                       HttpServletRequest request)
     {
-        System.out.println(request.getRemoteAddr() + " requests searchPlayers site, id: "+ key.toString()+"; search: "+toSearch+"; page: "+page.toString());
+        String params = "Key: " + key.toString() + ", SearchStr: "+toSearch+", Page: "+page.toString();
+        requestsLogger.Log(request,params,"SearchPlayers");
+
         List<Player> lst = playersBase.GetAllPlayers();
 
         if(!toSearch.isEmpty())
@@ -231,26 +199,13 @@ public class PlayersBaseControllerV1Site
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/ListPlayersFull")
-    public List<Player> listPlayersF(HttpServletRequest request)
-    {
-        System.out.println(request.getRemoteAddr() + " requests ListPlayers site");
-        List<Player> lst = playersBase.GetAllPlayers();
-
-//        int k = lst.size();
-//        if ( k > 100 )
-//            lst.subList(100, k).clear();
-
-        return lst;
-    }
-
-    @CrossOrigin(origins = "*")
     @GetMapping("/Authorize")
     public String login( @RequestParam("login") String login,
                          @RequestParam("password") String password,
                          HttpServletRequest request)
     {
-        System.out.println(request.getRemoteAddr() + " requests authorize with login: "+login+"; password: "+password);
+        String params = "Login: " + login + ", Password: " +password;
+        requestsLogger.Log(request,params,"Authorize");
 
         List<BaseAdmin> lst = adminsRepoJPA.findAll();
         boolean logged = false;
@@ -311,7 +266,8 @@ public class PlayersBaseControllerV1Site
                                         @RequestParam("playerId") Integer playerId,
                                         HttpServletRequest request)
     {
-        System.out.println(request.getRemoteAddr() + " requests playerInfo site, id: "+ key.toString()+"; playerId: "+playerId);
+        String params = "Key: " + key.toString() + ", PlayerId: " + playerId;
+        requestsLogger.Log(request, params, "GetPlayerInfo");
         return GetPlayerInfo(playerId);
     }
 }

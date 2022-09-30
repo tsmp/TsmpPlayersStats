@@ -1,8 +1,10 @@
 //package kernel.controllers;
 //
+//import kernel.controllers.RequestsLogger.BaseRequestLogger;
 //import kernel.entity.*;
 //import kernel.repository.*;
 //import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.web.bind.annotation.*;
 //
 //import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,10 @@
 //@RequestMapping("Special/v1")
 //public class SpecialOperationsController
 //{
+//    @Autowired
+//    @Qualifier("SpecReqLogger")
+//    private BaseRequestLogger requestsLogger;
+//
 //    @Autowired
 //    private OldGamesRepoJPA oldGamesRepoJPA;
 //
