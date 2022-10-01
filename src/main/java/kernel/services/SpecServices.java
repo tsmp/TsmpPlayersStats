@@ -1,27 +1,17 @@
-//package kernel.controllers;
-//
-//import kernel.controllers.RequestsLogger.BaseRequestLogger;
-//import kernel.entity.*;
-//import kernel.repository.*;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.web.bind.annotation.*;
-//
-//import javax.servlet.http.HttpServletRequest;
-//import java.util.List;
-//import java.util.Optional;
-//
-//@RestController
-//@RequestMapping("Special/v1")
-//public class SpecialOperationsController
-//{
-//    @Autowired
-//    @Qualifier("SpecReqLogger")
-//    private BaseRequestLogger requestsLogger;
-//
+package kernel.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SpecServices
+{
+    @Autowired
+    private SessionManager sessionManager;
+
 //    @Autowired
 //    private OldGamesRepoJPA oldGamesRepoJPA;
-//
+
 //    @Autowired
 //    private GamesRepoJPA gamesRepoJPA;
 //
@@ -30,7 +20,7 @@
 //
 //    @Autowired
 //    private PlayerGameRepoJPA playerGameRepoJPA;
-//
+
 //    private Integer GetSrvNameId(String name)
 //    {
 //        ServerName srvName = null;
@@ -76,7 +66,7 @@
 //        gamesRepoJPA.save(newGame);
 //        return newGame.getGameId();
 //    }
-//
+
 //    @GetMapping("/MigrateGames")
 //    public String myName()
 //    {
@@ -108,7 +98,12 @@
 //                playerGameRepoJPA.save(newPg);
 //            }
 //        }
-//
+
 //        return "ok";
 //    }
-//}
+
+    public int Hast(String str)
+    {
+        return sessionManager.Hash(str);
+    }
+}

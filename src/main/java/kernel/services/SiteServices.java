@@ -1,32 +1,16 @@
-package kernel.controllers;
+package kernel.services;
 
-import kernel.controllers.RequestsLogger.BaseRequestLogger;
 import kernel.entity.*;
 import kernel.repository.*;
-import kernel.services.PlayersBase;
-import kernel.services.SessionManager;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.apache.tomcat.jni.Address;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.*;
 
-import static java.lang.System.in;
-
-@RestController
-@RequestMapping("PlayersSite/v1")
-public class PlayersBaseSiteControllerV1
+@Component
+public class SiteServices
 {
-    @Autowired
-    @Qualifier("SiteReqLogger")
-    private BaseRequestLogger requestsLogger;
-
     @Autowired
     private PlayersBase playersBase;
 
@@ -45,15 +29,13 @@ public class PlayersBaseSiteControllerV1
     @Autowired
     private PlayersRepoJPA playersRepoJPA;
 
+    @Autowired
+    ClGameRepoJPA clGameRepoJPA;
+
     private String notLogged = "Unauthorized";
 
-    @CrossOrigin(origins = "*")
-    @GetMapping("/MyName")
-    public String myName(@RequestParam("key") Integer key, HttpServletRequest request)
+    public String MyName(Integer key)
     {
-        String params = "Key: " + key;
-        requestsLogger.Log(request,params, "MyName");
-
         ActiveSession session = sessionManager.GetSession(key);
 
         if(session == null)
@@ -67,40 +49,16 @@ public class PlayersBaseSiteControllerV1
         int end = list.size();
         Set<Integer> set = new HashSet<Integer>();
 
-        for(int i = 0; i < end; i++){
+        for(int i = 0; i < end; i++)
             set.add(list.get(i));
-        }
 
         List<Integer> lst = new ArrayList<>();
-
         Iterator it = set.iterator();
+
         while(it.hasNext())
             lst.add((Integer)it.next());
 
         return lst;
-    }
-
-    @NoArgsConstructor
-    @Getter
-    @Setter
-    class PlayerStruct
-    {
-        List<String> nicknames;
-        List<String> addresses;
-        Integer playerId;
-        Optional<String> hwid;
-        Optional<String> info;
-    }
-
-    @NoArgsConstructor
-    @Getter
-    @Setter
-    class SearchResponce
-    {
-        int resultsCnt;
-        int pagesCnt;
-        int firstNumber;
-        List<PlayerStruct> players;
     }
 
     private List<Player> Search(String searchFor, List<Player> lstFull)
@@ -117,7 +75,7 @@ public class PlayersBaseSiteControllerV1
             ids.add(id);
 
         ids = RemoveDuplicates(ids);
-        System.out.println("found by name: "+idsName.size()+" by ip: "+idsIp.size()+" total:" +ids.size());
+        System.out.println("found by name: " + idsName.size() + " by ip: " + idsIp.size() + " total:" + ids.size());
 
         for(Player player: lstFull)
         {
@@ -133,10 +91,10 @@ public class PlayersBaseSiteControllerV1
 
     final int ResultsPerPage = 50;
 
-    SearchResponce PrepareResult(List<Player> lst, Integer page)
+    SiteStruct.SearchResponce PrepareResult(List<Player> lst, Integer page)
     {
         int pagesCount = (lst.size() / ResultsPerPage) + 1;
-        SearchResponce res = new SearchResponce();
+        SiteStruct.SearchResponce res = new SiteStruct.SearchResponce();
         res.players = new ArrayList<>();
         res.pagesCnt = pagesCount;
         res.resultsCnt = lst.size();
@@ -150,7 +108,7 @@ public class PlayersBaseSiteControllerV1
 
         if(page != 1)
         {
-            int begin = ResultsPerPage*(page-1);
+            int begin = ResultsPerPage*(page - 1);
             int end = ResultsPerPage*(page);
             res.firstNumber = begin;
 
@@ -162,7 +120,7 @@ public class PlayersBaseSiteControllerV1
 
         for(Player player: lst)
         {
-            PlayerStruct pl = new PlayerStruct();
+            SiteStruct.PlayerStruct pl = new SiteStruct.PlayerStruct();
             pl.addresses = new ArrayList<>();
             pl.nicknames = new ArrayList<>();
             pl.hwid = Optional.ofNullable(player.getHwid());
@@ -180,33 +138,18 @@ public class PlayersBaseSiteControllerV1
         return res;
     }
 
-    @CrossOrigin(origins = "*")
-    @GetMapping("/SearchPlayers")
-    public SearchResponce searchPlayers(@RequestParam("key") Integer key,
-                                      @RequestParam("search") String toSearch,
-                                      @RequestParam("page") Integer page,
-                                      HttpServletRequest request)
+    public SiteStruct.SearchResponce SearchPlayers(Integer key, String toSearch, Integer page)
     {
-        String params = "Key: " + key.toString() + ", SearchStr: "+toSearch+", Page: "+page.toString();
-        requestsLogger.Log(request,params,"SearchPlayers");
-
         List<Player> lst = playersBase.GetAllPlayers();
 
         if(!toSearch.isEmpty())
-            lst = Search(toSearch,lst);
+            lst = Search(toSearch, lst);
 
         return PrepareResult(lst, page);
     }
 
-    @CrossOrigin(origins = "*")
-    @GetMapping("/Authorize")
-    public String login( @RequestParam("login") String login,
-                         @RequestParam("password") String password,
-                         HttpServletRequest request)
+    public String Login(String login, String password)
     {
-        String params = "Login: " + login + ", Password: " +password;
-        requestsLogger.Log(request,params,"Authorize");
-
         List<BaseAdmin> lst = adminsRepoJPA.findAll();
         boolean logged = false;
 
@@ -222,7 +165,7 @@ public class PlayersBaseSiteControllerV1
             }
         }
 
-        if(logged==false)
+        if(!logged)
         {
             System.out.println("! Attempt to login failed!");
             return "authorize failed";
@@ -231,43 +174,25 @@ public class PlayersBaseSiteControllerV1
         return sessionManager.StartSessionAdmin(login);
     }
 
-    @NoArgsConstructor
-    @Getter
-    @Setter
-    class PlayerInfoStruct
-    {
-        Player player;
-        List<ClGame> games;
-    }
-
-    PlayerInfoStruct GetPlayerInfo(Integer playerId)
+    SiteStruct.PlayerInfoStruct GetPlayerInfo(Integer playerId)
     {
         Optional<Player> player = playersRepoJPA.findById(playerId);
 
         if(player.isEmpty())
         {
             System.out.println("! Player with this id not found!");
-            return new PlayerInfoStruct();
+            return new SiteStruct.PlayerInfoStruct();
         }
 
-        PlayerInfoStruct info = new PlayerInfoStruct();
+        SiteStruct.PlayerInfoStruct info = new SiteStruct.PlayerInfoStruct();
         info.games = clGameRepoJPA.getGamesByPlayer(playerId);
         info.player = player.get();
 
         return info;
     }
 
-    @Autowired
-    ClGameRepoJPA clGameRepoJPA;
-
-    @CrossOrigin(origins = "*")
-    @GetMapping("/GetPlayerInfo")
-    public PlayerInfoStruct getPlayerInfoRequest(@RequestParam("key") Integer key,
-                                        @RequestParam("playerId") Integer playerId,
-                                        HttpServletRequest request)
+    public SiteStruct.PlayerInfoStruct GetPlayerInfo(Integer key, Integer playerId)
     {
-        String params = "Key: " + key.toString() + ", PlayerId: " + playerId;
-        requestsLogger.Log(request, params, "GetPlayerInfo");
         return GetPlayerInfo(playerId);
     }
 }
