@@ -3,7 +3,7 @@ spring:
     active: @spring.profiles.active@
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/PlayersDB
+    url: jdbc:postgresql://localhost:5432/PlayersBase
     username: postgres
     password: nmtprG
   jpa:
