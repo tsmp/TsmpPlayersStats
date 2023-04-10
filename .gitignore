@@ -2,15 +2,15 @@ output
 
 # Visual C++ cache files
 
-ipch/
-.vs/
-.idea/
-x64/
-obj/
-out/
-target/
-bin/
-output/
+**/ipch/
+**/.vs/
+**/.idea/
+**/x64/
+**/obj/
+**/out/
+**/target/
+**/bin/
+**/output/
 *.aps
 
 *.ncb
@@ -35,10 +35,4 @@ output/
 *.opendb
 *.pvs-studio.i
 
-# Ignore .vscode/* except GameResources/.vscode/settings.json
-
-GameResources/.vscode/*
-!GameResources/.vscode/
-!GameResources/.vscode/settings.json
-
-.vscode/*
+**/.vscode/*
