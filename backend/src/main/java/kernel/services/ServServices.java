@@ -17,9 +17,6 @@ public class ServServices
     @Autowired
     private PlayersBase playersBase;
 
-    @Autowired
-    private ServerNamesRepoJPA serverNamesRepoJPA;
-
     public String Hello()
     {
         return "Hello world! 12345. Привет, нубик)";
@@ -47,51 +44,24 @@ public class ServServices
         return "banned";
     }
 
-    private Integer GetSrvNameId(String name)
-    {
-        ServerName srvName = null;
-        List<ServerName> lst = serverNamesRepoJPA.findAll();
-
-        for (ServerName srvn: lst)
-        {
-            if(srvn.getName().equals(name))
-            {
-                srvName = srvn;
-                break;
-            }
-        }
-
-        if(srvName == null)
-        {
-            //System.out.println(name+" not found, created");
-            srvName = new ServerName();
-            srvName.setName(name);
-            serverNamesRepoJPA.save(srvName);
-            return srvName.getId();
-        }
-
-        //System.out.println(name+"found");
-        return srvName.getId();
-    }
-
-    void AddPlayerToBase(String name, String ip, ActiveSession session, String hwid)
-    {
-        Player player = new Player();
-        player.setHwid(hwid);
-
-        IpAddress ipAddress = new IpAddress();
-        ipAddress.setAddress(ip);
-
-        Nickname nickname = new Nickname();
-        nickname.setNickname(name);
-        nickname.setAddedDate(new Date());
-
-        Game game = new Game();
-        game.setGameDate(new Date());
-        game.setServerNameId(GetSrvNameId(session.getName())); // TODO: optimize
-
-        playersBase.AddPlayer(ipAddress, player, nickname, game);
-    }
+//    void AddPlayerToBase(String name, String ip, ActiveSession session, String hwid)
+//    {
+//        Player player = new Player();
+//        player.setHwid(hwid);
+//
+//        IpAddress ipAddress = new IpAddress();
+//        ipAddress.setAddress(ip);
+//
+//        Nickname nickname = new Nickname();
+//        nickname.setNickname(name);
+//        nickname.setAddedDate(new Date());
+//
+//        Game game = new Game();
+//        game.setGameDate(new Date());
+//        game.setServerNameId(GetSrvNameId(session.getName())); // TODO: optimize
+//
+//        playersBase.AddPlayer(ipAddress, player, nickname, game);
+//    }
 
     public String IsBanned(String ip, String name, int key, String hwid)
     {
@@ -100,7 +70,7 @@ public class ServServices
         if (session == null)
             return "Error: not authorized!";
 
-        AddPlayerToBase(name,ip,session, hwid.isEmpty() ? Player.NoHwidStr : hwid);
+        //AddPlayerToBase(name,ip,session, hwid.isEmpty() ? Player.NoHwidStr : hwid);
         return "0"; // Integer.toString(bannedRepositoryJPA.isRecordExist(ip));
     }
 }

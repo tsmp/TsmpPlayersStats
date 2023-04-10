@@ -23,5 +23,8 @@ public interface PlayersRepoJPA extends JpaRepository<Player, Integer> // Маг
     public List<Player> findAll();
 
     Optional<Player> findById(Integer id);
+
+    @Query(value = "SELECT nextval('player_unique_id_seq');", nativeQuery = true)
+    public Integer NextValueUID();
 }
 

@@ -41,7 +41,7 @@ public class SiteServices
         if(session == null)
             return notLogged;
 
-        return session.getName();
+        return "unknown user"; //session.getName();
     }
 
     private List<Integer> RemoveDuplicates(List<Integer> list)
@@ -93,47 +93,47 @@ public class SiteServices
 
     SiteStruct.SearchResponce PrepareResult(List<Player> lst, Integer page)
     {
-        int pagesCount = (lst.size() / ResultsPerPage) + 1;
+//        int pagesCount = (lst.size() / ResultsPerPage) + 1;
         SiteStruct.SearchResponce res = new SiteStruct.SearchResponce();
-        res.players = new ArrayList<>();
-        res.pagesCnt = pagesCount;
-        res.resultsCnt = lst.size();
-        res.firstNumber=0;
-
-        if(page > pagesCount)
-            return res;
-
-        if(page == 1 && pagesCount > 1)
-            lst.subList(ResultsPerPage, lst.size()).clear();
-
-        if(page != 1)
-        {
-            int begin = ResultsPerPage*(page - 1);
-            int end = ResultsPerPage*(page);
-            res.firstNumber = begin;
-
-            if(end > lst.size())
-                end = lst.size();
-
-            lst = lst.subList(begin, end);
-        }
-
-        for(Player player: lst)
-        {
-            SiteStruct.PlayerStruct pl = new SiteStruct.PlayerStruct();
-            pl.addresses = new ArrayList<>();
-            pl.nicknames = new ArrayList<>();
-            pl.hwid = Optional.ofNullable(player.getHwid());
-            pl.playerId = player.getPlayerId();
-
-            for(Nickname name: player.getNicknames())
-                pl.nicknames.add(name.getNickname());
-
-            for(IpAddress addr: player.getAddresses())
-                pl.addresses.add(addr.getAddress());
-
-            res.players.add(pl);
-        }
+//        res.players = new ArrayList<>();
+//        res.pagesCnt = pagesCount;
+//        res.resultsCnt = lst.size();
+//        res.firstNumber=0;
+//
+//        if(page > pagesCount)
+//            return res;
+//
+//        if(page == 1 && pagesCount > 1)
+//            lst.subList(ResultsPerPage, lst.size()).clear();
+//
+//        if(page != 1)
+//        {
+//            int begin = ResultsPerPage*(page - 1);
+//            int end = ResultsPerPage*(page);
+//            res.firstNumber = begin;
+//
+//            if(end > lst.size())
+//                end = lst.size();
+//
+//            lst = lst.subList(begin, end);
+//        }
+//
+//        for(Player player: lst)
+//        {
+//            SiteStruct.PlayerStruct pl = new SiteStruct.PlayerStruct();
+//            pl.addresses = new ArrayList<>();
+//            pl.nicknames = new ArrayList<>();
+//            pl.hwid = Optional.ofNullable(player.getHwid());
+//            pl.playerId = player.getPlayerId();
+//
+//            for(Nickname name: player.getNicknames())
+//                pl.nicknames.add(name.getNickname());
+//
+//            for(IpAddress addr: player.getAddresses())
+//                pl.addresses.add(addr.getAddress());
+//
+//            res.players.add(pl);
+//        }
 
         return res;
     }

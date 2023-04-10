@@ -22,12 +22,9 @@ public class ActiveSession // Класс, соответствующий зап�
     @Column(name = "session_key", nullable = false)
     private int SessionKey;
 
-    @Column(name = "name")
-    private String Name;
+    @Column(name = "srv_name_id")
+    private Integer SrvNameId;
 
     @Column(name = "srv_ver")
     private String SrvVer;
-
-    @Column(name = "is_admin")
-    private boolean IsAdmin;
 }

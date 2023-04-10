@@ -25,8 +25,8 @@ public class Player // Класс, соответствующий записи �
     @SequenceGenerator(name = "player_id_seq",sequenceName = "player_id_seq", allocationSize = 1)
     private Integer PlayerId;
 
-    @Column(name = "hwid")
-    private String Hwid;
+    @Column(name = "uid")
+    private Integer UID;
 
     @OneToMany(mappedBy="Player")
     private Set<IpAddress> Addresses;

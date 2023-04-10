@@ -2,6 +2,7 @@ package kernel.services;
 
 import kernel.entity.ActiveSession;
 import kernel.repository.ActiveSessionsRepoJPA;
+import kernel.repository.ServerNamesRepoJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,12 @@ public class SessionManager
 {
     @Autowired
     ActiveSessionsRepoJPA activeSessionsRepoJPA;
+
+    @Autowired
+    private SrvNameUtils srvNameUtils;
+
+    @Autowired
+    private ServerNamesRepoJPA serverNamesRepoJPA;
 
     private List<ActiveSession> m_SessionsCached;
     private boolean m_Synchronized = false;
@@ -74,9 +81,8 @@ public class SessionManager
         InitialSynchronize();
         ActiveSession session = new ActiveSession();
         session.setSessionKey(GenerateSessionKey());
-        session.setName(adminName);
+        session.setSrvNameId(0);
         session.setSrvVer("");
-        session.setIsAdmin(true);
 
         System.out.println("admin started new session");
         System.out.println(Integer.toString(session.getSessionKey()));
@@ -103,9 +109,8 @@ public class SessionManager
 
         ActiveSession session = new ActiveSession();
         session.setSessionKey(GenerateSessionKey());
-        session.setName(srv);
+        session.setSrvNameId(srvNameUtils.GetSrvNameId(srv));
         session.setSrvVer(ver);
-        session.setIsAdmin(false);
 
         System.out.println("started new session");
         System.out.println(Integer.toString(session.getSessionKey()));
