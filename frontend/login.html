@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <!-- <link rel="stylesheet" type="text/css" href="css/login.css" /> -->
+		<link href="login/style.css" rel="stylesheet">
+		<title>Вход в базу</title>
+    </head>
+    <body>
+		<script language="javascript">
+			function pasuser(form) 
+			{
+				logg = document.getElementById('login');
+				psww = document.getElementById('password');
+
+				if(logg.value=="")
+				{
+					alert("Введите логин!")
+				}
+				else if(psww.value=="")
+				{
+					alert("Введите пароль!")
+				}
+				else
+				{
+					log = logg.value
+					psw = psww.value
+
+					url = "http://185.189.255.144:8080/PlayersSite/v1/Authorize"					
+					loginParam = "?login="
+					passwordParam = "&password="
+					
+					req=url+loginParam+encodeURIComponent(log)+passwordParam+encodeURIComponent(psw)
+					//alert(req)
+
+					M = httpGet(req)
+					//alert(M.responseText)
+
+					resp = M.responseText
+					id = "id: "
+
+					if(resp.includes(id))
+					{
+						idCode = resp.substring(id.length,resp.length);
+						//alert(idCode)
+						loc = "main.html?id="+idCode
+						location = loc 
+					}
+					else
+					{
+						alert("Неверный логин или пароль")
+					}					
+				}
+			}
+
+			function httpGet(theUrl) 
+			{
+				var xmlHttp = new XMLHttpRequest({ mozSystem: true });
+				xmlHttp.open("GET", theUrl, false); // false for synchronous request
+				//xmlHttp.setRequestHeader('Content-Type', 'application/json');
+				//xmlHttp.getResponseHeader('Content-Type', 'application/json');
+				//xmlHttp.responseType = 'json';
+				xmlHttp.send();
+
+				return xmlHttp;
+			}
+					
+		</script>
+
+		<div class="wrapper">
+            <div class="animation" style="max-height: 374px;">
+                <div class="animation__eye animation__eye--one-one" style="display: block; opacity: 1; left: 59px; top: 110px;"></div>
+                <div class="animation__eye animation__eye--one-two" style="display: block; opacity: 1; left: 104px; top: 111px;"></div>
+                <div class="animation__eye animation__eye--two-one" style="display: block; opacity: 1; left: 248px; top: 168px;"></div>
+                <div class="animation__eye animation__eye--two-two" style="display: block; opacity: 1; left: 293px; top: 169px;"></div>
+                <video class="animation__video" width="384" height="374" loop="" muted="" autoplay="" style="display: block; opacity: 1;">
+                    <source src="login/watchers.mp4" type="video/mp4">
+                </video>
+            </div>
+            <form class="form">
+                <fieldset class="form__fieldset">
+                    <label class="form__field form__field--login" >
+                        <span class="form__label">Логин</span>
+                        <input class="form__input form__input--login" type="text" id="login">
+                    </label>
+                    <label class="form__field form__field--password">
+                        <span class="form__label">Пароль</span>
+                        <input class="form__input form__input--password" type="password" id="password">
+                    </label>
+                </fieldset>
+                <a class="form__button" onClick="pasuser(this.form)">Войти</a>
+            </form>
+		</div>
+        <script src="login/eyes.js"></script>
+	</body>
+</html>

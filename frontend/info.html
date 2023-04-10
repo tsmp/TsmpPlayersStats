@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<link rel="stylesheet" type="text/css" href="css/info.css" />
+	<title>База игроков</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8;charset=utf-8">
+</head>
+<body>
+	<p>
+		<form class="form">
+			<table width="100%" style="table-layout: fixed">
+				<colgroup>
+					<col width="100px">
+					<col width="100%">
+					<col width="200px">
+				</colgroup>
+
+				<tr>
+					<td class="info_block">
+						<input type="button" name="info" value="Назад" onClick="GoBack()">
+					</td>
+
+					<td class = "search_block">
+						<input type="text" name="search_field" class="search_field" placeholder="Поиск по никнейму, ip, hwid..." disabled="true">					
+						<input type="button" name="search" value="Искать" /*onClick="Search(this.form)"*/ disabled="true">
+					</td>
+
+					<td class= "user_block">
+						<label class ="user_name" id="user_name">user</label>
+						<input type="button" name="exit" value="Выйти" onClick="toLoginPage()">
+					</td>
+				</tr>
+			</table> 		       
+		</form>
+
+		<p class = "player_id" id="player_id">
+			Игрок: 228
+		</p>
+
+
+<script language="javascript" type="text/javascript">
+
+const urlParams = new URLSearchParams(window.location.search);
+id = urlParams.get("id")
+PlayerId = urlParams.get("pl")
+
+var Load = function()
+{
+	// Если не вошли!!!
+	if (id == null) 
+	{
+		toLoginPage();
+	}
+
+	// Если нет id игрока
+	if (PlayerId == null) 
+	{
+		toLoginPage();
+		throw new Error();
+	}
+
+	// Установить имя пользователя
+	nameRequest = "http://185.189.255.144:8080/PlayersSite/v1/MyName?key="+id;
+	user = httpGet(nameRequest);	
+	document.getElementById('user_name').innerHTML = user.responseText
+
+	// Установить id пользователя
+	document.getElementById('player_id').innerHTML = "Игрок: " + PlayerId
+	
+	getInfoReq = "http://185.189.255.144:8080/PlayersSite/v1/GetPlayerInfo?key="+id+"&playerId="+PlayerId;
+	//alert(getInfoReq)
+	M = httpGet(getInfoReq)	
+
+	//PrintS(M.responseText)	
+	//PrintS(M.);
+
+	var J = JSON.parse(M.responseText);
+	
+	//PrintJSON("res",J);
+	CreatePlayerInfo(J);	
+}
+
+function CreatePlayerInfo(playerJSON) 
+{
+	const body = document.body, tbl = document.createElement('table');
+
+	tbl.style.width = '100%';
+	tbl.style.border = '1px solid black';
+	spaces = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0';
+
+	const tr = tbl.insertRow();
+	const td = tr.insertCell();
+	text = "Ники: "
+
+	for (let j = 0; j < playerJSON.player.nicknames.length; j++)
+	{
+		if (j != 0)
+			text = text+ ","+spaces;
+
+		text = text+ playerJSON.player.nicknames[j].nickname
+	}
+
+	td.appendChild(document.createTextNode(text));
+	var br = document.createElement("br");
+	td.appendChild(br);
+	var br = document.createElement("br");
+	td.appendChild(br);		
+
+	text="ip: ";
+
+	for (let j = 0; j < playerJSON.player.addresses.length; j++)
+	{
+		if (j != 0)
+			text = text+ ","+spaces;
+
+		text = text+ playerJSON.player.addresses[j].address
+	}
+
+	td.appendChild(document.createTextNode(text));
+	var br = document.createElement("br");		
+	td.appendChild(br);
+	var br = document.createElement("br");		
+	td.appendChild(br);
+
+	text="hwid: " +playerJSON.player.hwid;
+	td.appendChild(document.createTextNode(text));
+
+	td.style.borderBottom = '1px solid black';
+	td.style.padding = '10px'
+	td.style.overflowWrap = 'anywhere'
+
+	const tr2 = tbl.insertRow();
+	const td2 = tr2.insertCell();
+
+	td2.style.borderBottom = '1px solid black';
+	td2.style.padding = '10px'
+	td2.style.overflowWrap = 'anywhere'
+
+	text="Игры: ";
+
+	for (let j = 0; j < playerJSON.games.length; j++)
+	{
+		td2.appendChild(document.createTextNode(text));
+		var br = document.createElement("br");
+		td2.appendChild(br);
+		var br = document.createElement("br");		
+		td2.appendChild(br);
+	
+
+		const [dateStr] = playerJSON.games[j].gameDate.split('T')
+		//[dateStr] = dateStr.split('T');
+		// alert(dateStr)
+		// date = Date.parse(dateStr)		
+		// alert(date.getMonth())
+
+		date = dateStr
+		//alert(date)
+		text = date+ spaces+ playerJSON.games[j].srvName
+	}
+
+	td2.appendChild(document.createTextNode(text));
+	body.appendChild(tbl);	
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest({mozSystem: true});
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+	//xmlHttp.setRequestHeader('Content-Type', 'application/json');
+	//xmlHttp.getResponseHeader('Content-Type', 'application/json');
+	//xmlHttp.responseType = 'json';
+    xmlHttp.send();
+
+	if(xmlHttp.responseText == "Unauthorized")
+	{
+		toLoginPage();
+	}
+	
+    return xmlHttp;
+}
+
+function toLoginPage()
+{
+	loginPage = "login.html"
+	location = loginPage;
+	throw new Error();
+}
+
+function GoBack() 
+{
+	history.back()	
+}
+
+function PrintS(s) { document.body.innerHTML += s; }
+function PrintP(p) { document.body.innerHTML += "\<img src=\"data:image\/png;base64," + p + "\"\/\>";}
+function PrintTIME(s,t1) { PrintS("<b><i>" + s + ": "+ (new Date().getTime()-t1.getTime())/1000 +"</i></b> sec.<br>") }
+function PrintJSON (str,obj) { PrintS( str + ":<p>"      + unescape(JSON.stringify(obj).replace(/\\u/g, '%u').replace(/</g,"&lt;").replace(/>/g,"&gt;"))); }
+function PrintJSONb(str,obj) { PrintS( str + ":<p><pre>" + unescape(JSON.stringify(obj,null,4).replace(/\\u/g, '%u').replace(/</g,"&lt;").replace(/>/g,"&gt;")) + "</pre>" ); }
+function PrintXML(str,obj) { PrintS( str + ":<p>" + obj.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "<br>" ); }
+
+Load();
+
+</script>
+
+</p></body></html>

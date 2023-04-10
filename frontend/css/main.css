@@ -1,0 +1,71 @@
+body 
+{
+    background: white url(../images/main/bkg.jpg) no-repeat center top;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.form
+{
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+}
+
+.info_block
+{
+    border-right: 1px solid black;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.search_block
+{    
+    padding: 5px;
+}
+
+.user_block
+{
+    border-left: 1px solid black;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.user_block label
+{
+    padding-right: 10px;
+}
+
+.search_field
+{
+    width: 80%;
+}
+
+.page_label, .page_go
+{
+    margin: 5px;
+}
+
+.results_cnt
+{
+    text-align: center;
+}
+
+.info_player
+{
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    width: 50px;
+    padding: 10px;
+}
+
+.player_info_button
+{
+    width: 50px;
+}
