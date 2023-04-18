@@ -7,6 +7,7 @@ import kernel.services.SiteServices;
 import kernel.services.StatsSiteServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,5 +38,15 @@ public class SiteControllerStats
     {
         requestsLogger.Log(request,"", "getPlayer");
         return services.getPlayerStat(playerId);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(
+            value = "/GetPlayerPdf",
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public byte[] getPlayerStatPdf(HttpServletRequest request, @RequestParam("player") Integer playerId)
+    {
+        requestsLogger.Log(request,"", "getPlayerPdf");
+        return services.getPlayerStatPdf(playerId);
     }
 }

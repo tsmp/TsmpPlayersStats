@@ -1,19 +1,27 @@
 package kernel.services;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import kernel.entity.*;
 import kernel.repository.*;
 import kernel.response.PlayerInfoResponse;
 import kernel.response.PlayersStatsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.*;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 @Component
 public class StatsSiteServices
@@ -154,7 +162,9 @@ public class StatsSiteServices
             if (game.getPlayerUID() == puid)
             {
                 PlayerInfoResponse.GameStruct gameStruct = new PlayerInfoResponse.GameStruct();
-                gameStruct.setDate(game.getGameDate().toString());
+
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                gameStruct.setDate(formatter.format(game.getGameDate()));
                 // TODO: MAP name
                 gameStruct.setMapName("Бассеин");
                 gameStruct.setId(game.getGameId());
@@ -220,5 +230,101 @@ public class StatsSiteServices
         res.setHoursIngame(res.getHoursIngame() / 60);
 
         return res;
+    }
+
+    public byte[] getPlayerStatPdf(Integer playerId)
+    {
+        try
+        {
+            Document document = new Document();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            PdfWriter.getInstance(document, stream);
+            document.open();
+
+            BaseFont baseFont=BaseFont.createFont("C://Windows//Fonts//Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fontHdr = new Font(baseFont, 20);
+            Font font = new Font(baseFont, 16);
+            Font fontBig = new Font(baseFont, 18);
+            PlayerInfoResponse player = getPlayerStat(playerId);
+
+            interface Line
+            {
+                void add(String text) throws DocumentException;
+            }
+
+            Line newLine = (String str)->
+            {
+                Chunk chunk = new Chunk("\n", font);
+                document.add(chunk);
+            };
+
+            Line header = (String text) ->
+            {
+                Paragraph paragraph = new Paragraph(text, fontHdr);
+                paragraph.setAlignment(Element.ALIGN_CENTER);
+                paragraph.setSpacingAfter(2);
+                document.add(paragraph);
+            };
+
+            Line text = (String txt) ->
+            {
+                Chunk chunk = new Chunk(txt, font);
+                document.add(chunk);
+                newLine.add("");
+            };
+
+            Line bigText = (String txt) ->
+            {
+                Chunk chunk = new Chunk(txt, fontBig);
+                document.add(chunk);
+                newLine.add("");
+            };
+
+            header.add("Игрок " + playerId.toString());
+
+            bigText.add("Никнеймы:");
+            text.add(player.getNicknames());
+            newLine.add("");
+
+            bigText.add("Убийств: " + player.getFrags());
+            bigText.add("Убийств/Смертей: " + player.getKd());
+            bigText.add("Артефактов: " + player.getArts());
+            bigText.add("Часов в игре: " + player.getHoursIngame());
+            bigText.add("Любимое оружие: " + player.getFavouriteWeapon());
+            newLine.add("");
+
+            header.add("Игры");
+            PdfPTable table = new PdfPTable(3);
+
+            Stream.of("Сервер", "Карта", "Дата")
+                    .forEach(columnTitle -> {
+                        PdfPCell hdr = new PdfPCell();
+                        hdr.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                        hdr.setBorderWidth(2);
+                        hdr.setPadding(2);
+                        hdr.setPhrase(new Phrase(columnTitle, fontBig));
+                        hdr.setHorizontalAlignment(Element.ALIGN_CENTER);
+                        table.addCell(hdr);
+                    });
+
+            PdfPCell cell = new PdfPCell();
+
+            for(PlayerInfoResponse.GameStruct game: player.getGames())
+            {
+                cell.setPhrase(new Phrase(game.getServerName(), font));
+                table.addCell(cell);
+                cell.setPhrase(new Phrase(game.getMapName(), font));
+                table.addCell(cell);
+                cell.setPhrase(new Phrase(game.getDate(), font));
+                table.addCell(cell);
+            }
+
+            document.add(table);
+            document.close();
+            return stream.toByteArray();
+        }
+        catch (Exception ex) {}
+
+        return null;
     }
 }
