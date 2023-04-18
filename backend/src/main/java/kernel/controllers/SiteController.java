@@ -1,7 +1,7 @@
 package kernel.controllers;
 
 import kernel.controllers.RequestsLogger.BaseRequestLogger;
-import kernel.entity.*;
+import kernel.response.SiteStruct;
 import kernel.services.SiteServices;
 
 import org.springframework.beans.factory.annotation.Autowired;

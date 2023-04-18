@@ -25,9 +25,6 @@ public class Nickname // Класс, соответствующий записи
     @Column(name = "nickname")
     private String Nickname;
 
-    @Column(name = "added_date")
-    private Date AddedDate;
-
     @Column(name = "player_id")
     private Integer PlayerId;
 }

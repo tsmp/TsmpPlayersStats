@@ -3,6 +3,7 @@ package kernel.services;
 import kernel.entity.*;
 import kernel.repository.*;
 
+import kernel.response.SiteStruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

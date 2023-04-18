@@ -1,5 +1,7 @@
-package kernel.entity;
+package kernel.response;
 
+import kernel.entity.ClGame;
+import kernel.entity.Player;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
