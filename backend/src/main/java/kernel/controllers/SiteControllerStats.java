@@ -1,6 +1,7 @@
 package kernel.controllers;
 
 import kernel.controllers.RequestsLogger.BaseRequestLogger;
+import kernel.response.PlayerInfoResponse;
 import kernel.response.PlayersStatsResponse;
 import kernel.services.SiteServices;
 import kernel.services.StatsSiteServices;
@@ -28,5 +29,13 @@ public class SiteControllerStats
     {
         requestsLogger.Log(request,"", "getPlayers");
         return services.getPlayers();
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/GetPlayer")
+    public PlayerInfoResponse getPlayerStat(HttpServletRequest request, @RequestParam("player") Integer playerId)
+    {
+        requestsLogger.Log(request,"", "getPlayer");
+        return services.getPlayerStat(playerId);
     }
 }

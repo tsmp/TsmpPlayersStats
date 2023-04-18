@@ -16,4 +16,5 @@ public class PlayersStatsResponse
     int arts;
     int achievements;
     int hoursIngame;
+    int id;
 }
