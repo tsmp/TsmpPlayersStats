@@ -65,4 +65,43 @@ public class SiteController
         requestsLogger.Log(request, params, "GetPlayerInfo");
         return services.GetPlayerInfo(key,playerId);
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/addNote")
+    public void addNote(
+            @RequestParam("key") Integer key,
+            @RequestParam("playerId") Integer playerId,
+            @RequestParam("text") String text,
+            HttpServletRequest request)
+    {
+        //String params = "Key: " + key.toString() + ", PlayerId: " + playerId;
+        //requestsLogger.Log(request, params, "GetPlayerInfo");
+        services.AddNote(key, playerId, text);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/editNote")
+    public void editNote(
+            @RequestParam("key") Integer key,
+            @RequestParam("note") Integer note,
+            @RequestParam("text") String text,
+            HttpServletRequest request)
+    {
+        //String params = "Key: " + key.toString() + ", PlayerId: " + playerId;
+        //requestsLogger.Log(request, params, "GetPlayerInfo");
+        services.EditNote(key, note, text);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/delNote")
+    public void delNote(
+            @RequestParam("key") Integer key,
+            @RequestParam("note") Integer note,
+            HttpServletRequest request)
+    {
+        //String params = "Key: " + key.toString() + ", PlayerId: " + playerId;
+        //requestsLogger.Log(request, params, "GetPlayerInfo");
+        //return services.GetPlayerInfo(key,playerId);
+        services.DelNote(key, note);
+    }
 }

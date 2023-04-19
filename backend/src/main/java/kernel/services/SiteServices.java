@@ -6,6 +6,7 @@ import kernel.repository.*;
 import kernel.response.SiteStruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -29,6 +30,9 @@ public class SiteServices
 
     @Autowired
     private PlayersRepoJPA playersRepoJPA;
+
+    @Autowired
+    private NoteRepoJpa noteRepoJpa;
 
     @Autowired
     ClGameRepoJPA clGameRepoJPA;
@@ -186,10 +190,60 @@ public class SiteServices
         }
 
         SiteStruct.PlayerInfoStruct info = new SiteStruct.PlayerInfoStruct();
+
+        List<Note> notes = noteRepoJpa.findAll();
+        List<Note> playerNotes = new ArrayList<>();
+
+        for(Note note: notes)
+        {
+            if(note.getPlayerId() == playerId)
+                playerNotes.add(note);
+        }
+
+        info.setNotes(playerNotes);
         //info.games = clGameRepoJPA.getGamesByPlayer(playerId);
         info.player = player.get();
 
         return info;
+    }
+
+    public void AddNote(Integer key, Integer playerId, String text)
+    {
+        if(sessionManager.GetSession(key) == null)
+            return;
+
+        Note note = new Note();
+        note.setAuthor("user3");
+        note.setInfo(text);
+        note.setPlayerId(playerId);
+        noteRepoJpa.save(note);
+    }
+
+    public void EditNote(Integer key, Integer noteId, String text)
+    {
+        if(sessionManager.GetSession(key) == null)
+            return;
+
+        Optional<Note> note = noteRepoJpa.findById(noteId);
+
+        if(note.isEmpty())
+            return;
+
+        note.get().setInfo(text);
+        noteRepoJpa.save(note.get());
+    }
+
+    public void DelNote(Integer key, Integer noteId)
+    {
+        if(sessionManager.GetSession(key) == null)
+            return;
+
+        Optional<Note> note = noteRepoJpa.findById(noteId);
+
+        if(note.isEmpty())
+            return;
+
+        noteRepoJpa.delete(note.get());
     }
 
     public SiteStruct.PlayerInfoStruct GetPlayerInfo(Integer key, Integer playerId)

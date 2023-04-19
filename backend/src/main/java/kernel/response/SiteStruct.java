@@ -1,6 +1,7 @@
 package kernel.response;
 
 import kernel.entity.ClGame;
+import kernel.entity.Note;
 import kernel.entity.Player;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class SiteStruct
     public static class PlayerInfoStruct
     {
         public Player player;
-        public List<ClGame> games;
+        public List<Note> notes;
     }
 
     @NoArgsConstructor
