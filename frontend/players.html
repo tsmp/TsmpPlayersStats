@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<title>Игроки</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8;charset=utf-8">
+</head>
+<body>
+	<input type="button" name="login" value="Войти" onClick="toLoginPage()" style="float: right;">
+	<br>
+
+<script language="javascript" type="text/javascript">
+
+var Load = function()
+{
+	req = "http://194.147.90.72:8080/StatsSite/v1/GetPlayers";
+	M = httpGet(req)
+	
+	//PrintS(M.responseText)	
+	//PrintS(M.);
+
+	var J = JSON.parse(M.responseText);
+	
+	//PrintJSON("res",J);
+	CreatePlayersList(J);
+}
+
+function SetSeachOnPressEnter()
+{
+	var input = document.getElementById("search_field");
+	input.addEventListener("keypress", function(event) 
+	{
+		if (event.key === "Enter") 
+		{
+			event.preventDefault();
+			document.getElementById("search").click();
+		}
+	});
+}
+
+function CreatePlayersList(playersJSON) 
+{
+	const body = document.body, tbl = document.createElement('table');
+
+	tbl.style.width = '100%';
+	tbl.style.border = '1px solid black';
+	tbl.style.borderCollapse = "collapse";
+
+	const tr1 = tbl.insertRow();
+	const td1 = tr1.insertCell();
+
+	text = "Номер";
+	td1.appendChild(document.createTextNode(text));
+	td1.style.border = '1px solid black';
+	td1.style.borderCollapse = "collapse";
+	td1.style.padding = '10px'
+	td1.style.width = "30px"
+
+	td2 = tr1.insertCell();
+	text = "Никнеймы"
+	td2.style.overflowWrap = 'anywhere'
+	td2.style.border = '1px solid black';
+	td2.style.borderCollapse = "collapse";
+	td2.appendChild(document.createTextNode(text));
+
+	td3 = tr1.insertCell();
+	td3.style.border = '1px solid black';
+	td3.style.borderCollapse = "collapse";
+	td3.appendChild(document.createTextNode("Фраги"));
+
+	td4 = tr1.insertCell();
+	td4.style.border = '1px solid black';
+	td4.style.borderCollapse = "collapse";
+	td4.appendChild(document.createTextNode("K/D"));
+
+	td5 = tr1.insertCell();
+	td5.style.border = '1px solid black';
+	td5.style.borderCollapse = "collapse";
+	td5.appendChild(document.createTextNode("Артефакты"));
+
+	td6 = tr1.insertCell();
+	td6.style.border = '1px solid black';
+	td6.style.borderCollapse = "collapse";
+	td6.appendChild(document.createTextNode("Часов в игре"));
+
+	for (let i = 0; i < playersJSON.length; i++) 
+	{
+		const tr = tbl.insertRow();
+		const td = tr.insertCell();
+
+		tr.onclick = ()=>OnPlayerClick(playersJSON[i].id);
+		td.style.border = '1px solid black';
+		td.style.borderCollapse = "collapse";
+		td.style.padding = '10px'
+		td.style.width = "30px"		
+
+		num = playersJSON[i].num;
+		td.appendChild(document.createTextNode(num));
+
+
+		td2 = tr.insertCell();
+		td2.style.overflowWrap = 'anywhere'
+		td2.style.border = '1px solid black';
+		td2.style.borderCollapse = "collapse";
+		td2.appendChild(document.createTextNode(playersJSON[i].nicknames));
+
+		td3 = tr.insertCell();
+		td3.style.border = '1px solid black';
+		td3.style.borderCollapse = "collapse";
+		td3.appendChild(document.createTextNode(playersJSON[i].frags));
+
+		td4 = tr.insertCell();
+		td4.style.border = '1px solid black';
+		td4.style.borderCollapse = "collapse";
+		td4.appendChild(document.createTextNode(playersJSON[i].kd));
+
+		td5 = tr.insertCell();
+		td5.style.border = '1px solid black';
+		td5.style.borderCollapse = "collapse";
+		td5.appendChild(document.createTextNode(playersJSON[i].arts));
+
+		td6 = tr.insertCell();
+		td6.style.border = '1px solid black';
+		td6.style.borderCollapse = "collapse";
+		td6.appendChild(document.createTextNode(playersJSON[i].hoursIngame));
+	}
+
+	body.appendChild(tbl);
+}
+
+function OnPlayerClick(id)
+{
+	toPlayerInfo(id);
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest({mozSystem: true});
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+	//xmlHttp.setRequestHeader('Content-Type', 'application/json');
+	//xmlHttp.getResponseHeader('Content-Type', 'application/json');
+	//xmlHttp.responseType = 'json';
+    xmlHttp.send();	
+    return xmlHttp;
+}
+
+function toPlayerInfo(player)
+{	
+	location = "playerInfo.html?player="+player;
+	throw new Error();
+}
+
+function toLoginPage()
+{
+	loginPage = "login.html"
+	location = loginPage;
+	throw new Error();
+}
+
+function PrintS(s) { document.body.innerHTML += s; }
+function PrintP(p) { document.body.innerHTML += "\<img src=\"data:image\/png;base64," + p + "\"\/\>";}
+function PrintTIME(s,t1) { PrintS("<b><i>" + s + ": "+ (new Date().getTime()-t1.getTime())/1000 +"</i></b> sec.<br>") }
+function PrintJSON (str,obj) { PrintS( str + ":<p>"      + unescape(JSON.stringify(obj).replace(/\\u/g, '%u').replace(/</g,"&lt;").replace(/>/g,"&gt;"))); }
+function PrintJSONb(str,obj) { PrintS( str + ":<p><pre>" + unescape(JSON.stringify(obj,null,4).replace(/\\u/g, '%u').replace(/</g,"&lt;").replace(/>/g,"&gt;")) + "</pre>" ); }
+function PrintXML(str,obj) { PrintS( str + ":<p>" + obj.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "<br>" ); }
+
+Load();
+
+</script>
+</body></html>
