@@ -7,6 +7,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import kernel.entity.*;
 import kernel.repository.*;
+import kernel.response.GameInfoResponse;
 import kernel.response.PlayerInfoResponse;
 import kernel.response.PlayersStatsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -326,5 +327,73 @@ public class StatsSiteServices
         catch (Exception ex) {}
 
         return null;
+    }
+
+    public GameInfoResponse getGame(Integer gameId)
+    {
+        // TODO: переписать все нафиг) для демо подходит, для продакшена - нет
+
+        GameInfoResponse res = new GameInfoResponse();
+        List<GameInfoResponse.WpnStat> wpnStat = new ArrayList<>();
+
+        List<Game> games = gamesRepoJpa.findAll();
+        List<Weapon> weapons = weaponRepoJpa.findAll();
+        List<Hit> hits = hitRepoJpa.findAll();
+        List<ServerName> srvNames = serverNamesRepoJPA.findAll();
+
+        for(Game game: games)
+        {
+            if(game.getGameId() == gameId)
+            {
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                res.setDate(formatter.format(game.getGameDate()));
+                res.setKills(game.getKills());
+                res.setDeaths(game.getDeaths());
+
+                if(res.getDeaths() != 0)
+                    res.setKd((float)res.getKills() / res.getDeaths());
+
+                res.setKillsAi(game.getKillsAi());
+                res.setHoursIngame((float)game.getGameTimeMinutes() / 60);
+                res.setKillsOneLife(game.getMaxKillsOneLife());
+
+                // TODO: MAP name
+                res.setMap("Бассеин");
+
+                for(ServerName srv: srvNames)
+                {
+                    if(srv.getId() == game.getServerNameId())
+                    {
+                        res.setServer(srv.getName());
+                        break;
+                    }
+                }
+
+                break;
+            }
+        }
+
+        for(Hit hit: hits)
+        {
+            if(hit.getGame() == gameId)
+            {
+                GameInfoResponse.WpnStat stat = new GameInfoResponse.WpnStat();
+                stat.setHits(hit.getHits());
+
+                for(Weapon wpn: weapons)
+                {
+                    if(wpn.getId() == hit.getWpn())
+                    {
+                        stat.setWpnName(wpn.getName());
+                        break;
+                    }
+                }
+
+                wpnStat.add(stat);
+            }
+        }
+
+        res.setWpnStats(wpnStat);
+        return res;
     }
 }

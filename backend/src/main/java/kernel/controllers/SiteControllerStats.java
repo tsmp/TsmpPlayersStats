@@ -1,6 +1,7 @@
 package kernel.controllers;
 
 import kernel.controllers.RequestsLogger.BaseRequestLogger;
+import kernel.response.GameInfoResponse;
 import kernel.response.PlayerInfoResponse;
 import kernel.response.PlayersStatsResponse;
 import kernel.services.SiteServices;
@@ -38,6 +39,14 @@ public class SiteControllerStats
     {
         requestsLogger.Log(request,"", "getPlayer");
         return services.getPlayerStat(playerId);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/GetGame")
+    public GameInfoResponse getGame(HttpServletRequest request, @RequestParam("game") Integer gameId)
+    {
+        requestsLogger.Log(request,"", "getGame");
+        return services.getGame(gameId);
     }
 
     @CrossOrigin(origins = "*")
