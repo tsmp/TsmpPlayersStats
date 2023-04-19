@@ -83,6 +83,7 @@ function CreatePlayerInfo(playerJSON)
 {
 	const body = document.body, tbl = document.createElement('table');
 
+	tbl.id="taaable";
 	tbl.style.width = '100%';
 	tbl.style.border = '1px solid black';
 	spaces = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0';
@@ -124,41 +125,103 @@ function CreatePlayerInfo(playerJSON)
 	text="hwid: " +playerJSON.player.hwid;
 	td.appendChild(document.createTextNode(text));
 
-	td.style.borderBottom = '1px solid black';
+	td.style.borderBottom = '0px solid black';
 	td.style.padding = '10px'
 	td.style.overflowWrap = 'anywhere'
 
-	const tr2 = tbl.insertRow();
-	const td2 = tr2.insertCell();
-
-	td2.style.borderBottom = '1px solid black';
-	td2.style.padding = '10px'
-	td2.style.overflowWrap = 'anywhere'
-
-	text="Игры: ";
-
-	for (let j = 0; j < playerJSON.games.length; j++)
+	
+	if(playerJSON.notes.length)
 	{
+		const tr2 = tbl.insertRow();
+		const td2 = tr2.insertCell();
+
+		td2.style.borderBottom = '1px solid black';
+		td2.style.padding = '10px'
+		td2.style.overflowWrap = 'anywhere'
+
+		text="Заметки: ";
 		td2.appendChild(document.createTextNode(text));
+
 		var br = document.createElement("br");
 		td2.appendChild(br);
-		var br = document.createElement("br");		
-		td2.appendChild(br);
-	
 
-		const [dateStr] = playerJSON.games[j].gameDate.split('T')
-		//[dateStr] = dateStr.split('T');
-		// alert(dateStr)
-		// date = Date.parse(dateStr)		
-		// alert(date.getMonth())
+		butAdd = document.createElement("input");
+		butAdd.type = "button";
+		butAdd.value ="Добавить заметку";
+		butAdd.onclick = ()=>AddNewNote();
+		td2.appendChild(butAdd);
 
-		date = dateStr
-		//alert(date)
-		text = date+ spaces+ playerJSON.games[j].srvName
+
+		for (let j = 0; j < playerJSON.notes.length; j++)
+		{
+			var br = document.createElement("br");
+			td2.appendChild(br);
+			var br = document.createElement("br");
+			td2.appendChild(br);
+
+			td2.appendChild(document.createTextNode("Автор: "+ playerJSON.notes[j].author));
+			var br = document.createElement("br");
+			td2.appendChild(br);	
+			noteText = document.createElement("input");
+			noteText.type = "input";
+			noteText.value=playerJSON.notes[j].info;
+
+			td2.id = playerJSON.notes[j].id;
+			td2.appendChild(noteText);
+
+			butSave = document.createElement("input");
+			butSave.type = "button"
+			butSave.value ="Сохранить"
+			butSave.onclick = ()=>OnSaveClick(playerJSON.notes[j].id, noteText.value);
+			td2.appendChild(butSave);
+
+			butDel = document.createElement("input");
+			butDel.type = "button";
+			butDel.value ="Удалить";
+			butDel.onclick = ()=>OnDelClick(playerJSON.notes[j].id, noteText.value);
+			td2.appendChild(butDel);
+		}
 	}
 
-	td2.appendChild(document.createTextNode(text));
+	
 	body.appendChild(tbl);	
+}
+
+function AddNewNote()
+{
+	if(document.getElementById('newNote') != undefined)
+		return;
+
+	tabl = document.getElementById('taaable');
+	const tr = tabl.insertRow();
+	const td2 = tr.insertCell();
+
+	var br = document.createElement("br");
+	td2.appendChild(br);
+	var br = document.createElement("br");
+	td2.appendChild(br);
+
+	td2.appendChild(document.createTextNode("Новая заметка: "));
+	td2.id="newNote";
+	var br = document.createElement("br");
+	td2.appendChild(br);	
+	noteText = document.createElement("input");
+	noteText.type = "input";
+	noteText.value="Введите текст заметки";
+
+	td2.appendChild(noteText);
+
+	butSave = document.createElement("input");
+	butSave.type = "button"
+	butSave.value ="Сохранить"
+	butSave.onclick = ()=>OnSaveClick(-1, noteText.value);
+	td2.appendChild(butSave);
+
+	butDel = document.createElement("input");
+	butDel.type = "button";
+	butDel.value ="Удалить";
+	butDel.onclick = ()=>OnDelClick(-1, noteText.value);
+	td2.appendChild(butDel);
 }
 
 function httpGet(theUrl)
@@ -176,6 +239,36 @@ function httpGet(theUrl)
 	}
 	
     return xmlHttp;
+}
+
+function OnSaveClick(noteId, text)
+{
+	if(noteId === -1)
+	{
+		req = "http://194.147.90.72:8080/PlayersSite/v1/addNote?key="+id+"&playerId="+PlayerId+"&text="+text;
+		M = httpGet(req);
+	}
+	else
+	{
+		req = "http://194.147.90.72:8080/PlayersSite/v1/editNote?key="+id+"&note="+noteId+"&text="+text;
+		M = httpGet(req);
+	}
+	RefreshPage();
+}
+
+function OnDelClick(noteId, text)
+{
+	if(noteId != -1)
+	{
+		req = "http://194.147.90.72:8080/PlayersSite/v1/delNote?key="+id+"&note="+noteId;
+		M = httpGet(req);
+	}
+	RefreshPage();
+}
+
+function RefreshPage()
+{
+	location.reload();
 }
 
 function toLoginPage()
