@@ -5,14 +5,40 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=8;charset=utf-8">
 </head>
 <body>
+    <input type="button" name="login" value="Назад" onClick="toPlayersPage()" style="float: left;">
 	<input type="button" name="login" value="Войти" onClick="toLoginPage()" style="float: right;">
 	<br>
 
+    <h1 id="playerId" style="text-align: center">Игрок 98273723</h1>
+    <b>Никнеймы:</b>
+    <p id="nicknames">
+        names
+    </p>
+    <br>
+
+    <p><b>Убийств: </b><div id="kills">kills</div></p><br>
+    <p><b>Убийств/Смертей: </b><div id="kd">kd</div></p><br>
+    <p><b>Артефактов: </b><div id="arts">arts</div></p><br>
+    <p><b>Часов в игре: </b><div id="hoursIngame">hoursIngame</div></p><br>
+    <p><b>Любимое оружие: </b><div id="bestWpn">bestWpn</div></p><br>
+
+    <input type="button" value="Сохранить в PDF" onClick="getPdf()" style="float: left;">
+
+    <h1 style="text-align: center">Игры</h1>
+
 <script language="javascript" type="text/javascript">
+
+const urlParams = new URLSearchParams(window.location.search);
+id = urlParams.get("player");
 
 var Load = function()
 {
-	req = "http://194.147.90.72:8080/StatsSite/v1/GetPlayers";
+	if (id == null) 
+	{
+		toPlayersPage();
+	}
+
+	req = "http://194.147.90.72:8080/StatsSite/v1/GetPlayer?player="+id;
 	M = httpGet(req)
 	
 	//PrintS(M.responseText)	
@@ -21,10 +47,21 @@ var Load = function()
 	var J = JSON.parse(M.responseText);
 	
 	//PrintJSON("res",J);
-	CreatePlayersList(J);
+	CreatePlayerStat(J);
+    CreateGamesList(J.games)
 }
 
-function CreatePlayersList(playersJSON) 
+function CreatePlayerStat(player) 
+{
+    document.getElementById('playerId').innerHTML = "Игрок " + id;
+    document.getElementById('nicknames').innerHTML = player.nicknames;
+    document.getElementById('kills').innerHTML = player.frags;
+    document.getElementById('kd').innerHTML = player.kd;
+    document.getElementById('hoursIngame').innerHTML = player.hoursIngame;
+    document.getElementById('bestWpn').innerHTML = player.favouriteWeapon;
+}
+
+function CreateGamesList(games)
 {
 	const body = document.body, tbl = document.createElement('table');
 
@@ -35,88 +72,72 @@ function CreatePlayersList(playersJSON)
 	const tr1 = tbl.insertRow();
 	const td1 = tr1.insertCell();
 
-	text = "Номер";
+	text = "Сервер";
 	td1.appendChild(document.createTextNode(text));
 	td1.style.border = '1px solid black';
 	td1.style.borderCollapse = "collapse";
 	td1.style.padding = '10px'
-	td1.style.width = "30px"
+    td1.style.width="33%";
 
 	td2 = tr1.insertCell();
-	text = "Никнеймы"
-	td2.style.overflowWrap = 'anywhere'
+	text = "Карта"
 	td2.style.border = '1px solid black';
 	td2.style.borderCollapse = "collapse";
+    td2.style.width="33%";
 	td2.appendChild(document.createTextNode(text));
 
 	td3 = tr1.insertCell();
 	td3.style.border = '1px solid black';
 	td3.style.borderCollapse = "collapse";
-	td3.appendChild(document.createTextNode("Фраги"));
+    td3.style.width="33%";
+	td3.appendChild(document.createTextNode("Дата"));
 
-	td4 = tr1.insertCell();
-	td4.style.border = '1px solid black';
-	td4.style.borderCollapse = "collapse";
-	td4.appendChild(document.createTextNode("K/D"));
-
-	td5 = tr1.insertCell();
-	td5.style.border = '1px solid black';
-	td5.style.borderCollapse = "collapse";
-	td5.appendChild(document.createTextNode("Артефакты"));
-
-	td6 = tr1.insertCell();
-	td6.style.border = '1px solid black';
-	td6.style.borderCollapse = "collapse";
-	td6.appendChild(document.createTextNode("Часов в игре"));
-
-	for (let i = 0; i < playersJSON.length; i++) 
+	for (let i = 0; i < games.length; i++) 
 	{
 		const tr = tbl.insertRow();
 		const td = tr.insertCell();
 
-		tr.onclick = ()=>OnPlayerClick(playersJSON[i].id);
+		tr.onclick = ()=>OnGameClick(games[i].id);
 		td.style.border = '1px solid black';
 		td.style.borderCollapse = "collapse";
 		td.style.padding = '10px'
-		td.style.width = "30px"		
 
-		num = playersJSON[i].num;
-		td.appendChild(document.createTextNode(num));
-
+		td.appendChild(document.createTextNode(games[i].serverName));
 
 		td2 = tr.insertCell();
-		td2.style.overflowWrap = 'anywhere'
 		td2.style.border = '1px solid black';
 		td2.style.borderCollapse = "collapse";
-		td2.appendChild(document.createTextNode(playersJSON[i].nicknames));
+		td2.appendChild(document.createTextNode(games[i].mapName));
 
 		td3 = tr.insertCell();
 		td3.style.border = '1px solid black';
 		td3.style.borderCollapse = "collapse";
-		td3.appendChild(document.createTextNode(playersJSON[i].frags));
-
-		td4 = tr.insertCell();
-		td4.style.border = '1px solid black';
-		td4.style.borderCollapse = "collapse";
-		td4.appendChild(document.createTextNode(playersJSON[i].kd));
-
-		td5 = tr.insertCell();
-		td5.style.border = '1px solid black';
-		td5.style.borderCollapse = "collapse";
-		td5.appendChild(document.createTextNode(playersJSON[i].arts));
-
-		td6 = tr.insertCell();
-		td6.style.border = '1px solid black';
-		td6.style.borderCollapse = "collapse";
-		td6.appendChild(document.createTextNode(playersJSON[i].hoursIngame));
+		td3.appendChild(document.createTextNode(games[i].date));
 	}
 
 	body.appendChild(tbl);
 }
 
-function OnPlayerClick(id)
+function getPdf()
 {
-	toPlayerInfo(id);
+    window.open("http://194.147.90.72:8080/StatsSite/v1/GetPlayerPdf?player="+id, '_blank').focus();
+} 
+
+function OnGameClick(gameId)
+{
+	toGamePage(gameId);
+}
+
+function toGamePage(gameId)
+{
+	location = "game.html?game="+gameId+"&player="+id;
+	throw new Error();
+}
+
+function toPlayersPage()
+{
+	location = "players.html";
+	throw new Error();
 }
 
 function httpGet(theUrl)
