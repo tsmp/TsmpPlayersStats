@@ -79,11 +79,11 @@ var Load = function()
 	}
 
 	// Установить имя пользователя
-	nameRequest = "http://185.189.255.144:8080/PlayersSite/v1/MyName?key="+id;
+	nameRequest = "http://194.147.90.72:8080/PlayersSite/v1/MyName?key="+id;
 	user = httpGet(nameRequest);	
 	document.getElementById('user_name').innerHTML = user.responseText	
 	
-	searchReq = "http://185.189.255.144:8080/PlayersSite/v1/SearchPlayers?key="+id+"&search="+encodeURIComponent(search)+"&page="+curPage
+	searchReq = "http://194.147.90.72:8080/PlayersSite/v1/SearchPlayers?key="+id+"&search="+encodeURIComponent(search)+"&page="+curPage
 	//alert(searchReq)
 	M = httpGet(searchReq)
 	

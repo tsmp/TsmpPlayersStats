@@ -59,14 +59,14 @@ var Load = function()
 	}
 
 	// Установить имя пользователя
-	nameRequest = "http://185.189.255.144:8080/PlayersSite/v1/MyName?key="+id;
+	nameRequest = "http://194.147.90.72:8080/PlayersSite/v1/MyName?key="+id;
 	user = httpGet(nameRequest);	
 	document.getElementById('user_name').innerHTML = user.responseText
 
 	// Установить id пользователя
 	document.getElementById('player_id').innerHTML = "Игрок: " + PlayerId
 	
-	getInfoReq = "http://185.189.255.144:8080/PlayersSite/v1/GetPlayerInfo?key="+id+"&playerId="+PlayerId;
+	getInfoReq = "http://194.147.90.72:8080/PlayersSite/v1/GetPlayerInfo?key="+id+"&playerId="+PlayerId;
 	//alert(getInfoReq)
 	M = httpGet(getInfoReq)	
 
