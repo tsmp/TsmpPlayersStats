@@ -1,12 +1,40 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="css/main.css" />
-	<title>Игроки</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet"/>
+	<title>Статистика игроков</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=8;charset=utf-8">
 </head>
 <body>
-	<input type="button" name="login" value="Войти" onClick="toLoginPage()" style="float: right;">
+
+	<header>
+		<div class="container">
+			<div class = "row">
+				<div class="col-12">
+					<div class="header-main" id="header-main">
+						<div class="rad_icon">
+							<img src="images/rad.svg">
+						</div>
+						<div class="header-text">
+							  <h1 class="text-white">Статистика игроков</h1>
+						</div>
+					</div>
+
+					<div class="radmins-func" id="radmins-func">
+						<h5 class="text-white">Функции радмина</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
 	<br>
 
 <script language="javascript" type="text/javascript">
@@ -137,13 +165,6 @@ function toPlayerInfo(player)
 	throw new Error();
 }
 
-function toLoginPage()
-{
-	loginPage = "login.html"
-	location = loginPage;
-	throw new Error();
-}
-
 function PrintS(s) { document.body.innerHTML += s; }
 function PrintP(p) { document.body.innerHTML += "\<img src=\"data:image\/png;base64," + p + "\"\/\>";}
 function PrintTIME(s,t1) { PrintS("<b><i>" + s + ": "+ (new Date().getTime()-t1.getTime())/1000 +"</i></b> sec.<br>") }
@@ -154,4 +175,7 @@ function PrintXML(str,obj) { PrintS( str + ":<p>" + obj.replace(/</g,"&lt;").rep
 Load();
 
 </script>
+
+<script src="js/common.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 </body></html>
