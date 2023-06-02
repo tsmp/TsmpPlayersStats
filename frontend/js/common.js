@@ -1,13 +1,18 @@
-function toMainPage() {
-    let targetPage = "players.html"
-	location = targetPage;
+// common
+const servicesUrl = "http://194.147.90.72:8080/";
+
+function toPage(pageUrl) {
+	location = pageUrl;
 	throw new Error();
 }
 
+// header related
+function toMainPage() {
+    toPage("players.html");
+}
+
 function toRadminPage() {
-    let targetPage = "login.html"
-	location = targetPage;
-	throw new Error();
+    toPage("login.html");
 }
 
 function setHeaderHandlers() {
@@ -17,4 +22,17 @@ function setHeaderHandlers() {
 
 window.onload = function(e) { 
     setHeaderHandlers();
+}
+
+// debug
+function PrintS(s) { document.body.innerHTML += s; }
+function PrintJSON (str,obj) { PrintS( str + ":<p>"      + unescape(JSON.stringify(obj).replace(/\\u/g, '%u').replace(/</g,"&lt;").replace(/>/g,"&gt;"))); }
+
+// requests
+function httpGet(theUrl)
+{
+    let xmlHttp = new XMLHttpRequest({mozSystem: true});
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send();
+    return xmlHttp;
 }
