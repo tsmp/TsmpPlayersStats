@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -19,6 +16,8 @@ public class Hit
 {
     @javax.persistence.Id
     @Column(name = "hits_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "hit_id_seq")
+    @SequenceGenerator(name = "hit_id_seq",sequenceName = "hit_id_seq", allocationSize = 1)
     private Integer Id;
 
     @Column(name = "game_id", nullable = false)

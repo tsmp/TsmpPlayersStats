@@ -28,4 +28,21 @@ public class ServControllerStats
         requestsLogger.Log(request,"key: " + Integer.toString(key),"GetPlayerID");
         return services.GenNewPlayerUID(key);
     }
+
+    @GetMapping("/ReportPlayerStats")
+    public String ReportPlayerStats(@RequestParam("key") int key,
+                                    @RequestParam("id") int playerUID,
+                                    @RequestParam("stats") String statsStr,
+                                    HttpServletRequest request)
+    {
+        requestsLogger.Log(request,"key: " + Integer.toString(key) +", UID: " + Integer.toString(key) + ", stats: " + statsStr,"ReportPlayerStats");
+        return services.ReportPlayerStats(key, playerUID, statsStr);
+    }
+
+    @GetMapping("/test")
+    public String GetPlayerID()
+    {
+        services.test();
+        return "ok";
+    }
 }
