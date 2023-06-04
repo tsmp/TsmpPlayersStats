@@ -38,11 +38,4 @@ public class ServControllerStats
         requestsLogger.Log(request,"key: " + Integer.toString(key) +", UID: " + Integer.toString(key) + ", stats: " + statsStr,"ReportPlayerStats");
         return services.ReportPlayerStats(key, playerUID, statsStr);
     }
-
-    @GetMapping("/test")
-    public String GetPlayerID()
-    {
-        services.test();
-        return "ok";
-    }
 }

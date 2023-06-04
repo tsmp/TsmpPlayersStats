@@ -22,9 +22,9 @@ public class ServServices
         return "Hello world! 12345. Привет, нубик)";
     }
 
-    public String StartSession(String serverName, int secretKey, String srvVer)
+    public String StartSession(String serverName, int secretKey, String srvVer, String mapName)
     {
-        return sessionManager.StartSessionServer(serverName,srvVer,secretKey);
+        return sessionManager.StartSessionServer(serverName,srvVer,secretKey, mapName);
     }
 
     public String BanCheater(String ip, Integer reasonId, String nickname, int key)

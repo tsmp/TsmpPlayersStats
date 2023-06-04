@@ -25,6 +25,9 @@ public class ActiveSession // Класс, соответствующий зап�
     @Column(name = "srv_name_id")
     private Integer SrvNameId;
 
+    @Column(name = "srv_map_id")
+    private Integer SrvMapId;
+
     @Column(name = "srv_ver")
     private String SrvVer;
 }

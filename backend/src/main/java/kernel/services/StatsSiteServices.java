@@ -45,6 +45,9 @@ public class StatsSiteServices
     @Autowired
     private WeaponRepoJpa weaponRepoJpa;
 
+    @Autowired
+    private MapRepoJPA mapRepoJPA;
+
     public List<PlayersStatsResponse> getPlayers()
     {
         // TODO: переписать все нафиг) для демо подходит, для продакшена - нет
@@ -156,6 +159,7 @@ public class StatsSiteServices
         List<Weapon> weapons = weaponRepoJpa.findAll();
         List<Hit> hits = hitRepoJpa.findAll();
         List<ServerName> srvNames = serverNamesRepoJPA.findAll();
+        List<MapEntity> mapNames = mapRepoJPA.findAll();
         Map<Integer, Integer> wpnUsages = new HashMap<>();
 
         for (Game game : games)
@@ -166,8 +170,16 @@ public class StatsSiteServices
 
                 DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 gameStruct.setDate(formatter.format(game.getGameDate()));
-                // TODO: MAP name
-                gameStruct.setMapName("Бассеин");
+
+                for(MapEntity map: mapNames)
+                {
+                    if(game.getMapNameId() == map.getId())
+                    {
+                        gameStruct.setMapName(map.getName());
+                        break;
+                    }
+                }
+
                 gameStruct.setId(game.getGameId());
 
                 for(ServerName srv: srvNames)
@@ -358,6 +370,8 @@ public class StatsSiteServices
                 res.setKillsOneLife(game.getMaxKillsOneLife());
 
                 // TODO: MAP name
+
+
                 res.setMap("Бассеин");
 
                 for(ServerName srv: srvNames)

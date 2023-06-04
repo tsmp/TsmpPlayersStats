@@ -28,6 +28,9 @@ public class Game // Класс, соответствующий записи в 
     @Column(name = "srv_name_id")
     private Integer ServerNameId;
 
+    @Column(name = "map_name_id")
+    private Integer MapNameId;
+
     @Column(name = "player_uid")
     private Integer PlayerUID;
 

@@ -1,7 +1,9 @@
 package kernel.services;
 
 import kernel.entity.ActiveSession;
+import kernel.entity.MapEntity;
 import kernel.repository.ActiveSessionsRepoJPA;
+import kernel.repository.MapRepoJPA;
 import kernel.repository.ServerNamesRepoJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
@@ -19,6 +21,9 @@ public class SessionManager
 
     @Autowired
     private ServerNamesRepoJPA serverNamesRepoJPA;
+
+    @Autowired
+    private MapRepoJPA mapRepoJPA;
 
     private List<ActiveSession> m_SessionsCached;
     private boolean m_Synchronized = false;
@@ -92,7 +97,7 @@ public class SessionManager
         return "id: " + session.getSessionKey();
     }
 
-    public String StartSessionServer(String srv, String ver, int key)
+    public String StartSessionServer(String srv, String ver, int key, String map)
     {
         InitialSynchronize();
         String strToHash = srv + ver + "PlayersBase3218";
@@ -107,10 +112,21 @@ public class SessionManager
             return "validation failed!";
         }
 
+        List<Integer> mapId = mapRepoJPA.SearchByName(map);
+
+        if(mapId.isEmpty())
+        {
+            MapEntity mapEntity = new MapEntity();
+            mapEntity.setName(map);
+            mapRepoJPA.save(mapEntity);
+            mapId.add(mapEntity.getId());
+        }
+
         ActiveSession session = new ActiveSession();
         session.setSessionKey(GenerateSessionKey());
         session.setSrvNameId(srvNameUtils.GetSrvNameId(srv));
         session.setSrvVer(ver);
+        session.setSrvMapId(mapId.get(0));
 
         System.out.println("started new session");
         System.out.println(Integer.toString(session.getSessionKey()));

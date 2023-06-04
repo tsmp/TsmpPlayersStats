@@ -70,12 +70,6 @@ public class StatsServServices
         return Integer.parseInt(val);
     }
 
-    public void test()
-    {
-        String statsStr = "frags:1fragsNpc:2headshot:3deaths:4arts:5maxFrags:6time:7weaponCnt:2wpn:diglhits:5wpn:akhits:9";
-        SaveGameStats(1,1,statsStr);
-    }
-
     void SaveWpnStats(String statsStr, int weaponsCnt, int gameId)
     {
         int searchFrom = 0;
@@ -116,7 +110,7 @@ public class StatsServServices
         }
     }
 
-    void SaveGameStats(int srvNameId, int playerUID, String statsStr)
+    void SaveGameStats(int srvNameId, int mapNameId, int playerUID, String statsStr)
     {
         Game game = new Game();
 
@@ -131,6 +125,7 @@ public class StatsServServices
         game.setGameDate(new Date());
         game.setServerNameId(srvNameId);
         game.setPlayerUID(playerUID);
+        game.setMapNameId(mapNameId);
 
         gamesRepoJPA.save(game);
 
@@ -145,7 +140,7 @@ public class StatsServServices
         if (session == null)
             return "Error: not authorized!";
 
-        SaveGameStats(session.getSrvNameId(), playerUID, statsStr);
+        SaveGameStats(session.getSrvNameId(), session.getSrvMapId(), playerUID, statsStr);
         return "success";
     }
 }

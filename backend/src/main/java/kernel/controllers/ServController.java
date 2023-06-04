@@ -35,7 +35,20 @@ public class ServController
     {
         String params = "SrvName: "+ serverName + ", Ver: " + srvVer + ", Key: " + Integer.toString(secretKey);
         requestsLogger.Log(request,params,"StartSession");
-        return services.StartSession(serverName, secretKey, srvVer);
+        return services.StartSession(serverName, secretKey, srvVer, "");
+    }
+
+    @GetMapping("/StartSession2")
+    public String startSession(
+            @RequestParam("srv") String serverName,
+            @RequestParam("key") int secretKey,
+            @RequestParam("ver") String srvVer,
+            @RequestParam("map") String mapName,
+            HttpServletRequest request)
+    {
+        String params = "SrvName: "+ serverName + ", Ver: " + srvVer + ", Key: " + Integer.toString(secretKey) + ", map: " + mapName;
+        requestsLogger.Log(request,params,"StartSession");
+        return services.StartSession(serverName, secretKey, srvVer, mapName);
     }
 
     @GetMapping("/BanCheater")
