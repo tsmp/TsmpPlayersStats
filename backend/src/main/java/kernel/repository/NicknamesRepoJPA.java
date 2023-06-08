@@ -14,6 +14,9 @@ public interface NicknamesRepoJPA extends JpaRepository<Nickname, Integer> // М
 {
     public List<Nickname> findAll();
 
+    @Query(value = "select nickname from k_nicknames where :plid = player_id", nativeQuery = true)
+    public List<String> searchByPlayerId(@Param("plid") int PlayerId);
+
     @Query(value = "select player_id from k_nicknames where position(:NickName in LOWER(nickname))>0", nativeQuery = true)
     public List<Integer> SearchByNickname(@Param("NickName") String name);
 }

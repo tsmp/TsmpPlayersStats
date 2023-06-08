@@ -22,6 +22,8 @@ public interface PlayersRepoJPA extends JpaRepository<Player, Integer> // Маг
 
     public List<Player> findAll();
 
+    public List<Player> findByUIDNotNull();
+
     Optional<Player> findById(Integer id);
     @Query(value = "select player_id from k_players where :Uid = uid", nativeQuery = true)
     public List<Integer> SearchByUID(@Param("Uid") int uid);
