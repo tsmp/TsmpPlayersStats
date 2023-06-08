@@ -232,68 +232,37 @@ public class StatsSiteServices
 
     public GameInfoResponse getGame(Integer gameId)
     {
-        // TODO: переписать все нафиг) для демо подходит, для продакшена - нет
+        Optional<Game> gamee = gamesRepoJpa.findById(gameId);
+        if(gamee.isEmpty())
+            return null;
+        Game game = gamee.get();
 
         GameInfoResponse res = new GameInfoResponse();
+        res.setKills(game.getKills());
+        res.setDeaths(game.getDeaths());
+
+        res.setKillsAi(game.getKillsAi());
+        res.setHoursIngame((float) game.getGameTimeMinutes() / 60);
+        res.setKillsOneLife(game.getMaxKillsOneLife());
+
+        res.setMap(mapRepoJPA.findById(game.getMapNameId()).get().getName());
+        res.setServer(serverNamesRepoJPA.findById(game.getServerNameId()).get().getName());
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        res.setDate(formatter.format(game.getGameDate()));
+
+        if (res.getDeaths() != 0)
+            res.setKd((float) res.getKills() / res.getDeaths());
+
+        List<Hit> hits = hitRepoJpa.SearchByGame(gameId);
         List<GameInfoResponse.WpnStat> wpnStat = new ArrayList<>();
 
-        List<Game> games = gamesRepoJpa.findAll();
-        List<Weapon> weapons = weaponRepoJpa.findAll();
-        List<Hit> hits = hitRepoJpa.findAll();
-        List<ServerName> srvNames = serverNamesRepoJPA.findAll();
-
-        for(Game game: games)
+        for (Hit hit : hits)
         {
-            if(game.getGameId() == gameId)
-            {
-                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                res.setDate(formatter.format(game.getGameDate()));
-                res.setKills(game.getKills());
-                res.setDeaths(game.getDeaths());
-
-                if(res.getDeaths() != 0)
-                    res.setKd((float)res.getKills() / res.getDeaths());
-
-                res.setKillsAi(game.getKillsAi());
-                res.setHoursIngame((float)game.getGameTimeMinutes() / 60);
-                res.setKillsOneLife(game.getMaxKillsOneLife());
-
-                // TODO: MAP name
-
-
-                res.setMap("Бассеин");
-
-                for(ServerName srv: srvNames)
-                {
-                    if(srv.getId() == game.getServerNameId())
-                    {
-                        res.setServer(srv.getName());
-                        break;
-                    }
-                }
-
-                break;
-            }
-        }
-
-        for(Hit hit: hits)
-        {
-            if(hit.getGame() == gameId)
-            {
-                GameInfoResponse.WpnStat stat = new GameInfoResponse.WpnStat();
-                stat.setHits(hit.getHits());
-
-                for(Weapon wpn: weapons)
-                {
-                    if(wpn.getId() == hit.getWpn())
-                    {
-                        stat.setWpnName(wpn.getName());
-                        break;
-                    }
-                }
-
-                wpnStat.add(stat);
-            }
+            GameInfoResponse.WpnStat stat = new GameInfoResponse.WpnStat();
+            stat.setHits(hit.getHits());
+            stat.setWpnName(weaponRepoJpa.findById(hit.getWpn()).get().getName());
+            wpnStat.add(stat);
         }
 
         res.setWpnStats(wpnStat);
