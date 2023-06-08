@@ -137,3 +137,16 @@ $$;
 select * from get_player_games(9)
 
 
+
+select weapon_id from
+(
+    select sum(hits_count) as cnt, weapon_id from
+    (
+        select hits_count, weapon_id from k_hits where game_id in
+        (select game_id from k_games where player_uid = 1)
+    ) as g
+
+    group by weapon_id order by cnt desc limit 1
+) as e
+
+

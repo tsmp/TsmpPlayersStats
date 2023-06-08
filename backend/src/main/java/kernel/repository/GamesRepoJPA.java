@@ -13,6 +13,9 @@ public interface GamesRepoJPA extends JpaRepository<Game, Integer> // Магия
 {
     public List<Game> findAll();
 
+    @Query(value = "select * from k_games where :pluid = player_uid", nativeQuery = true)
+    public List<Game> findByPlayerUID(@Param("pluid") int PlayerUID);
+
     @Query(value = "select sum(kills) from k_games where :pluid = player_uid", nativeQuery = true)
     public Integer sumPlayerFrags(@Param("pluid") int PlayerUID);
 

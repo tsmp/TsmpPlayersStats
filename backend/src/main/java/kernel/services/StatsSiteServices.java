@@ -17,10 +17,8 @@ import java.io.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
@@ -48,6 +46,22 @@ public class StatsSiteServices
     @Autowired
     private MapRepoJPA mapRepoJPA;
 
+    private String GetPlayerNicknames(Integer playerId)
+    {
+        String namesStr = "";
+        List<String> names = nicknamesRepoJpa.searchByPlayerId(playerId);
+
+        for(String nickname: names)
+        {
+            if (!namesStr.isEmpty())
+                namesStr += ", ";
+
+            namesStr += nickname;
+        }
+
+        return namesStr;
+    }
+
     public List<PlayersStatsResponse> getPlayers()
     {
         List<Player> players = playersRepoJPA.findByUIDNotNull();
@@ -60,19 +74,8 @@ public class StatsSiteServices
             final Integer pid = player.getPlayerId();
             final Integer puid = player.getUID();
 
-            String namesStr = "";
-            List<String> names = nicknamesRepoJpa.searchByPlayerId(pid);
-
-            for(String nickname: names)
-            {
-                if (!namesStr.isEmpty())
-                    namesStr += ", ";
-
-                namesStr += nickname;
-            }
-
             PlayersStatsResponse response = new PlayersStatsResponse();
-            response.setNicknames(namesStr);
+            response.setNicknames(GetPlayerNicknames(pid));
             response.setFrags(gamesRepoJpa.sumPlayerFrags(puid));
             response.setArts(gamesRepoJpa.sumPlayerArts(puid));
             response.setHoursIngame(gamesRepoJpa.sumPlayerMinutesIngame(puid) / 60);
@@ -93,131 +96,40 @@ public class StatsSiteServices
 
     public PlayerInfoResponse getPlayerStat(Integer playerId)
     {
-        // TODO: переписать все нафиг) для демо подходит, для продакшена - нет
+        Optional<Player> pl = playersRepoJPA.findById(playerId);
 
-        List<Player> players = playersRepoJPA.findAll();
-        Integer puid = 0;
-
-        for(int i= 0; i< players.size(); i++)
-        {
-            if(players.get(i).getPlayerId() == playerId)
-            {
-                puid = players.get(i).getUID();
-                break;
-            }
-        }
-
-        if(puid == 0)
+        if(pl.isEmpty() || pl.get().getUID() == null)
             return null;
 
-        List<Nickname> names = nicknamesRepoJpa.findAll();
-        List<Game> games = gamesRepoJpa.findAll();
-        PlayerInfoResponse res = new PlayerInfoResponse();
+        final Integer puid = pl.get().getUID();
+        List<Game> games = gamesRepoJpa.findByPlayerUID(puid);
         List<PlayerInfoResponse.GameStruct> gamess = new ArrayList<>();
-        String namesStr = "";
-
-        for (Nickname nickname : names)
-        {
-            if (nickname.getPlayerId() == playerId)
-            {
-                if (!namesStr.isEmpty())
-                    namesStr += ", ";
-
-                namesStr += nickname.getNickname();
-            }
-        }
-
-        res.setNicknames(namesStr);
-
-        // TODO: реализовать
-        res.setFavouriteWeapon("lr300");
-        int deaths = 0;
-
-        List<Weapon> weapons = weaponRepoJpa.findAll();
-        List<Hit> hits = hitRepoJpa.findAll();
-        List<ServerName> srvNames = serverNamesRepoJPA.findAll();
-        List<MapEntity> mapNames = mapRepoJPA.findAll();
-        Map<Integer, Integer> wpnUsages = new HashMap<>();
 
         for (Game game : games)
         {
-            if (game.getPlayerUID() == puid)
-            {
-                PlayerInfoResponse.GameStruct gameStruct = new PlayerInfoResponse.GameStruct();
+            PlayerInfoResponse.GameStruct gameStruct = new PlayerInfoResponse.GameStruct();
 
-                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                gameStruct.setDate(formatter.format(game.getGameDate()));
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            gameStruct.setDate(formatter.format(game.getGameDate()));
 
-                for(MapEntity map: mapNames)
-                {
-                    if(game.getMapNameId() == map.getId())
-                    {
-                        gameStruct.setMapName(map.getName());
-                        break;
-                    }
-                }
-
-                gameStruct.setId(game.getGameId());
-
-                for(ServerName srv: srvNames)
-                {
-                    if((int)srv.getId() == (int)game.getServerNameId())
-                    {
-                        gameStruct.setServerName(srv.getName());
-                        break;
-                    }
-                }
-
-                for(Hit hit: hits)
-                {
-                    if(hit.getGame() == game.getGameId())
-                    {
-                        Integer wpn = hit.getWpn();
-                        Integer count = hit.getHits();
-
-                        if(wpnUsages.get(wpn) != null)
-                            count += wpnUsages.get(wpn);
-
-                        wpnUsages.put(wpn, count);
-                    }
-                }
-
-                gamess.add(gameStruct);
-
-                res.setArts(res.getArts() + game.getArtefacts());
-                res.setFrags(res.getFrags() + game.getKills());
-                res.setHoursIngame(res.getHoursIngame() + game.getGameTimeMinutes());
-                deaths += game.getDeaths();
-            }
+            gameStruct.setId(game.getGameId());
+            gameStruct.setMapName(mapRepoJPA.findById(game.getMapNameId()).get().getName());
+            gameStruct.setServerName(serverNamesRepoJPA.findById(game.getServerNameId()).get().getName());
+            gamess.add(gameStruct);
         }
 
-        AtomicInteger maxCnt = new AtomicInteger(0);
-        AtomicInteger wpnId = new AtomicInteger(0);
-
-        wpnUsages.forEach((id, cnt) ->
-        {
-            if(cnt > maxCnt.get())
-            {
-                maxCnt.set(cnt);
-                wpnId.set(id);
-            }
-        });
-
-        for (Weapon wp: weapons)
-        {
-            if(wp.getId() == wpnId.get())
-            {
-                res.setFavouriteWeapon(wp.getName());
-                break;
-            }
-        }
+        PlayerInfoResponse res = new PlayerInfoResponse();
 
         res.setGames(gamess);
+        res.setNicknames(GetPlayerNicknames(playerId));
+        res.setFrags(gamesRepoJpa.sumPlayerFrags(puid));
+        res.setArts(gamesRepoJpa.sumPlayerArts(puid));
+        res.setHoursIngame(gamesRepoJpa.sumPlayerMinutesIngame(puid) / 60);
+        res.setFavouriteWeapon(weaponRepoJpa.findById(hitRepoJpa.bestWeaponId(puid)).get().getName());
 
+        final int deaths = gamesRepoJpa.sumPlayerDeaths(puid);
         if (deaths != 0)
             res.setKd((float) res.getFrags() / deaths);
-
-        res.setHoursIngame(res.getHoursIngame() / 60);
 
         return res;
     }
