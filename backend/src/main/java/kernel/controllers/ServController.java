@@ -73,19 +73,19 @@ public class ServController
     {
         String params = "Ip: " + ip + ", Name: " + name + ", Key: " + Integer.toString(key);
         requestsLogger.Log(request,params,"IsBanned");
-        return services.IsBanned(ip, name, key, "");
+        return services.IsBanned(ip, name, key, 0);
     }
 
     @GetMapping("/IsBanned2")
     public String IsBanned(
             @RequestParam("ip") String ip,
             @RequestParam("name") String name,
-            @RequestParam("HWID") String hwid,
             @RequestParam("key") int key,
+            @RequestParam("uid") int uid,
             HttpServletRequest request)
     {
-        String params = "Ip: " + ip + ", Name: " + name + "Hwis: " + hwid + ", Key: " + Integer.toString(key);
+        String params = "Ip: " + ip + ", Name: " + name + "uid: " + Integer.toString(uid) + ", Key: " + Integer.toString(key);
         requestsLogger.Log(request,params,"IsBanned2");
-        return services.IsBanned(ip, name, key, hwid);
+        return services.IsBanned(ip, name, key, uid);
     }
 }

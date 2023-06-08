@@ -44,54 +44,76 @@ public class PlayersBase
         return go.getGameId();
     }
 
-    public void AddPlayer(IpAddress ip, Player player, Nickname nickname, Game game)
+    public int PlayerId(IpAddress ip, Player player, Nickname nickname)
     {
         Optional<IpAddress> findIp = ipAddressesRepoJPA.findById(ip.getAddress());
+        int playerId = 0;
+        int uid = 0;
 
-        int playerId;
-        boolean exist = !findIp.isEmpty();
+        if(player.getUID() != null)
+            uid = player.getUID();
 
-        if(exist)
+        if(!findIp.isEmpty())
         {
             IpAddress addr = findIp.get();
             Integer iPlayer = addr.getPlayer();
 
             if(iPlayer == null)
-            {
-                System.out.println("error! player by ip not found!");
-                return;
-            }
+                throw new RuntimeException("error! player by ip not found!");
 
             playerId = iPlayer;
         }
-        else
+
+        // если есть с таким uid но нет такого ip
+        if(uid != 0)
         {
-            ipAddressesRepoJPA.save(ip);
+            List<Integer> players = playersRepoJPA.SearchByUID(uid);
+
+            if(!players.isEmpty())
+            {
+                if(playerId != players.get(0))
+                {
+                    IpAddress addr = findIp.get(); // переназначаем ip на игрока с uid
+                    addr.setPlayer(players.get(0));
+                    ipAddressesRepoJPA.save(addr);
+                }
+
+                playerId = players.get(0);
+            }
+        }
+
+        if(playerId !=0)
+        {
+            Player pl = playersRepoJPA.getById(playerId);
+
+            if(pl.getUID() == null && uid !=0)
+            {
+                pl.setUID(uid);
+                playersRepoJPA.save(pl); // update entry with UID
+            }
+
+            return playerId; // already have player and ip
+        }
+        else
+            player.setUID(null);
+
+        // add new player
+        if(playerId == 0)
+        {
             Player saved = playersRepoJPA.save(player);
             System.out.println("saved new player with id " + Integer.toString(saved.getPlayerId()));
-
             playerId = saved.getPlayerId();
-            ip.setPlayer(playerId);
-            ipAddressesRepoJPA.save(ip);
         }
 
-        Integer gameId = GetGameId(game); // TODO: Optimize
+        // save ip
+        ip.setPlayer(playerId);
+        ipAddressesRepoJPA.save(ip);
+        return playerId;
+    }
 
-        PlayerGame playerGame = new PlayerGame();
-        playerGame.setPlayerId(playerId);
-        playerGame.setGameId(gameId);
-
-        List<PlayerGame> pgList = playerGameRepoJPA.findAll();
-        boolean found = false;
-
-        for(PlayerGame pg: pgList) // TODO: Optimize
-        {
-            if(pg.getGameId().equals(gameId) && pg.getPlayerId().equals(playerGame.getPlayerId()))
-                found=true;
-        }
-
-        if(!found)
-            playerGameRepoJPA.save(playerGame);
+    public void AddPlayer(IpAddress ip, Player player, Nickname nickname)
+    {
+        int playerId = PlayerId(ip, player, nickname);
 
         nickname.setPlayerId(playerId);
 

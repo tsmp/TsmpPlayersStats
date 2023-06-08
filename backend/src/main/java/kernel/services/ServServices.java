@@ -44,33 +44,28 @@ public class ServServices
         return "banned";
     }
 
-//    void AddPlayerToBase(String name, String ip, ActiveSession session, String hwid)
-//    {
-//        Player player = new Player();
-//        player.setHwid(hwid);
-//
-//        IpAddress ipAddress = new IpAddress();
-//        ipAddress.setAddress(ip);
-//
-//        Nickname nickname = new Nickname();
-//        nickname.setNickname(name);
-//        nickname.setAddedDate(new Date());
-//
-//        Game game = new Game();
-//        game.setGameDate(new Date());
-//        game.setServerNameId(GetSrvNameId(session.getName())); // TODO: optimize
-//
-//        playersBase.AddPlayer(ipAddress, player, nickname, game);
-//    }
+    void AddPlayerToBase(String name, String ip, ActiveSession session, int uid)
+    {
+        Player player = new Player();
+        player.setUID(uid);
 
-    public String IsBanned(String ip, String name, int key, String hwid)
+        IpAddress ipAddress = new IpAddress();
+        ipAddress.setAddress(ip);
+
+        Nickname nickname = new Nickname();
+        nickname.setNickname(name);
+
+        playersBase.AddPlayer(ipAddress, player, nickname);
+    }
+
+    public String IsBanned(String ip, String name, int key, int uid)
     {
         ActiveSession session = sessionManager.GetSession(key);
 
         if (session == null)
             return "Error: not authorized!";
 
-        //AddPlayerToBase(name,ip,session, hwid.isEmpty() ? Player.NoHwidStr : hwid);
+        AddPlayerToBase(name,ip,session, uid);
         return "0"; // Integer.toString(bannedRepositoryJPA.isRecordExist(ip));
     }
 }

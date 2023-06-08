@@ -184,7 +184,7 @@ public class StatsSiteServices
 
                 for(ServerName srv: srvNames)
                 {
-                    if(srv.getId() == game.getServerNameId())
+                    if((int)srv.getId() == (int)game.getServerNameId())
                     {
                         gameStruct.setServerName(srv.getName());
                         break;

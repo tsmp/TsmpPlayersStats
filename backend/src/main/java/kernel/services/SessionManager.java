@@ -87,6 +87,7 @@ public class SessionManager
         ActiveSession session = new ActiveSession();
         session.setSessionKey(GenerateSessionKey());
         session.setSrvNameId(1);
+        session.setSrvMapId(1);
         session.setSrvVer("");
 
         System.out.println("admin started new session");
