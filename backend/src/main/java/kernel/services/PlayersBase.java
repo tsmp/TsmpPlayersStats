@@ -71,7 +71,7 @@ public class PlayersBase
 
             if(!players.isEmpty())
             {
-                if(playerId != players.get(0))
+                if(playerId != 0 && playerId != players.get(0))
                 {
                     IpAddress addr = findIp.get(); // переназначаем ip на игрока с uid
                     addr.setPlayer(players.get(0));
