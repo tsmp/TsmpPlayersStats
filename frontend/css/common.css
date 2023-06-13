@@ -38,3 +38,11 @@ header {
 .radmins-func:hover {
     background-color: var(--color1);
 }
+
+.color1 {
+    color: var(--color1);
+}
+
+.color2 {
+    color: var(--color2);
+}

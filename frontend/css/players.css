@@ -1,0 +1,43 @@
+.stats-players h2 {
+    padding: 0px;
+    padding-top: 30px;
+}
+
+.player-col {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-right: 3px solid var(--color1);
+    padding: 5px;
+}
+
+.player-col-last {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.player-col-header {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.player-row {
+    border: 3px solid var(--color1);
+    margin: 10px;
+    word-break: break-word;
+}
+
+.player-row:hover {
+    background-color: var(--color2);
+    color: var(--color1);
+    cursor: pointer;
+}
+
+.player-row-header {
+    margin: 10px;
+    word-break: break-word;
+}

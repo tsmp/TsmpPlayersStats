@@ -6,6 +6,16 @@ function toPage(pageUrl) {
 	throw new Error();
 }
 
+function CreateElem(elemType, className, parent) {
+    const newElem = document.createElement(elemType);
+    newElem.className = className;
+
+    if (parent !== undefined)
+        parent.appendChild(newElem);
+
+    return newElem;
+}
+
 // header related
 function toMainPage() {
     toPage("players.html");
@@ -16,13 +26,12 @@ function toRadminPage() {
 }
 
 function setHeaderHandlers() {
+    console.log("set header handlers");
     document.getElementById('header-main').onclick = () => toMainPage();
     document.getElementById('radmins-func').onclick = () => toRadminPage();
 }
 
-window.onload = function(e) { 
-    setHeaderHandlers();
-}
+setHeaderHandlers();
 
 // debug
 function PrintS(s) { document.body.innerHTML += s; }
