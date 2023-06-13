@@ -16,6 +16,15 @@ function CreateElem(elemType, className, parent) {
     return newElem;
 }
 
+function SetElemText(elemId, text) {
+    document.getElementById(elemId).innerHTML = text;
+}
+
+function GetUrlParamValue(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
 // header related
 function toMainPage() {
     toPage("players.html");
