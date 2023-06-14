@@ -1,138 +1,114 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="css/main.css" />
-	<title>Игроки</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=8;charset=utf-8">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	<link href="css/game.css" rel="stylesheet"/>
+	<link href="css/main.css" rel="stylesheet"/>
+	<title>Игра</title>
 </head>
 <body>
-    <input type="button" name="login" value="Назад" onClick="toPlayerInfo()" style="float: left;">
-	<input type="button" name="login" value="Войти" onClick="toLoginPage()" style="float: right;">
-	<br>
 
-    <h1 id="gameHeader" style="text-align: center">gameHeader</h1>
-    <p><b>Убийств: </b><div id="kills">kills</div></p><br>
-    <p><b>Смертей: </b><div id="deaths">deaths</div></p><br>
-    <p><b>Убийств/Смертей: </b><div id="kd">kd</div></p><br>
-    <p><b>Убийств НПС: </b><div id="killsAi">killsAi</div></p><br>
-    <p><b>Максимум убийств за одну жизнь: </b><div id="killsOneLife">killsOneLife</div></p><br>
-    <p><b>Часов в игре: </b><div id="hoursIngame">hoursIngame</div></p>
+<body>
+	<header>
+		<div class="container">
+			<div class = "row">
+				<div class="col-12">
+					<div class="header-main" id="header-main">
+						<div class="rad_icon">
+							<img src="images/rad.svg">
+						</div>
+						<div class="header-text">
+							  <h1 class="text-white">Статистика игроков</h1>
+						</div>
+					</div>
 
-    <h1 style="text-align: center">Использование оружия</h1>
+					<div class="radmins-func" id="radmins-func">
+						<h5 class="text-white">Функции радмина</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 
-<script language="javascript" type="text/javascript">
+	<section class="stats-game">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<a class="btn btn-lg text-uppercase back-btn" id="back-btn">Назад</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<h2 class="text-center text-uppercase color2 mb-2" id="gameHeader">Игра</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<h5 class="text-center">
+						<b>Фраги:</b>
+						<p id="kills"></p>
+					</h5>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<h5 class="text-center">
+						<b>Убийств нпс:</b>
+						<p id="killsAi"></p>
+					</h5>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<h5 class="text-center">
+						<b>Максимум убийств за одну жизнь:</b>
+						<p id="killsOneLife"></p>
+					</h5>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<h5 class="text-center">
+						<b>Смерти:</b>
+						<p id="deaths"></p>
+					</h5>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<h5 class="text-center">
+						<b>K/D:</b>
+						<p id="kd"></p>
+					</h5>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<h5 class="text-center">
+						<b>Часов в игре:</b>
+						<p id="hoursIngame"></p>
+					</h5>
+				</div>
+			</div>
+		</div>
+	</section>
 
-const urlParams = new URLSearchParams(window.location.search);
-id = urlParams.get("game");
-playerId = urlParams.get("player");
+	<section class="stats-wpn">
+		<div class="container" id="wpn-container">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="text-center text-uppercase color2 mb-2">Использование оружия</h2>
+				</div>
+			</div>
+			<div class="row wpn-row-header">
+				<div class="col-xl-6 col-md-6 col-sm-6 wpn-col-header">
+					<h5 class="text-center">Оружие</h5>
+				</div>
+				<div class="col-xl-6 col-md-6 col-sm-6 wpn-col-header">
+					<h5 class="text-center">Попаданий</h5>
+				</div>
+			</div>
+		</div>
+	</section>
 
-var Load = function()
-{
-	if (id == null) 
-	{
-		toPlayersPage();
-	}
+<script src="js/common.js"></script>
+<script src="js/game.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 
-	req = "http://194.147.90.72:8080/StatsSite/v1/GetGame?game="+id;
-	M = httpGet(req)
-	
-	//PrintS(M.responseText)	
-	//PrintS(M.);
-
-	var J = JSON.parse(M.responseText);
-	
-	//PrintJSON("res",J);
-	CreateGameStat(J);
-    CreateWeaponsList(J.wpnStats)
-}
-
-function CreateGameStat(game) 
-{
-    document.getElementById('gameHeader').innerHTML = "Игра " + game.date + ", сервер: "+game.server+ ", карта: "+ game.map;
-    document.getElementById('kills').innerHTML = game.kills;
-    document.getElementById('killsAi').innerHTML = game.killsAi;
-    document.getElementById('deaths').innerHTML = game.deaths;
-    document.getElementById('kd').innerHTML = game.kd;
-    document.getElementById('hoursIngame').innerHTML = game.hoursIngame;
-    document.getElementById('killsOneLife').innerHTML = game.killsOneLife;
-}
-
-function CreateWeaponsList(lst)
-{
-	const body = document.body, tbl = document.createElement('table');
-
-	tbl.style.width = '100%';
-	tbl.style.border = '1px solid black';
-	tbl.style.borderCollapse = "collapse";
-
-	const tr1 = tbl.insertRow();
-	const td1 = tr1.insertCell();
-
-	text = "Оружие";
-	td1.appendChild(document.createTextNode(text));
-	td1.style.border = '1px solid black';
-	td1.style.borderCollapse = "collapse";
-	td1.style.padding = '10px'
-    td1.style.width="50%";
-
-	td2 = tr1.insertCell();
-	text = "Попаданий"
-	td2.style.border = '1px solid black';
-	td2.style.borderCollapse = "collapse";
-    td2.style.width="50%";
-	td2.appendChild(document.createTextNode(text));
-
-	for (let i = 0; i < lst.length; i++) 
-	{
-		const tr = tbl.insertRow();
-		const td = tr.insertCell();
-
-		td.style.border = '1px solid black';
-		td.style.borderCollapse = "collapse";
-
-		td.appendChild(document.createTextNode(lst[i].wpnName));
-
-		td2 = tr.insertCell();
-		td2.style.border = '1px solid black';
-		td2.style.borderCollapse = "collapse";
-		td2.appendChild(document.createTextNode(lst[i].hits));
-	}
-
-	body.appendChild(tbl);
-}
-
-function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest({mozSystem: true});
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-	//xmlHttp.setRequestHeader('Content-Type', 'application/json');
-	//xmlHttp.getResponseHeader('Content-Type', 'application/json');
-	//xmlHttp.responseType = 'json';
-    xmlHttp.send();	
-    return xmlHttp;
-}
-
-function toPlayerInfo()
-{	
-	location = "playerInfo.html?player="+playerId;
-	throw new Error();
-}
-
-function toLoginPage()
-{
-	loginPage = "login.html"
-	location = loginPage;
-	throw new Error();
-}
-
-function PrintS(s) { document.body.innerHTML += s; }
-function PrintP(p) { document.body.innerHTML += "\<img src=\"data:image\/png;base64," + p + "\"\/\>";}
-function PrintTIME(s,t1) { PrintS("<b><i>" + s + ": "+ (new Date().getTime()-t1.getTime())/1000 +"</i></b> sec.<br>") }
-function PrintJSON (str,obj) { PrintS( str + ":<p>"      + unescape(JSON.stringify(obj).replace(/\\u/g, '%u').replace(/</g,"&lt;").replace(/>/g,"&gt;"))); }
-function PrintJSONb(str,obj) { PrintS( str + ":<p><pre>" + unescape(JSON.stringify(obj,null,4).replace(/\\u/g, '%u').replace(/</g,"&lt;").replace(/>/g,"&gt;")) + "</pre>" ); }
-function PrintXML(str,obj) { PrintS( str + ":<p>" + obj.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "<br>" ); }
-
-Load();
-
-</script>
-</body></html>
+</body>
+</html>
