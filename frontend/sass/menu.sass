@@ -19,16 +19,16 @@
   text-decoration: none
   color: #2d2d2d
   cursor: default
-  transition: 0.3s ease-in-out
+  transition: all 0.3s ease-in-out
 
   &:hover
-    color: black
-    background: #fef200
-
-  &:active
     color: white
     background: black
-    transition-duration: 0.1s
+
+  &:active
+    color: black
+    background: #fef200
+    transition-duration: 0.01s
 
 .menu_logo_button
   width: 35vw
@@ -52,32 +52,6 @@
     &:hover
       background: url('../media/icons/favicon.svg') no-repeat center center
       background-size: contain
-
-.menu_search_field
-  min-width: 40%
-  height: 1vh
-  padding: 1.5vh
-  font-family: 'helvetica neue', sans-serif
-  font-size: 2vh
-  font-weight: normal
-  color: black
-  border: 1px solid gray
-  border-radius: 1vh
-  cursor: text
-  margin: auto 1vh auto 1vh
-  user-select: all
-
-  &:hover
-    color: #2d2d2d
-    background: white
-    border: 1px solid #464646
-    box-shadow: 1px 1px 5px rgba(114, 114, 114, 0.5)
-
-  &:focus
-    color: #2d2d2d
-    background: white
-    border: 1px solid black
-    box-shadow: 3px 3px 6px rgba(65, 65, 65, 0.5)
 
 .menu_search_icon
   display: inline-flex
@@ -108,9 +82,20 @@
   padding: 2vh
   cursor: pointer
   text-align: center
+  font-size: 2.2vh
 
-  &:active .menu_user_icon
-    filter: invert(100%)
+  &:hover
+    .menu_user_icon
+      filter: invert(100%)
+    color: white
+    background: black
+
+  &:active
+    .menu_user_icon
+      filter: invert(0%)
+    color: black
+    background: #fef200
+    transition-duration: 0.01s
 
 .menu_user_icon
   display: inline-flex
