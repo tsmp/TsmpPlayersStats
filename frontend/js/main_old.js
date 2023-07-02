@@ -63,7 +63,7 @@ var Load = function () {
 
     const a_page_nums = document.querySelectorAll('a.page_num');
     a_page_nums.forEach((a) => {
-        a.textContent = curPage + " / " + maxPage;
+        a.textContent = "Страница " + curPage + " из " + maxPage;
     });
 
     const search_button = document.getElementById('search');
@@ -91,10 +91,10 @@ function SetSeachOnPressEnter() {
 }
 
 function CreatePlayersList(playersJSON) {
-    const list_div = document.createElement('div');
-    list_div.classList.add('player_list');
+    const tbl = document.createElement('table');
     const main_div = document.getElementById('main');
     const last_nav = document.getElementById('last_nav');
+
     resultsCnt = playersJSON.resultsCnt
     document.getElementById('results_cnt').innerHTML = "Найдено игроков: " + resultsCnt
 
@@ -102,66 +102,71 @@ function CreatePlayersList(playersJSON) {
     maxPage = pagesCnt
     firstNumber = playersJSON.firstNumber
 
+    tbl.style.width = '100%';
+    tbl.style.border = '1px solid black';
+    spaces = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0';
+
     for (let i = 0; i < playersJSON.players.length; i++) {
-        const player_div = document.createElement('div');
-        player_div.classList.add('player_list_element');
-        list_div.appendChild(player_div);
+        const tr = tbl.insertRow();
+        const td = tr.insertCell();
+        tr.id = playersJSON.players[i].playerId
 
-        const ple_info_div = document.createElement('div');
-        ple_info_div.classList.add('ple_info');
-        player_div.appendChild(ple_info_div);
-
-        const a_id = document.createElement('a');
-        a_id.classList.add('player_id');
-        ple_info_div.appendChild(a_id);
-        a_id.innerHTML = playersJSON.players[i].playerId;
-
-        let ip_address = '';
-
-        for (let j = 0; j < playersJSON.players[i].addresses.length; j++) {
-            if (j !== 0)
-                ip_address += ', ';
-
-            ip_address += playersJSON.players[i].addresses[j];
-        }
-
-        const a_ip_address = document.createElement('a');
-        a_ip_address.classList.add('player_ip');
-        ple_info_div.appendChild(a_ip_address);
-        a_ip_address.innerHTML = ip_address;
-
-        let nicknames = '';
+        num = firstNumber + i + 1
+        text = num + ". Ники: "
 
         for (let j = 0; j < playersJSON.players[i].nicknames.length; j++) {
-            if (j !== 0)
-                nicknames += ' , ';
+            if (j != 0)
+                text = text + "," + spaces;
 
-            nicknames += playersJSON.players[i].nicknames[j];
+            text = text + playersJSON.players[i].nicknames[j]
         }
 
-        const p_nicknames = document.createElement('p');
-        p_nicknames.classList.add('player_nicknames');
-        ple_info_div.appendChild(p_nicknames);
-        p_nicknames.innerHTML = nicknames;
+        td.appendChild(document.createTextNode(text));
+        var br = document.createElement("br");
+        td.appendChild(br);
+        var br = document.createElement("br");
+        td.appendChild(br);
 
-        const a_hwid = document.createElement('a');
-        a_hwid.classList.add('player_hwid');
-        ple_info_div.appendChild(a_hwid);
-        if (playersJSON.players[i].hwid != null)
-            a_hwid.innerHTML = playersJSON.players[i].hwid;
-        else
-            a_hwid.innerHTML = 'Неизвестен';
+        text = "ip: ";
 
-        const button_info = document.createElement('button');
-        button_info.classList.add('player_info');
-        player_div.appendChild(button_info);
-        button_info.innerHTML = 'Информация \u2192';
-        button_info.onclick = function () {
-            PlayerInfo(a_id.innerHTML);
+        for (let j = 0; j < playersJSON.players[i].addresses.length; j++) {
+            if (j != 0)
+                text = text + "," + spaces;
+
+            text = text + playersJSON.players[i].addresses[j]
+        }
+
+        td.appendChild(document.createTextNode(text));
+        var br = document.createElement("br");
+        td.appendChild(br);
+        var br = document.createElement("br");
+        td.appendChild(br);
+
+        text = "hwid: " + playersJSON.players[i].hwid;
+        td.appendChild(document.createTextNode(text));
+
+        td.style.borderBottom = '1px solid black';
+        td.style.padding = '10px'
+        td.style.overflowWrap = 'anywhere'
+
+        td2 = tr.insertCell();
+        td2.className = "info_player"
+
+        buttonInfo = document.createElement("input");
+        buttonInfo.type = "button"
+        buttonInfo.value = "Инфо"
+        buttonInfo.className = "player_info_button"
+
+        buttonInfo.onclick = function () {
+            PlayerInfo(tr.id);
         };
+
+        td2.appendChild(buttonInfo)
+
+
     }
 
-    main_div.insertBefore(list_div, last_nav);
+    main_div.insertBefore(tbl, last_nav);
 }
 
 function httpGet(theUrl) {

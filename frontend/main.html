@@ -51,7 +51,8 @@
             <input style="width: 20vh; font-size: 1.65vh" class="search_field page_input" id="page_input" type="text"
                    name="page_input" placeholder="Введите номер страницы">
             <button type="button" name="page_go" onClick="ChangePage(this.form)">Перейти</button>
-            <button type="button" class="circle_button arrow_right" name="page_go_forward" onClick="NextPage(this.form)">
+            <button type="button" class="circle_button arrow_right" name="page_go_forward"
+                    onClick="NextPage(this.form)">
                 <img src="media/icons/arrow_left.svg" alt="arrow_left"/>
             </button>
         </nav>
@@ -69,13 +70,36 @@
             <input style="width: 20vh; font-size: 1.65vh" class="search_field" id="page_input_2" type="text"
                    name="page_input" placeholder="Введите номер страницы">
             <button type="button" name="page_go" onClick="ChangePage(this.form)">Перейти</button>
-            <button type="button" class="circle_button arrow_right" name="page_go_forward" onClick="NextPage(this.form)">
+            <button type="button" class="circle_button arrow_right" name="page_go_forward"
+                    onClick="NextPage(this.form)">
                 <img src="media/icons/arrow_left.svg" alt="arrow_left"/>
             </button>
         </nav>
     </form>
 </div>
 
+<footer>
+    <div class="footer_option_list">
+        <a class="href" style="display: inline-flex" href="https://discord.gg/D5nHxsygpc">
+            <img style="margin: auto 0 auto 0" src="media/icons/footer_discord.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Discord</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life-server.ru">
+            <img style="margin: auto 0 auto 0" src="media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://team-stalker.ucoz.com">
+            <img style="margin: auto 0 auto 0" src="media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Team-Stalker</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life.ucoz.net">
+            <img style="margin: auto 0 auto 0" src="media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life (Старый)</span>
+        </a>
+    </div>
+    <div class="footer_line"></div>
+    <p class="company_desc">X-ray Project, 2023 г.</p>
+</footer>
 
 <script type="text/javascript" src="js/main.js"></script>
 

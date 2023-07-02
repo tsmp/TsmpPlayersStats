@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   font-family: "Lato Regular", sans-serif;
   font-size: 2vh;
@@ -25,9 +26,10 @@ body {
   height: 100%;
   background-color: white;
   color: #282e36;
-  font-size: 10vh;
+  font-size: 8vh;
   justify-content: center;
   align-content: center;
+  text-align: center;
   opacity: 1;
   z-index: 9999;
 }
@@ -143,6 +145,133 @@ button:active {
   background: white;
   border: 1px solid black;
   box-shadow: 3px 3px 6px rgba(65, 65, 65, 0.5);
+}
+
+.player_list {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  border: 1px solid gray;
+  border-radius: 1vh;
+  padding: 2vh;
+  margin: 2vh 0 2vh 0;
+}
+
+.player_list_element {
+  display: inline-flex;
+  justify-content: space-between;
+  padding: 1vh;
+  color: #282e36;
+  border-bottom: 1px solid gray;
+}
+
+.ple_info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.ple_info a {
+  font-family: "Lato Regular", sans-serif;
+  font-size: 2.2vh;
+  padding: 0.5vh;
+}
+.ple_info a.player_id:before {
+  font-family: "Lato Bold", sans-serif;
+  content: "ID: ";
+}
+.ple_info a.player_hwid:before {
+  font-family: "Lato Bold", sans-serif;
+  content: "HWID: ";
+}
+.ple_info a.player_ip:before {
+  font-family: "Lato Bold", sans-serif;
+  content: "IP адрес: ";
+}
+.ple_info p {
+  padding: 0.5vh;
+  margin: 0;
+  font-size: 2.2vh;
+}
+.ple_info p.player_nicknames:before {
+  font-family: "Lato Bold", sans-serif;
+  content: "Ники: ";
+}
+
+button.player_info {
+  height: 5vh;
+  min-width: 19vh;
+  margin: auto 0 auto 0;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  bottom: 0;
+  height: 29%;
+  width: 100%;
+  background: -webkit-linear-gradient(top, #2c2c2c, #1e1e1e);
+  background: -o-linear-gradient(top, #2c2c2c, #1e1e1e);
+  color: #ffffff;
+  font-family: "helvetica neue", sans-serif;
+  font-size: 2vh;
+  margin: 10vh 0 0 0;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+footer img {
+  width: 3vh;
+  height: 3vh;
+  padding: 1vh;
+  margin: 3vh;
+  filter: invert(90%);
+  background: transparent;
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+}
+
+footer .href {
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.15s ease-in-out;
+}
+footer .href:hover {
+  color: white;
+  font-size: 2.1vh;
+}
+footer .href:hover img {
+  filter: invert(15%);
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.footer_option_list {
+  display: inline-flex;
+  width: 80%;
+  height: 7vh;
+  margin: 1vh 0 0 0;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.footer_line {
+  width: 70%;
+  height: 0.1vh;
+  background: -webkit-linear-gradient(left, #2c2c2c, #dedede, #2c2c2c);
+  background: -o-linear-gradient(left, #2c2c2c, #dedede, #2c2c2c);
+  margin: 1vh auto 1vh auto;
+}
+
+.company_desc {
+  color: #efefef;
+  text-align: center;
+  font-family: "Roboto Thin", sans-serif;
+  font-size: 1.8vh;
+  margin: 0;
+  padding: 0.3vh 0 1.7vh 0;
+  letter-spacing: 0.25vh;
 }
 
 /*# sourceMappingURL=base.css.map */
