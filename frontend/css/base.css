@@ -36,6 +36,7 @@ body {
 
 .main {
   margin: 3vh;
+  min-height: 70vh;
 }
 
 .players_found {
