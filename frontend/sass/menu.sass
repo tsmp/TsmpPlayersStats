@@ -1,0 +1,112 @@
+.menu
+  display: flex
+  width: 100%
+  min-height: 8vh
+  border-bottom: 1px solid gray
+  justify-content: space-between
+  align-content: center
+  user-select: none
+
+.menu_element
+  display: inline-flex
+  width: 30vw
+  max-height: 8vh
+  justify-content: center
+  margin: auto 0 auto 0
+  padding: 3vh
+  font-family: 'Roboto', sans-serif
+  font-size: 2.5vh
+  text-decoration: none
+  color: #2d2d2d
+  cursor: default
+  transition: all 0.3s ease-in-out
+
+  &:hover
+    color: white
+    background: black
+
+  &:active
+    color: black
+    background: #fef200
+    transition-duration: 0.01s
+
+.menu_logo_button
+  width: 35vw
+  height: 7vh
+  border: 0
+  margin: auto 1vh auto 1vh
+  background: url('../media/images/logo.png') no-repeat center center
+  background-size: contain
+  cursor: pointer
+  transition: 0.2s ease-in-out
+
+  &:hover
+    background: url('../media/images/logo_line.png') no-repeat center center
+    background-size: contain
+
+@media (max-width: 1300px)
+  .menu_logo_button
+    background: url('../media/icons/favicon.svg') no-repeat center center
+    background-size: contain
+
+    &:hover
+      background: url('../media/icons/favicon.svg') no-repeat center center
+      background-size: contain
+
+.menu_search_icon
+  display: inline-flex
+  justify-content: center
+  margin: auto 1vh auto 1vh
+  padding: 4vh
+  cursor: pointer
+  background: url('../media/icons/menu_search.svg') no-repeat center center
+  background-size: 4vh
+  transition: 0.3s ease-in-out
+
+  &:hover
+    rotate: 25deg
+
+@keyframes search_icon_anim
+  0%
+    rotate: 25deg
+  100%
+    rotate: 135deg
+    background-size: 3.5vh
+
+.menu_user_block
+  display: inline-flex
+  width: 25vw
+  height: 5vh
+  align-content: center
+  margin: 0
+  padding: 2vh
+  cursor: pointer
+  text-align: center
+  font-size: 2.2vh
+
+  &:hover
+    .menu_user_icon
+      filter: invert(100%)
+    color: white
+    background: black
+
+  &:active
+    .menu_user_icon
+      filter: invert(0%)
+    color: black
+    background: #fef200
+    transition-duration: 0.01s
+
+.menu_user_icon
+  display: inline-flex
+  justify-content: center
+  padding: 2vh
+  background: url('../media/icons/menu_user.svg') no-repeat center center
+  background-size: 4vh
+
+.menu_logout_icon
+  display: inline-flex
+  padding: 2vh 10vh 2vh 2vh
+  cursor: pointer
+  background: url('../media/icons/menu_logout.svg') no-repeat center center
+  background-size: 3.5vh

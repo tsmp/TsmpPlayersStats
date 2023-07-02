@@ -1,0 +1,630 @@
+{
+  "resultsCnt": 245681,
+  "pagesCnt": 4914,
+  "firstNumber": 0,
+  "players": [
+    {
+      "nicknames": [
+        "DOM"
+      ],
+      "addresses": [
+        "46.39.45.65"
+      ],
+      "playerId": 5,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Zalupok",
+        "Игорь"
+      ],
+      "addresses": [
+        "85.95.188.177"
+      ],
+      "playerId": 6,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "User"
+      ],
+      "addresses": [
+        "92.47.39.170"
+      ],
+      "playerId": 7,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Vexsel",
+        "админ_1",
+        "Админ",
+        "админ",
+        "Михаил"
+      ],
+      "addresses": [
+        "92.100.145.29"
+      ],
+      "playerId": 8,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "user_1",
+        "[darkside]vik",
+        "pc",
+        "user"
+      ],
+      "addresses": [
+        "176.111.96.67"
+      ],
+      "playerId": 9,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "37253"
+      ],
+      "addresses": [
+        "46.131.55.220"
+      ],
+      "playerId": 10,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "ruden",
+        "аntоniоdiеzzz",
+        "Antoniodiezzz",
+        "antoniodiezzz"
+      ],
+      "addresses": [
+        "94.140.241.48"
+      ],
+      "playerId": 11,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "ПАВЕДУЛО)))"
+      ],
+      "addresses": [
+        "109.62.216.8"
+      ],
+      "playerId": 12,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "79995"
+      ],
+      "addresses": [
+        "188.18.232.253"
+      ],
+      "playerId": 13,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "ufа"
+      ],
+      "addresses": [
+        "94.41.206.212"
+      ],
+      "playerId": 14,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Player",
+        "User",
+        "DNS"
+      ],
+      "addresses": [
+        "176.59.50.239"
+      ],
+      "playerId": 15,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "F1ghter",
+        "Юрий",
+        "Bdsm"
+      ],
+      "addresses": [
+        "95.179.127.206"
+      ],
+      "playerId": 16,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "07-20"
+      ],
+      "addresses": [
+        "2.132.168.241"
+      ],
+      "playerId": 17,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "сергей"
+      ],
+      "addresses": [
+        "176.57.76.119"
+      ],
+      "playerId": 18,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "user"
+      ],
+      "addresses": [
+        "94.198.36.18"
+      ],
+      "playerId": 19,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Роман"
+      ],
+      "addresses": [
+        "95.153.162.64"
+      ],
+      "playerId": 20,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "юзер"
+      ],
+      "addresses": [
+        "91.236.14.168"
+      ],
+      "playerId": 21,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "User"
+      ],
+      "addresses": [
+        "213.135.158.10"
+      ],
+      "playerId": 22,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Печка"
+      ],
+      "addresses": [
+        "95.105.65.147"
+      ],
+      "playerId": 23,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Admin",
+        "slavone2323232323"
+      ],
+      "addresses": [
+        "93.100.237.94"
+      ],
+      "playerId": 24,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "tatyana"
+      ],
+      "addresses": [
+        "31.42.248.146"
+      ],
+      "playerId": 25,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Сергей"
+      ],
+      "addresses": [
+        "95.52.34.138"
+      ],
+      "playerId": 26,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "User",
+        "Мунлайт-Виктор"
+      ],
+      "addresses": [
+        "217.25.217.242"
+      ],
+      "playerId": 27,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Петросян"
+      ],
+      "addresses": [
+        "176.59.21.123"
+      ],
+      "playerId": 28,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Vova",
+        "Player_7",
+        "Player_1",
+        "User",
+        "Ogre4ka",
+        "Player"
+      ],
+      "addresses": [
+        "91.233.43.234"
+      ],
+      "playerId": 29,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "max_007",
+        "max_007_1",
+        "User",
+        "Max_007"
+      ],
+      "addresses": [
+        "109.106.136.139"
+      ],
+      "playerId": 30,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "рit",
+        "Pit"
+      ],
+      "addresses": [
+        "77.236.206.224"
+      ],
+      "playerId": 31,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "пк"
+      ],
+      "addresses": [
+        "93.171.93.172"
+      ],
+      "playerId": 32,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "roker",
+        "dik_v",
+        "Player_1",
+        "Dik_v",
+        "Вячеслав",
+        "Roker",
+        "_"
+      ],
+      "addresses": [
+        "193.160.204.203"
+      ],
+      "playerId": 33,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Богдан"
+      ],
+      "addresses": [
+        "37.79.128.99"
+      ],
+      "playerId": 34,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "www_1",
+        "Jack_the_ripper",
+        "Jack_the_Ripper",
+        "San.xo",
+        "Mouse",
+        "skott",
+        "www",
+        "san.xo",
+        "Www",
+        "Jack the Ripper"
+      ],
+      "addresses": [
+        "31.128.178.76"
+      ],
+      "playerId": 35,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Друг Кроманьонцев",
+        "Player_1"
+      ],
+      "addresses": [
+        "92.39.215.3"
+      ],
+      "playerId": 36,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "User",
+        "User_1"
+      ],
+      "addresses": [
+        "185.33.161.222"
+      ],
+      "playerId": 37,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "functiоnаl-t9000",
+        "undеrcоvеr",
+        "____",
+        "functional-Т9000",
+        "Hardboss[Тornado",
+        "F.a",
+        "Mordor",
+        "User",
+        "Pidroid",
+        "Ryrk[tornado]",
+        "Velikan",
+        "Functional-t9000",
+        "banhammer-350",
+        "Murdoc",
+        "Kong[eternity]",
+        "kоng[еtеrnitу]",
+        "Voice",
+        "infеrnо",
+        "functiоnаl-t3000",
+        "Mrodor",
+        "Functional-Т9000",
+        "functiоnаl-t5000",
+        "functiоnаl-Т9000",
+        "Server-bot",
+        "functiоnаl-t1000",
+        "Rob"
+      ],
+      "addresses": [
+        "178.169.92.25"
+      ],
+      "playerId": 38,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Vvs",
+        "Dexter",
+        "Pavel K",
+        "vvs"
+      ],
+      "addresses": [
+        "46.32.87.244"
+      ],
+      "playerId": 39,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "vladi"
+      ],
+      "addresses": [
+        "95.72.206.13"
+      ],
+      "playerId": 40,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "никита"
+      ],
+      "addresses": [
+        "109.252.122.177"
+      ],
+      "playerId": 41,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Saleout-pc"
+      ],
+      "addresses": [
+        "85.175.254.132"
+      ],
+      "playerId": 42,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Albert"
+      ],
+      "addresses": [
+        "213.24.135.10"
+      ],
+      "playerId": 43,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Игорь"
+      ],
+      "addresses": [
+        "178.66.157.86"
+      ],
+      "playerId": 44,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Руслан"
+      ],
+      "addresses": [
+        "94.180.25.115"
+      ],
+      "playerId": 45,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Player_1",
+        "Эдуард"
+      ],
+      "addresses": [
+        "87.117.52.104"
+      ],
+      "playerId": 46,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "SERG_NB"
+      ],
+      "addresses": [
+        "89.250.9.74"
+      ],
+      "playerId": 47,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Leshii"
+      ],
+      "addresses": [
+        "93.171.54.33"
+      ],
+      "playerId": 48,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Венера"
+      ],
+      "addresses": [
+        "89.239.169.37"
+      ],
+      "playerId": 49,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Chucha",
+        "Egor"
+      ],
+      "addresses": [
+        "109.252.177.43"
+      ],
+      "playerId": 50,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "USER-S"
+      ],
+      "addresses": [
+        "90.188.136.209"
+      ],
+      "playerId": 51,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "frolo"
+      ],
+      "addresses": [
+        "176.52.22.179"
+      ],
+      "playerId": 52,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "USER"
+      ],
+      "addresses": [
+        "85.26.235.83"
+      ],
+      "playerId": 54,
+      "hwid": null,
+      "info": null
+    },
+    {
+      "nicknames": [
+        "Beastman"
+      ],
+      "addresses": [
+        "84.251.242.174"
+      ],
+      "playerId": 55,
+      "hwid": null,
+      "info": null
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Lato Regular';
+    src: url('../fonts/lato_regular.eot');
+    src: url('../fonts/lato_regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/lato_regular.woff2') format('woff2'),
+    url('../fonts/lato_regular.woff') format('woff'),
+    url('../fonts/lato_regular.ttf') format('truetype'),
+    url('../fonts/lato_regular.svg#lato_regular') format('svg');
+}
+
+@font-face {
+    font-family: 'Lato Bold';
+    src: url('../fonts/lato_bold.eot');
+    src: url('../fonts/lato_bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/lato_bold.woff2') format('woff2'),
+    url('../fonts/lato_bold.woff') format('woff'),
+    url('../fonts/lato_bold.ttf') format('truetype'),
+    url('../fonts/lato_bold.svg#lato_bold') format('svg');
+}
+
+@font-face {
+    font-family: 'Droid Sans Mono';
+    src: url('../fonts/droid_sans_mono.eot');
+    src: url('../fonts/droid_sans_mono.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/droid_sans_mono.woff2') format('woff2'),
+    url('../fonts/droid_sans_mono.woff') format('woff'),
+    url('../fonts/droid_sans_mono.ttf') format('truetype'),
+    url('../fonts/droid_sans_mono.svg#droid_sans_mono') format('svg');
+}
+
+@font-face {
+    font-family: 'helvetica neue';
+    src: url('../fonts/helveticaneueots.eot');
+    src: url('../fonts/helveticaneueots.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/helveticaneueots.woff2') format('woff2'),
+    url('../fonts/helveticaneueots.woff') format('woff'),
+    url('../fonts/helveticaneueots.ttf') format('truetype'),
+    url('../fonts/helveticaneueots.svg#helveticaneueots') format('svg');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.eot');
+    src: url('../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Regular.woff') format('woff'),
+    url('../fonts/Roboto-Regular.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Roboto Thin';
+    src: url('../fonts/Roboto-Thin.eot');
+    src: url('../fonts/Roboto-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Thin.woff') format('woff'),
+    url('../fonts/Roboto-Thin.ttf') format('truetype')
+}
