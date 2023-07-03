@@ -1,299 +1,40 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
+﻿<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-    <link rel="stylesheet" type="text/css" href="css/info.css"/>
-    <link rel="shortcut icon" href="media/icons/favicon.ico" type="image/x-icon">
-    <title>База игроков</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=8;charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/anims.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="icon" type="image/x-icon" href="media/icons/favicon.ico">
+    <title>Информация об игроке</title>
 </head>
-<body>
-<p>
-<form class="form">
-    <table width="100%" style="table-layout: fixed">
-        <colgroup>
-            <col width="100px">
-            <col width="100%">
-            <col width="200px">
-        </colgroup>
+<body id="body">
 
-        <tr>
-            <td class="info_block">
-                <input type="button" name="info" value="Назад" onClick="GoBack()">
-            </td>
-
-            <td class="search_block">
-                <input type="text" name="search_field" class="search_field" placeholder="Поиск по никнейму, ip, hwid..."
-                       disabled="true">
-                <input type="button" name="search" value="Искать" /*onClick="Search(this.form)"*/ disabled="true">
-            </td>
-
-            <td class="user_block">
-                <label class="user_name" id="user_name">user</label>
-                <input type="button" name="exit" value="Выйти" onClick="toLoginPage()">
-            </td>
-        </tr>
-    </table>
+<form id="menu_search_form">
+    <div class="menu">
+        <a class="menu_logo_button" onClick="MainPage()"></a>
+        <a style="width: 15vh" class="menu_element" onClick="MainPage()">Главная</a>
+        <label for="search_field"></label>
+        <input style="min-width: 40%" class="menu_element input_field" type="text" name="search_field"
+               id="search_field"
+               placeholder="Поиск по никнейму, ip, hwid...">
+        <a type="button" class="menu_search_icon" id="search"></a>
+        <div class="menu_element menu_user_block">
+            <a style="margin: auto 0 auto 0" class="menu_user_icon"></a>
+            <a style="margin: auto 0 auto 2vh" id="user_name">User name</a>
+        </div>
+        <a class="menu_logout_icon" onClick="toLoginPage()"></a>
+    </div>
 </form>
 
-<p class="player_id" id="player_id">
-    Игрок: 228
-</p>
+<div class="main" id="main">
+    <p class="players_found" id="player_id">Игрок №1</p>
+</div>
 
-
-<script type="text/javascript">
-
-    const urlParams = new URLSearchParams(window.location.search);
-    id = urlParams.get("id")
-    PlayerId = urlParams.get("pl")
-
-    var Load = function () {
-        // Если не вошли!!!
-        if (id == null) {
-            toLoginPage();
-        }
-
-        // Если нет id игрока
-        if (PlayerId == null) {
-            toLoginPage();
-            throw new Error();
-        }
-
-        // Установить имя пользователя
-        nameRequest = "http://194.147.90.72:8080/PlayersSite/v1/MyName?key=" + id;
-        user = httpGet(nameRequest);
-        document.getElementById('user_name').innerHTML = user.responseText
-
-        // Установить id пользователя
-        document.getElementById('player_id').innerHTML = "Игрок: " + PlayerId
-
-        getInfoReq = "http://194.147.90.72:8080/PlayersSite/v1/GetPlayerInfo?key=" + id + "&playerId=" + PlayerId;
-        //alert(getInfoReq)
-        M = httpGet(getInfoReq)
-
-        //PrintS(M.responseText)
-        //PrintS(M.);
-
-        var J = JSON.parse(M.responseText);
-
-        //PrintJSON("res",J);
-        CreatePlayerInfo(J);
-    }
-
-    function CreatePlayerInfo(playerJSON) {
-        const body = document.body, tbl = document.createElement('table');
-
-        tbl.id = "taaable";
-        tbl.style.width = '100%';
-        tbl.style.border = '1px solid black';
-        spaces = '\xa0\xa0\xa0\xa0\xa0\xa0\xa0';
-
-        const tr = tbl.insertRow();
-        const td = tr.insertCell();
-        text = "Ники: "
-
-        for (let j = 0; j < playerJSON.player.nicknames.length; j++) {
-            if (j != 0)
-                text = text + "," + spaces;
-
-            text = text + playerJSON.player.nicknames[j].nickname
-        }
-
-        td.appendChild(document.createTextNode(text));
-        var br = document.createElement("br");
-        td.appendChild(br);
-        var br = document.createElement("br");
-        td.appendChild(br);
-
-        text = "ip: ";
-
-        for (let j = 0; j < playerJSON.player.addresses.length; j++) {
-            if (j != 0)
-                text = text + "," + spaces;
-
-            text = text + playerJSON.player.addresses[j].address
-        }
-
-        td.appendChild(document.createTextNode(text));
-        var br = document.createElement("br");
-        td.appendChild(br);
-        var br = document.createElement("br");
-        td.appendChild(br);
-
-        text = "hwid: " + playerJSON.player.hwid;
-        td.appendChild(document.createTextNode(text));
-
-        td.style.borderBottom = '0px solid black';
-        td.style.padding = '10px'
-        td.style.overflowWrap = 'anywhere'
-
-
-        if (playerJSON.notes.length) {
-            const tr2 = tbl.insertRow();
-            const td2 = tr2.insertCell();
-
-            td2.style.borderBottom = '1px solid black';
-            td2.style.padding = '10px'
-            td2.style.overflowWrap = 'anywhere'
-
-            text = "Заметки: ";
-            td2.appendChild(document.createTextNode(text));
-
-            var br = document.createElement("br");
-            td2.appendChild(br);
-
-            butAdd = document.createElement("input");
-            butAdd.type = "button";
-            butAdd.value = "Добавить заметку";
-            butAdd.onclick = () => AddNewNote();
-            td2.appendChild(butAdd);
-
-
-            for (let j = 0; j < playerJSON.notes.length; j++) {
-                var br = document.createElement("br");
-                td2.appendChild(br);
-                var br = document.createElement("br");
-                td2.appendChild(br);
-
-                td2.appendChild(document.createTextNode("Автор: " + playerJSON.notes[j].author));
-                var br = document.createElement("br");
-                td2.appendChild(br);
-                noteText = document.createElement("input");
-                noteText.type = "input";
-                noteText.value = playerJSON.notes[j].info;
-
-                td2.id = playerJSON.notes[j].id;
-                td2.appendChild(noteText);
-
-                butSave = document.createElement("input");
-                butSave.type = "button"
-                butSave.value = "Сохранить"
-                butSave.onclick = () => OnSaveClick(playerJSON.notes[j].id, noteText.value);
-                td2.appendChild(butSave);
-
-                butDel = document.createElement("input");
-                butDel.type = "button";
-                butDel.value = "Удалить";
-                butDel.onclick = () => OnDelClick(playerJSON.notes[j].id, noteText.value);
-                td2.appendChild(butDel);
-            }
-        }
-
-
-        body.appendChild(tbl);
-    }
-
-    function AddNewNote() {
-        if (document.getElementById('newNote') != undefined)
-            return;
-
-        tabl = document.getElementById('taaable');
-        const tr = tabl.insertRow();
-        const td2 = tr.insertCell();
-
-        var br = document.createElement("br");
-        td2.appendChild(br);
-        var br = document.createElement("br");
-        td2.appendChild(br);
-
-        td2.appendChild(document.createTextNode("Новая заметка: "));
-        td2.id = "newNote";
-        var br = document.createElement("br");
-        td2.appendChild(br);
-        noteText = document.createElement("input");
-        noteText.type = "input";
-        noteText.value = "Введите текст заметки";
-
-        td2.appendChild(noteText);
-
-        butSave = document.createElement("input");
-        butSave.type = "button"
-        butSave.value = "Сохранить"
-        butSave.onclick = () => OnSaveClick(-1, noteText.value);
-        td2.appendChild(butSave);
-
-        butDel = document.createElement("input");
-        butDel.type = "button";
-        butDel.value = "Удалить";
-        butDel.onclick = () => OnDelClick(-1, noteText.value);
-        td2.appendChild(butDel);
-    }
-
-    function httpGet(theUrl) {
-        var xmlHttp = new XMLHttpRequest({mozSystem: true});
-        xmlHttp.open("GET", theUrl, false); // false for synchronous request
-        //xmlHttp.setRequestHeader('Content-Type', 'application/json');
-        //xmlHttp.getResponseHeader('Content-Type', 'application/json');
-        //xmlHttp.responseType = 'json';
-        xmlHttp.send();
-
-        if (xmlHttp.responseText == "Unauthorized") {
-            toLoginPage();
-        }
-
-        return xmlHttp;
-    }
-
-    function OnSaveClick(noteId, text) {
-        if (noteId === -1) {
-            req = "http://194.147.90.72:8080/PlayersSite/v1/addNote?key=" + id + "&playerId=" + PlayerId + "&text=" + text;
-            M = httpGet(req);
-        } else {
-            req = "http://194.147.90.72:8080/PlayersSite/v1/editNote?key=" + id + "&note=" + noteId + "&text=" + text;
-            M = httpGet(req);
-        }
-        RefreshPage();
-    }
-
-    function OnDelClick(noteId, text) {
-        if (noteId != -1) {
-            req = "http://194.147.90.72:8080/PlayersSite/v1/delNote?key=" + id + "&note=" + noteId;
-            M = httpGet(req);
-        }
-        RefreshPage();
-    }
-
-    function RefreshPage() {
-        location.reload();
-    }
-
-    function toLoginPage() {
-        loginPage = "login.html"
-        location = loginPage;
-        throw new Error();
-    }
-
-    function GoBack() {
-        history.back()
-    }
-
-    function PrintS(s) {
-        document.body.innerHTML += s;
-    }
-
-    function PrintP(p) {
-        document.body.innerHTML += "\<img src=\"data:image\/png;base64," + p + "\"\/\>";
-    }
-
-    function PrintTIME(s, t1) {
-        PrintS("<b><i>" + s + ": " + (new Date().getTime() - t1.getTime()) / 1000 + "</i></b> sec.<br>")
-    }
-
-    function PrintJSON(str, obj) {
-        PrintS(str + ":<p>" + unescape(JSON.stringify(obj).replace(/\\u/g, '%u').replace(/</g, "&lt;").replace(/>/g, "&gt;")));
-    }
-
-    function PrintJSONb(str, obj) {
-        PrintS(str + ":<p><pre>" + unescape(JSON.stringify(obj, null, 4).replace(/\\u/g, '%u').replace(/</g, "&lt;").replace(/>/g, "&gt;")) + "</pre>");
-    }
-
-    function PrintXML(str, obj) {
-        PrintS(str + ":<p>" + obj.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "<br>");
-    }
-
-    Load();
-
-</script>
-
-</p></body>
+<script type="text/javascript" src="js/info.js"></script>
+</body>
 </html>
