@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/anims.css">
+    <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/players.css">
+    <link rel="icon" type="image/x-icon" href="../media/icons/favicon.ico">
+    <title>Игровая статистика</title>
+</head>
+<body id="body">
+
+<div id="load_screen">
+    <div style="margin: 15% auto 0 auto">
+        <div style="margin: 0 auto 0 auto" class="spinner-block">
+            <div class="spinner spinner-1"></div>
+        </div>
+        <a style="font-size: 6vh">Идет загрузка страницы, пожалуйста подождите...</a>
+    </div>
+</div>
+
+<header class="menu">
+    <a class="menu_logo_button" href="main.html"></a>
+    <a style="margin: auto 80vh auto 1vh; width: 70vh" class="menu_element" href="players.html">Игровая статистика</a>
+    <div class="menu_element menu_user_block">
+        <a style="margin: auto 0 auto 0" class="menu_user_icon"></a>
+        <a style="margin: auto 0 auto 2vh; min-width: 30vh" id="user_name">Вы не авторизованы</a>
+    </div>
+    <a class="menu_logout_icon" href="login.html"></a>
+</header>
+
+<section class="stats-players">
+    <div class="container" id="players-container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center text-uppercase color2 mb-2">Рейтинг игроков</h2>
+            </div>
+        </div>
+        <div class="row player-row-header">
+            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
+                <h5 class="text-center">Место</h5>
+            </div>
+            <div class="col-xl-7 col-md-7 col-sm-7 player-col-header">
+                <h5 class="text-center">Никнеймы</h5>
+            </div>
+            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
+                <h5 class="text-center">Фрагов</h5>
+            </div>
+            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
+                <h5 class="text-center">K/D</h5>
+            </div>
+            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
+                <h5 class="text-center">Артефактов</h5>
+            </div>
+            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
+                <h5 class="text-center">Часов в игре</h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+<h1 style="text-align: center">Рейтинг игроков</h1>
+
+<div class="container">
+    <div class="table">
+        <div class="table-header">
+            <div class="header__item"><a id="place" class="filter__link">Место</a></div>
+            <div class="header__item"><a id="nicknames" class="filter__link">Никнеймы</a></div>
+            <div class="header__item"><a id="frags" class="filter__link">Фрагов</a></div>
+            <div class="header__item"><a id="ktod" class="filter__link">K/D</a></div>
+            <div class="header__item"><a id="artifacts" class="filter__link">Артефактов</a></div>
+            <div class="header__item"><a id="hours" class="filter__link">Часов в игре</a></div>
+        </div>
+        <div class="table-content">
+            <div class="table-row">
+                <div class="table-data">1472</div>
+                <div class="table-data">2</div>
+                <div class="table-data">0</div>
+                <div class="table-data">1</div>
+                <div class="table-data">5</div>
+                <div class="table-data">5</div>
+            </div>
+            <div class="table-row">
+                <div class="table-data">1935</div>
+                <div class="table-data">1</div>
+                <div class="table-data">1</div>
+                <div class="table-data">2</div>
+                <div class="table-data">3</div>
+                <div class="table-data">3</div>
+            </div>
+            <div class="table-row">
+                <div class="table-data">2205</div>
+                <div class="table-data">0</div>
+                <div class="table-data">2</div>
+                <div class="table-data">2</div>
+                <div class="table-data">2</div>
+                <div class="table-data">2</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/page_preloader.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/players.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -4,37 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/anims.css">
-    <link rel="stylesheet" type="text/css" href="css/fonts.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/menu.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="icon" type="image/x-icon" href="media/icons/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../css/anims.css">
+    <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="icon" type="image/x-icon" href="../media/icons/favicon.ico">
     <title>Информация об игроке</title>
 </head>
 <body id="body">
 
 <form id="menu_search_form">
-    <div class="menu">
-        <a class="menu_logo_button" onClick="MainPage()"></a>
-        <a style="width: 15vh" class="menu_element" onClick="MainPage()">Главная</a>
+    <header class="menu">
+        <a class="menu_logo_button" href="main.html"></a>
+        <a class="menu_element" href="players.html">Игровая статистика</a>
         <label for="search_field"></label>
-        <input style="min-width: 40%" class="menu_element input_field" type="text" name="search_field"
-               id="search_field"
+        <input style="min-width: 40%" class="menu_element input_field" type="text" name="search_field" id="search_field"
                placeholder="Поиск по никнейму, ip, hwid...">
         <a type="button" class="menu_search_icon" id="search"></a>
         <div class="menu_element menu_user_block">
             <a style="margin: auto 0 auto 0" class="menu_user_icon"></a>
             <a style="margin: auto 0 auto 2vh" id="user_name">User name</a>
         </div>
-        <a class="menu_logout_icon" onClick="toLoginPage()"></a>
-    </div>
+        <a class="menu_logout_icon" href="login.html"></a>
+    </header>
 </form>
 
 <div class="main" id="main">
     <p class="players_found" id="player_id">Игрок №1</p>
 </div>
 
-<script type="text/javascript" src="js/info.js"></script>
+<script type="text/javascript" src="../js/info.js"></script>
 </body>
 </html>

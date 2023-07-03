@@ -1,3 +1,4 @@
+
 window.addEventListener('load', function () {
     const load_screen = document.getElementById('load_screen');
     const page = document.getElementById('body');
