@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/menu.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/anims.css">
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="icon" type="image/x-icon" href="media/icons/favicon.ico">
     <title>База игроков</title>
 </head>
 <body id="body">
+
 
 <div id="load_screen">
     <div style="margin: 15% auto 0 auto">
@@ -27,7 +29,7 @@
         <a class="menu_logo_button" onClick="MainPage()"></a>
         <a style="width: 15vh" class="menu_element" onClick="MainPage()">Главная</a>
         <label for="search_field"></label>
-        <input style="min-width: 40%" class="menu_element search_field" type="text" name="search_field"
+        <input style="min-width: 40%" class="menu_element input_field" type="text" name="search_field"
                id="search_field"
                placeholder="Поиск по никнейму, ip, hwid...">
         <a type="button" class="menu_search_icon" id="search"></a>
@@ -48,7 +50,7 @@
             </button>
             <a class="page_num"></a>
             <label for="page_input"></label>
-            <input style="width: 20vh; font-size: 1.65vh" class="search_field page_input" id="page_input" type="text"
+            <input style="width: 20vh; font-size: 1.65vh" class="input_field page_input" id="page_input" type="text"
                    name="page_input" placeholder="Введите номер страницы">
             <button type="button" name="page_go" onClick="ChangePage(this.form)">Перейти</button>
             <button type="button" class="circle_button arrow_right" name="page_go_forward"
@@ -67,7 +69,7 @@
             </button>
             <a class="page_num"></a>
             <label for="page_input_2"></label>
-            <input style="width: 20vh; font-size: 1.65vh" class="search_field" id="page_input_2" type="text"
+            <input style="width: 20vh; font-size: 1.65vh" class="input_field" id="page_input_2" type="text"
                    name="page_input" placeholder="Введите номер страницы">
             <button type="button" name="page_go" onClick="ChangePage(this.form)">Перейти</button>
             <button type="button" class="circle_button arrow_right" name="page_go_forward"
@@ -98,9 +100,10 @@
         </a>
     </div>
     <div class="footer_line"></div>
-    <p class="company_desc">Team-Stalker Multiplayer, 2023 г.</p>
+    <p class="footer_desc">Team-Stalker Multiplayer, 2023 г.</p>
 </footer>
 
+<script type="text/javascript" src="js/page_preloader.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 
 </body>

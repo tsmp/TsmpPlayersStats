@@ -54,12 +54,6 @@ var Load = function () {
 
 
     // ------------------------------------------------------------------------------- //
-    window.addEventListener('load', function () {
-        const load_screen = document.getElementById('load_screen');
-        const page = document.getElementById('body');
-        load_screen.style.display = 'none';
-        page.style.animation = 'page_init_anim 0.5s ease-in-out forwards';
-    });
 
     const a_page_nums = document.querySelectorAll('a.page_num');
     a_page_nums.forEach((a) => {
@@ -71,12 +65,7 @@ var Load = function () {
         this.style.animation = 'search_icon_anim 0.3s forwards';
     });
 
-    document.getElementById('search').addEventListener('click', function () {
-        var form = document.getElementById('menu_search_form');
-        Search(form);
-    });
-
-// ------------------------------------------------------------------------------- //
+    // ------------------------------------------------------------------------------- //
 
 }
 

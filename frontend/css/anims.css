@@ -1,3 +1,11 @@
+@keyframes page_init_anim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .spinner-block {
   width: 125px;
   text-align: center;
@@ -58,6 +66,36 @@
   top: 17.55px;
   left: 17.55px;
   animation: anti-rotate-animation 0.85s linear 0s infinite;
+}
+
+.watchers_anim {
+  position: relative;
+  max-height: 0;
+}
+.watchers_anim__eye {
+  display: block;
+  position: absolute;
+  width: 6px;
+  height: 5px;
+  background-image: url("../media/images/eye.png");
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+.watchers_anim__eye--one-one {
+  left: 58px;
+  top: 107px;
+}
+.watchers_anim__eye--one-two {
+  left: 104px;
+  top: 108px;
+}
+.watchers_anim__eye--two-one {
+  left: 250px;
+  top: 164px;
+}
+.watchers_anim__eye--two-two {
+  left: 296px;
+  top: 164px;
 }
 
 /*# sourceMappingURL=anims.css.map */

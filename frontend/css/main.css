@@ -1,71 +1,59 @@
-body 
-{
-    background: white url(../images/main/bkg.jpg) no-repeat center top;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-attachment: fixed;
+@charset "UTF-8";
+.player_list {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  border: 1px solid gray;
+  border-radius: 1vh;
+  padding: 2vh;
+  margin: 2vh 0 2vh 0;
 }
 
-.form
-{
-    width: 100%;
-    border: 1px solid black;
-    display: flex;
+.player_list_element {
+  display: inline-flex;
+  justify-content: space-between;
+  padding: 1vh;
+  color: #282e36;
+  border-bottom: 1px solid gray;
 }
 
-.info_block
-{
-    border-right: 1px solid black;
-    padding: 5px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
+.ple_info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.ple_info a {
+  font-family: "Lato Regular", sans-serif;
+  font-size: 2.2vh;
+  padding: 0.5vh;
+}
+.ple_info a.player_id:before {
+  font-family: "Lato Bold", sans-serif;
+  content: "ID: ";
+}
+.ple_info a.player_hwid:before {
+  font-family: "Lato Bold", sans-serif;
+  content: "HWID: ";
+}
+.ple_info a.player_ip:before {
+  font-family: "Lato Bold", sans-serif;
+  content: "IP адрес: ";
+}
+.ple_info p {
+  padding: 0.5vh;
+  margin: 0;
+  font-size: 2.2vh;
+}
+.ple_info p.player_nicknames:before {
+  font-family: "Lato Bold", sans-serif;
+  content: "Ники: ";
 }
 
-.search_block
-{    
-    padding: 5px;
+button.player_info {
+  height: 5vh;
+  min-width: 19vh;
+  margin: auto 0 auto 0;
 }
 
-.user_block
-{
-    border-left: 1px solid black;
-    padding: 5px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-
-.user_block label
-{
-    padding-right: 10px;
-}
-
-.search_field
-{
-    width: 80%;
-}
-
-.page_label, .page_go
-{
-    margin: 5px;
-}
-
-.results_cnt
-{
-    text-align: center;
-}
-
-.info_player
-{
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-    width: 50px;
-    padding: 10px;
-}
-
-.player_info_button
-{
-    width: 50px;
-}
+/*# sourceMappingURL=main.css.map */

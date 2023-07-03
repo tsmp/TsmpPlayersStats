@@ -1,18 +1,9 @@
-@charset "UTF-8";
 html {
   font-family: "Lato Regular", sans-serif;
   font-size: 2vh;
   letter-spacing: 0.1vh;
 }
 
-@keyframes page_init_anim {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 body {
   margin: 0;
 }
@@ -36,7 +27,7 @@ body {
 
 .main {
   margin: 3vh;
-  min-height: 70vh;
+  min-height: 76vh;
 }
 
 .players_found {
@@ -122,7 +113,7 @@ button:active {
   cursor: default;
 }
 
-.search_field {
+.input_field {
   height: 1vh;
   padding: 1.5vh;
   font-family: "helvetica neue", sans-serif;
@@ -135,74 +126,17 @@ button:active {
   margin: auto 1vh auto 1vh;
   user-select: all;
 }
-.search_field:hover {
+.input_field:hover {
   color: #2d2d2d;
   background: white;
   border: 1px solid #464646;
   box-shadow: 1px 1px 5px rgba(114, 114, 114, 0.5);
 }
-.search_field:focus {
+.input_field:focus {
   color: #2d2d2d;
   background: white;
   border: 1px solid black;
   box-shadow: 3px 3px 6px rgba(65, 65, 65, 0.5);
-}
-
-.player_list {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  border: 1px solid gray;
-  border-radius: 1vh;
-  padding: 2vh;
-  margin: 2vh 0 2vh 0;
-}
-
-.player_list_element {
-  display: inline-flex;
-  justify-content: space-between;
-  padding: 1vh;
-  color: #282e36;
-  border-bottom: 1px solid gray;
-}
-
-.ple_info {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-.ple_info a {
-  font-family: "Lato Regular", sans-serif;
-  font-size: 2.2vh;
-  padding: 0.5vh;
-}
-.ple_info a.player_id:before {
-  font-family: "Lato Bold", sans-serif;
-  content: "ID: ";
-}
-.ple_info a.player_hwid:before {
-  font-family: "Lato Bold", sans-serif;
-  content: "HWID: ";
-}
-.ple_info a.player_ip:before {
-  font-family: "Lato Bold", sans-serif;
-  content: "IP адрес: ";
-}
-.ple_info p {
-  padding: 0.5vh;
-  margin: 0;
-  font-size: 2.2vh;
-}
-.ple_info p.player_nicknames:before {
-  font-family: "Lato Bold", sans-serif;
-  content: "Ники: ";
-}
-
-button.player_info {
-  height: 5vh;
-  min-width: 19vh;
-  margin: auto 0 auto 0;
 }
 
 footer {
@@ -265,7 +199,7 @@ footer .href:hover img {
   margin: 1vh auto 1vh auto;
 }
 
-.company_desc {
+.footer_desc {
   color: #efefef;
   text-align: center;
   font-family: "Roboto Thin", sans-serif;
