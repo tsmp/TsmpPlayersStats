@@ -1,112 +1,112 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/common.css" rel="stylesheet">
-	<link href="css/playerInfo.css" rel="stylesheet"/>
-	<link href="css/main.css" rel="stylesheet"/>
-	<title>Игрок</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="media/icons/favicon.ico" type="image/x-icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/playerInfo.css" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet"/>
+    <title>Игрок</title>
 </head>
 <body>
 
-	<header>
-		<div class="container">
-			<div class = "row">
-				<div class="col-12">
-					<div class="header-main" id="header-main">
-						<div class="rad_icon">
-							<img src="images/rad.svg">
-						</div>
-						<div class="header-text">
-							  <h1 class="text-white">Статистика игроков</h1>
-						</div>
-					</div>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="header-main" id="header-main">
+                    <div class="rad_icon">
+                        <img src="media/icons/favicon.svg">
+                    </div>
+                    <div class="header-text">
+                        <h1 class="text-white">Статистика игроков</h1>
+                    </div>
+                </div>
 
-					<div class="radmins-func" id="radmins-func">
-						<h5 class="text-white">Функции радмина</h5>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+                <div class="radmins-func" id="radmins-func">
+                    <h5 class="text-white">Функции радмина</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-	<section class="stats-player">
-		<div class="container" id="stats-container">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="text-center text-uppercase color2 mb-2" id="playerId">Игрок</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<h5 class="text-center">
-						<b>Никнеймы:</b>
-						<p id="nicknames"></p>
-					</h5>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 col-sm-12">
-					<h5 class="text-center">
-						<b>Фраги:</b>
-						<p id="kills"></p>
-					</h5>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<h5 class="text-center">
-						<b>K/D:</b>
-						<p id="kd"></p>
-					</h5>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<h5 class="text-center">
-						<b>Часов в игре:</b>
-						<p id="hoursIngame"></p>
-					</h5>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<h5 class="text-center">
-						<b>Любимое оружие:</b>
-						<p id="bestWpn"></p>
-					</h5>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<a class="btn btn-lg text-uppercase btn-pdf" onClick="getPdf()">Сохранить в PDF</a>
-				</div>
-			</div>
-		</div>
-	</section>
+<section class="stats-player">
+    <div class="container" id="stats-container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center text-uppercase color2 mb-2" id="playerId">Игрок</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="text-center">
+                    <b>Никнеймы:</b>
+                    <p id="nicknames"></p>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">
+                    <b>Фраги:</b>
+                    <p id="kills"></p>
+                </h5>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">
+                    <b>K/D:</b>
+                    <p id="kd"></p>
+                </h5>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">
+                    <b>Часов в игре:</b>
+                    <p id="hoursIngame"></p>
+                </h5>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h5 class="text-center">
+                    <b>Любимое оружие:</b>
+                    <p id="bestWpn"></p>
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-lg text-uppercase btn-pdf" onClick="getPdf()">Сохранить в PDF</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-	<section class="stats-games">
-		<div class="container" id="games-container">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="text-center text-uppercase color2 mb-2">Игры</h2>
-				</div>
-			</div>
-			<div class="row game-row-header">
-				<div class="col-xl-4 col-md-4 col-sm-4 game-col-header">
-					<h5 class="text-center">Сервер</h5>
-				</div>
-				<div class="col-xl-4 col-md-4 col-sm-4 game-col-header">
-					<h5 class="text-center">Карта</h5>
-				</div>
-				<div class="col-xl-4 col-md-4 col-sm-4 game-col-header">
-					<h5 class="text-center">Дата</h5>
-				</div>
-			</div>
-		</div>
-	</section>
+<section class="stats-games">
+    <div class="container" id="games-container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center text-uppercase color2 mb-2">Игры</h2>
+            </div>
+        </div>
+        <div class="row game-row-header">
+            <div class="col-xl-4 col-md-4 col-sm-4 game-col-header">
+                <h5 class="text-center">Сервер</h5>
+            </div>
+            <div class="col-xl-4 col-md-4 col-sm-4 game-col-header">
+                <h5 class="text-center">Карта</h5>
+            </div>
+            <div class="col-xl-4 col-md-4 col-sm-4 game-col-header">
+                <h5 class="text-center">Дата</h5>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script src="js/common.js"></script>
 <script src="js/playerInfo.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
-	
+
 </body>
 </html>
