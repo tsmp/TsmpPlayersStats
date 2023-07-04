@@ -5,7 +5,10 @@ $footer-text-color: #ffffff
 html
   font-family: 'Lato Regular', sans-serif
   font-size: 2vh
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: auto
   letter-spacing: 0.1vh
+  line-height: 3vh
 
 body
   margin: 0
@@ -100,10 +103,10 @@ button
     -ms-user-select: none
 
   &:hover
-    box-shadow: -3px 3px 6px rgba(128, 128, 128, 0.53)
+    box-shadow: 3px 3px 6px rgba(128, 128, 128, 0.53)
 
   &:active
-    box-shadow: -5px 5px 7px gray
+    box-shadow: 5px 5px 7px gray
 
   &:active img
     filter: invert(100%)
@@ -198,4 +201,3 @@ footer .href
   margin: 0
   padding: 0.3vh 0 1.7vh 0
   letter-spacing: 0.25vh
-

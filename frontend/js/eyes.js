@@ -30,13 +30,13 @@
 
         for (var i = 0; i < eye.length; i++) {
             eye[i].style.display = 'block';
-            fadeIn(eye[i], 2000);
+            //fadeIn(eye[i], 2000);
         }
 
         animation.style.maxHeight = '374px';
         animationVideo.style.display = 'block';
-        fadeIn(animationVideo, 2000);
-        fadeIn(about, 2000);
+        //fadeIn(animationVideo, 2000);
+        //fadeIn(about, 2000);
         animationVideo.play();
 
         inputLogin.removeEventListener('focus', firstFocusHandler);
@@ -48,13 +48,14 @@
         //button.addEventListener('click', clickHandler);
     }
 
+    /*
     function fadeIn(elem, speed) {
         var inInterval = setInterval(function () {
             elem.style.opacity = Number(elem.style.opacity) + 0.02;
             if (elem.style.opacity >= 1)
                 clearInterval(inInterval);
         }, speed / 50);
-    }
+    }*/
 
     function fadeOut(elem, speed) {
         var outInterval = setInterval(function () {

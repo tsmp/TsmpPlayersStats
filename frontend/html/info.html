@@ -14,26 +14,56 @@
 </head>
 <body id="body">
 
-<form id="menu_search_form">
-    <header class="menu">
-        <a class="menu_logo_button" href="main.html"></a>
-        <a class="menu_element" href="players.html">Игровая статистика</a>
-        <label for="search_field"></label>
-        <input style="min-width: 40%" class="menu_element input_field" type="text" name="search_field" id="search_field"
-               placeholder="Поиск по никнейму, ip, hwid...">
-        <a type="button" class="menu_search_icon" id="search"></a>
-        <div class="menu_element menu_user_block">
-            <a style="margin: auto 0 auto 0" class="menu_user_icon"></a>
-            <a style="margin: auto 0 auto 2vh" id="user_name">User name</a>
+<div id="load_screen">
+    <div style="margin: 15% auto 0 auto">
+        <div style="margin: 0 auto 0 auto" class="spinner-block">
+            <div class="spinner spinner-1"></div>
         </div>
-        <a class="menu_logout_icon" href="login.html"></a>
-    </header>
-</form>
+        <a style="font-size: 6vh; line-height: 7vh">Идет загрузка страницы, пожалуйста подождите...</a>
+    </div>
+</div>
+
+<header class="menu">
+    <a class="menu_logo_button logo_adapt_size" href="main.html"></a>
+    <a class="menu_element main_adapt_size" href="main.html">Главная</a>
+    <a class="menu_element stat_adapt_size" href="players.html">Игровая статистика</a>
+    <div class="empty_adapt_size"></div>
+    <div style="margin: auto 1vh auto 1vh" class="menu_element menu_user_block user_adapt_size">
+        <a style="margin: auto 2vh auto 1vh" class="menu_user_icon"></a>
+        <a style="margin: auto 0 auto 0" id="user_name">Вы не авторизованы</a>
+    </div>
+    <a class="menu_logout_icon logout_adapt_size" href="login.html"></a>
+</header>
 
 <div class="main" id="main">
     <p class="players_found" id="player_id">Игрок №1</p>
 </div>
 
+<footer>
+    <div class="footer_option_list">
+        <a class="href" style="display: inline-flex" href="https://discord.gg/D5nHxsygpc">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_discord.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Discord</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life-server.ru">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://team-stalker.ucoz.com">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Team-Stalker</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life.ucoz.net">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life (Старый)</span>
+        </a>
+    </div>
+    <div class="footer_line"></div>
+    <p class="footer_desc">Team-Stalker Multiplayer, 2023 г.</p>
+</footer>
+
+<script type="text/javascript" src="../js/theme_switcher.js"></script>
+<script type="text/javascript" src="../js/page_preloader.js"></script>
 <script type="text/javascript" src="../js/info.js"></script>
 </body>
 </html>

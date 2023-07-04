@@ -5,6 +5,11 @@ id = urlParams.get("id")
 maxPage = 1
 curPage = 1
 
+document.getElementById('search').addEventListener('click', function () {
+    var form = document.getElementById('menu_search_form');
+    Search(form);
+});
+
 var Load = function () {
     // Если не вошли!!!
     if (id == null) {

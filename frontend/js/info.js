@@ -1,3 +1,5 @@
+const searchKey = "search"
+const pageKey = "page"
 const urlParams = new URLSearchParams(window.location.search);
 id = urlParams.get("id")
 PlayerId = urlParams.get("pl")

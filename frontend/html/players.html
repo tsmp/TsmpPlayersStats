@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/players.css">
     <link rel="stylesheet" type="text/css" href="../css/anims.css">
     <link rel="stylesheet" type="text/css" href="../css/fonts.css">
     <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/menu.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/players.css">
     <link rel="icon" type="image/x-icon" href="../media/icons/favicon.ico">
     <title>Игровая статистика</title>
 </head>
@@ -25,89 +25,58 @@
 </div>
 
 <header class="menu">
-    <a class="menu_logo_button" href="main.html"></a>
-    <a style="margin: auto 80vh auto 1vh; width: 70vh" class="menu_element" href="players.html">Игровая статистика</a>
-    <div class="menu_element menu_user_block">
-        <a style="margin: auto 0 auto 0" class="menu_user_icon"></a>
-        <a style="margin: auto 0 auto 2vh; min-width: 30vh" id="user_name">Вы не авторизованы</a>
+    <a class="menu_logo_button logo_adapt_size" href="main.html"></a>
+    <a class="menu_element main_adapt_size" href="main.html">Главная</a>
+    <a class="menu_element stat_adapt_size" href="players.html">Игровая статистика</a>
+    <div class="empty_adapt_size"></div>
+    <div style="margin: auto 1vh auto 1vh" class="menu_element menu_user_block user_adapt_size">
+        <a style="margin: auto 2vh auto 1vh" class="menu_user_icon"></a>
+        <a style="margin: auto 0 auto 0" id="user_name">Вы не авторизованы</a>
     </div>
-    <a class="menu_logout_icon" href="login.html"></a>
+    <a class="menu_logout_icon logout_adapt_size" href="login.html"></a>
 </header>
 
-<section class="stats-players">
-    <div class="container" id="players-container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="text-center text-uppercase color2 mb-2">Рейтинг игроков</h2>
-            </div>
-        </div>
-        <div class="row player-row-header">
-            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
-                <h5 class="text-center">Место</h5>
-            </div>
-            <div class="col-xl-7 col-md-7 col-sm-7 player-col-header">
-                <h5 class="text-center">Никнеймы</h5>
-            </div>
-            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
-                <h5 class="text-center">Фрагов</h5>
-            </div>
-            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
-                <h5 class="text-center">K/D</h5>
-            </div>
-            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
-                <h5 class="text-center">Артефактов</h5>
-            </div>
-            <div class="col-xl-1 col-md-1 col-sm-1 player-col-header">
-                <h5 class="text-center">Часов в игре</h5>
-            </div>
-        </div>
+<h1 style="text-align: center; font-family: 'Lato Bold', sans-serif; margin: 5vh">Рейтинг игроков</h1>
+<div class="table_stats" id="table_stats">
+    <div class="table_header">
+        <div class="header_item filter_link">Место</div>
+        <div class="header_item filter_link">Никнеймы</div>
+        <div class="header_item filter_link">Фрагов</div>
+        <div class="header_item filter_link">K/D</div>
+        <div class="header_item filter_link">Артефактов</div>
+        <div class="header_item filter_link">Часов в игре</div>
     </div>
-</section>
+    <div class="table_content">
 
-<h1 style="text-align: center">Рейтинг игроков</h1>
-
-<div class="container">
-    <div class="table">
-        <div class="table-header">
-            <div class="header__item"><a id="place" class="filter__link">Место</a></div>
-            <div class="header__item"><a id="nicknames" class="filter__link">Никнеймы</a></div>
-            <div class="header__item"><a id="frags" class="filter__link">Фрагов</a></div>
-            <div class="header__item"><a id="ktod" class="filter__link">K/D</a></div>
-            <div class="header__item"><a id="artifacts" class="filter__link">Артефактов</a></div>
-            <div class="header__item"><a id="hours" class="filter__link">Часов в игре</a></div>
-        </div>
-        <div class="table-content">
-            <div class="table-row">
-                <div class="table-data">1472</div>
-                <div class="table-data">2</div>
-                <div class="table-data">0</div>
-                <div class="table-data">1</div>
-                <div class="table-data">5</div>
-                <div class="table-data">5</div>
-            </div>
-            <div class="table-row">
-                <div class="table-data">1935</div>
-                <div class="table-data">1</div>
-                <div class="table-data">1</div>
-                <div class="table-data">2</div>
-                <div class="table-data">3</div>
-                <div class="table-data">3</div>
-            </div>
-            <div class="table-row">
-                <div class="table-data">2205</div>
-                <div class="table-data">0</div>
-                <div class="table-data">2</div>
-                <div class="table-data">2</div>
-                <div class="table-data">2</div>
-                <div class="table-data">2</div>
-            </div>
-        </div>
     </div>
 </div>
 
+<footer>
+    <div class="footer_option_list">
+        <a class="href" style="display: inline-flex" href="https://discord.gg/D5nHxsygpc">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_discord.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Discord</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life-server.ru">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://team-stalker.ucoz.com">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Team-Stalker</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life.ucoz.net">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life (Старый)</span>
+        </a>
+    </div>
+    <div class="footer_line"></div>
+    <p class="footer_desc">Team-Stalker Multiplayer, 2023 г.</p>
+</footer>
+
+<script type="text/javascript" src="../js/theme_switcher.js"></script>
 <script type="text/javascript" src="../js/page_preloader.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/players.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
