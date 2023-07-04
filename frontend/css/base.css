@@ -196,7 +196,7 @@ footer .href:hover img {
 
 .footer_line {
   width: 70%;
-  height: 0.1vh;
+  height: 0.2vh;
   background: -webkit-linear-gradient(left, #2c2c2c, #dedede, #2c2c2c);
   background: -o-linear-gradient(left, #2c2c2c, #dedede, #2c2c2c);
   margin: 1vh auto 1vh auto;
