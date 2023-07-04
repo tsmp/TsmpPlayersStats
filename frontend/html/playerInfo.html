@@ -37,31 +37,33 @@
     <a class="menu_logout_icon logout_adapt_size" href="login.html"></a>
 </header>
 
-<h1 style="text-align: center; font-family: 'Lato Bold', sans-serif; margin: 5vh" id="playerId">Игрок</h1>
-<div class="stats_grid">
-    <div class="stats_grid_col_1">
-        <div style="height: 20vh" class="stats_grid_item col_height"><a id="nicknames"></a></div>
+<div class="main" id="main">
+    <h1 id="playerId">Игрок</h1>
+    <div class="stats_grid">
+        <div class="stats_grid_col_1">
+            <div style="min-height: 20vh" class="stats_grid_item"><a id="nicknames"></a></div>
+        </div>
+        <div class="stats_grid_col_2">
+            <div class="stats_grid_item"><a id="kills"></a></div>
+            <div class="stats_grid_item"><a id="kd"></a></div>
+            <div class="stats_grid_item"><a id="hoursIngame"></a></div>
+            <div class="stats_grid_item"><a id="bestWpn"></a></div>
+        </div>
     </div>
-    <div class="stats_grid_col_2">
-        <div class="stats_grid_item"><a id="kills"></a></div>
-        <div class="stats_grid_item"><a id="kd"></a></div>
-        <div class="stats_grid_item"><a id="hoursIngame"></a></div>
-        <div class="stats_grid_item"><a id="bestWpn"></a></div>
-    </div>
-</div>
 
-<button style="margin: 3vh auto 3vh auto; letter-spacing: 0.1vw; font-family: 'Droid Sans Mono', sans-serif; font-size: 3vh; padding: 2vh"
-        onClick="getPdf()">Сохранить в PDF
-</button>
-<h1 style="text-align: center; font-family: 'Lato Bold', sans-serif; margin: 5vh">Игры</h1>
-<div style="width: 70%" class="table_stats" id="table_stats">
-    <div class="table_header">
-        <div class="header_item filter_link">Сервер</div>
-        <div class="header_item filter_link">Карта</div>
-        <div class="header_item filter_link">Дата</div>
-    </div>
-    <div class="table_content">
+    <button style="margin: 3vh auto 3vh auto; letter-spacing: 0.1vw; font-family: 'Droid Sans Mono', sans-serif; font-size: 3vh; padding: 2vh"
+            onClick="getPdf()">Сохранить в PDF
+    </button>
+    <h1>Игры</h1>
+    <div style="width: 70%" class="table_stats" id="table_stats">
+        <div class="table_header">
+            <div class="header_item filter_link">Сервер</div>
+            <div class="header_item filter_link">Карта</div>
+            <div class="header_item filter_link">Дата</div>
+        </div>
+        <div class="table_content">
 
+        </div>
     </div>
 </div>
 
@@ -92,7 +94,6 @@
 <script type="text/javascript" src="../js/page_preloader.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/playerInfo.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

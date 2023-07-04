@@ -18,12 +18,12 @@ var Load = function () {
 
 function CreateGameStat(game) {
     SetElemText("gameHeader", "Игра: " + game.date + ", сервер: " + game.server + ", карта: " + game.map);
-    SetElemText("kills", game.kills);
-    SetElemText("killsAi", game.killsAi);
-    SetElemText("deaths", game.deaths);
-    SetElemText("kd", game.kd.toFixed(2));
-    SetElemText("hoursIngame", game.hoursIngame.toFixed(2));
-    SetElemText("killsOneLife", game.killsOneLife);
+    SetElemText("kills", "Фраги:<br>" + game.kills);
+    SetElemText("killsAi", "Убийства НПС:<br>" + game.killsAi);
+    SetElemText("deaths", "Смерти:<br>" + game.deaths);
+    SetElemText("kd", "K/D:<br>" + game.kd.toFixed(2));
+    SetElemText("hoursIngame", "Часов в игре:<br>" + game.hoursIngame.toFixed(2));
+    SetElemText("killsOneLife", "Убийств за одну жизнь:<br>" + game.killsOneLife);
 }
 
 function CreateWpnEntry(container, wpnData) {
