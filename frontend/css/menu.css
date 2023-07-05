@@ -163,10 +163,10 @@
     min-width: 17vw;
   }
   .search_adapt_size {
-    min-width: 39vw;
+    min-width: 38vw;
   }
   .user_adapt_size {
-    min-width: 20vw;
+    min-width: 16vw;
   }
   .logout_adapt_size {
     min-width: 2vw;
@@ -194,7 +194,7 @@
     min-width: 17vw;
   }
   .search_adapt_size {
-    min-width: 27vw;
+    min-width: 24vw;
   }
   .user_adapt_size {
     min-width: 19vw;
@@ -282,6 +282,27 @@
   .empty_adapt_size {
     min-width: 27vw;
   }
+}
+#theme_switcher {
+  display: flex;
+  top: 11.5vh;
+  right: 1.5vw;
+  position: absolute;
+  padding: 1vh;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px rgba(128, 128, 128, 0.53);
+  border-radius: 50%;
+  transition: 0.1s ease-in-out;
+}
+#theme_switcher:hover {
+  box-shadow: 3px 3px 6px rgba(128, 128, 128, 0.53);
+}
+#theme_switcher:active {
+  background: black;
+  box-shadow: 5px 5px 7px gray;
+}
+#theme_switcher:active img {
+  filter: invert(100%);
 }
 
 /*# sourceMappingURL=menu.css.map */
