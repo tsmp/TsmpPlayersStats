@@ -10,8 +10,28 @@
     <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/menu.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" id="link_dark_theme">
     <link rel="icon" type="image/x-icon" href="../media/icons/favicon.ico">
     <title>Игровая статистика</title>
+    <script type="text/css" id="dark_preloader_style">
+        #load_screen {
+            background-color: #171717;
+            color: white;
+        }
+
+        .spinner.spinner-1:before {
+            border-bottom-color: white;
+            border-right-color: white;
+            border-top-color: rgba(255, 255, 255, 0);
+            border-left-color: rgba(255, 255, 255, 0);
+        }
+        .spinner.spinner-1:after {
+            border-bottom-color: white;
+            border-right-color: white;
+            border-top-color: rgba(255, 255, 255, 0);
+            border-left-color: rgba(255, 255, 255, 0);
+        }
+    </script>
 </head>
 <body id="body">
 
@@ -37,7 +57,7 @@
 </header>
 
 <div class="main" id="main">
-    <h1>Рейтинг игроков</h1>
+    <h1 class="">Рейтинг игроков</h1>
     <div class="table_stats" id="table_stats">
         <div class="table_header">
             <div class="header_item filter_link">Место</div>
