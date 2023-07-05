@@ -24,6 +24,7 @@
             border-top-color: rgba(255, 255, 255, 0);
             border-left-color: rgba(255, 255, 255, 0);
         }
+
         .spinner.spinner-1:after {
             border-bottom-color: white;
             border-right-color: white;
@@ -44,19 +45,21 @@
     </div>
 </div>
 
-<header class="menu">
-    <a class="menu_logo_button logo_adapt_size" href="main.html"></a>
-    <a class="menu_element stat_adapt_size" href="players.html">Игровая статистика</a>
-    <label for="search_field"></label>
-    <input class="menu_element input_field search_adapt_size" type="text" name="search_field"
-           id="search_field" placeholder="Поиск по никнейму, ip, hwid...">
-    <a type="button" class="menu_search_icon" id="search"></a>
-    <div style="margin: auto 1vh auto 1vh" class="menu_element menu_user_block user_adapt_size">
-        <a style="margin: auto 2vh auto 1vh" class="menu_user_icon"></a>
-        <a style="margin: auto 0 auto 0" id="user_name">Вы не авторизованы</a>
-    </div>
-    <a class="menu_logout_icon logout_adapt_size" href="login.html"></a>
-</header>
+<form>
+    <header class="menu">
+        <a class="menu_logo_button logo_adapt_size" href="main.html"></a>
+        <a class="menu_element stat_adapt_size" href="players.html">Игровая статистика</a>
+        <label for="search_field"></label>
+        <input class="menu_element input_field search_adapt_size" type="text" name="search_field"
+               id="search_field" placeholder="Поиск по никнейму, ip, hwid...">
+        <a type="button" class="menu_search_icon" id="search"></a>
+        <div style="margin: auto 1vh auto 1vh" class="menu_element menu_user_block user_adapt_size">
+            <a style="margin: auto 2vh auto 1vh" class="menu_user_icon"></a>
+            <a style="margin: auto 0 auto 0" id="user_name">Вы не авторизованы</a>
+        </div>
+        <a class="menu_logout_icon logout_adapt_size" href="login.html"></a>
+    </header>
+</form>
 
 <div class="main" id="main">
     <p class="players_found" id="results_cnt">Найдено игроков: 228</p>

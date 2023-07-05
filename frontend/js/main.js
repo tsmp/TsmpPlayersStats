@@ -188,7 +188,7 @@ function MainPage() {
 }
 
 function Search(form) {
-    val = form.search_field.value;
+    const val = document.getElementById('search_field').value;
     console.log(val);
     urlParams.set(searchKey, val);
     urlParams.set(pageKey, "1");
