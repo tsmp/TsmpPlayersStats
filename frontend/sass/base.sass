@@ -29,6 +29,9 @@ body
   opacity: 1
   z-index: 9999
 
+header
+  margin: 0 0 10vh 0
+
 .main
   margin: 3vh
   min-height: 76vh
@@ -69,6 +72,23 @@ button
   height: 5vh
   border-radius: 50%
   cursor: default
+
+header .circle_button
+  padding: 0.4vh
+  margin: 1vh 0.5vw 1vh 0.5vw
+
+  img
+    user-select: none
+    -moz-user-select: none
+    -webkit-user-drag: none
+    -webkit-user-select: none
+    -ms-user-select: none
+
+  &:active
+    background: #171717
+
+  &:active img
+    filter: invert(100%)
 
 .arrow_left
   img

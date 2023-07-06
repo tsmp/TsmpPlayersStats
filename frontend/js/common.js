@@ -36,8 +36,8 @@ function toRadminPage() {
 
 function setHeaderHandlers() {
     console.log("set header handlers");
-    document.getElementById('header-main').onclick = () => toMainPage();
-    document.getElementById('radmins-func').onclick = () => toRadminPage();
+    //document.getElementById('header-main').onclick = () => toMainPage();
+    //document.getElementById('radmins-func').onclick = () => toRadminPage();
 }
 
 setHeaderHandlers();

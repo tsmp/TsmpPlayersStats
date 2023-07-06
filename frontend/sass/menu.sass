@@ -106,6 +106,35 @@
   &:hover
     background-size: 4vh
 
+#theme_switcher
+  display: flex
+  top: 11.5vh
+  right: 1.5vw
+  position: absolute
+  padding: 1vh
+  border: 1px solid black
+  box-shadow: 1px 1px 2px rgba(128, 128, 128, 0.53)
+  background-size: 200px 200px
+  border-radius: 50%
+  transition: 0.1s ease-in-out
+
+  &:hover
+    box-shadow: 3px 3px 6px rgba(128, 128, 128, 0.53)
+
+  &:active
+    background: black
+    box-shadow: 5px 5px 7px gray
+
+  &:active img
+    filter: invert(100%)
+
+.buttons_history
+  display: inline-flex
+  margin-left: 1vw
+  position: absolute
+  top: 10vh
+  transition: 0.3s
+
 // 4:3
 // 1024x768
 @media (min-width: 874px) and (max-width: 1174px) and (min-height: 618px) and (max-height: 918px)
@@ -258,7 +287,7 @@
     min-width: 18vw
 
   .main_adapt_size
-    min-width: 6vw
+    min-width: 5.5vw
 
   .stat_adapt_size
     min-width: 15vw
@@ -275,23 +304,3 @@
   .empty_adapt_size
     min-width: 27vw
 
-#theme_switcher
-  display: flex
-  top: 11.5vh
-  right: 1.5vw
-  position: absolute
-  padding: 1vh
-  border: 1px solid black
-  box-shadow: 1px 1px 2px rgba(128, 128, 128, 0.53)
-  border-radius: 50%
-  transition: 0.1s ease-in-out
-
-  &:hover
-    box-shadow: 3px 3px 6px rgba(128, 128, 128, 0.53)
-
-  &:active
-    background: black
-    box-shadow: 5px 5px 7px gray
-
-  &:active img
-    filter: invert(100%)

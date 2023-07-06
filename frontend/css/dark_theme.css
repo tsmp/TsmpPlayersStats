@@ -248,4 +248,18 @@ footer {
   filter: invert(0%);
 }
 
+header .circle_button {
+  padding: 0.4vh;
+  margin: 1vh 0.5vw 1vh 0.5vw;
+}
+header .circle_button img {
+  filter: invert(100%);
+}
+header .circle_button:active {
+  background: white;
+}
+header .circle_button:active img {
+  filter: invert(0%);
+}
+
 /*# sourceMappingURL=dark_theme.css.map */

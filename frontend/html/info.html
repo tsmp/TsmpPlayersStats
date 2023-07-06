@@ -34,6 +34,7 @@
 </head>
 <body id="body">
 
+
 <div id="load_screen">
     <div style="margin: 15% auto 0 auto">
         <div style="margin: 0 auto 0 auto" class="spinner-block">
@@ -47,6 +48,7 @@
     <div>
         <div class="menu">
             <a class="menu_logo_button logo_adapt_size" href="main.html"></a>
+            <a class="menu_element main_adapt_size" href="main.html">Главная</a>
             <a class="menu_element stat_adapt_size" href="players.html">Игровая статистика</a>
             <div class="empty_adapt_size"></div>
             <div style="margin: auto 1vh auto 1vh" class="menu_element menu_user_block user_adapt_size">
@@ -54,6 +56,14 @@
                 <a style="margin: auto 0 auto 0" id="user_name">Вы не авторизованы</a>
             </div>
             <a class="menu_logout_icon logout_adapt_size" href="login.html"></a>
+        </div>
+        <div class="buttons_history">
+            <button class="circle_button" onclick="history.back();">
+                <img style="transform: scale(-1, 1);" src="../media/icons/history_arrow_left.svg" alt="history_arrow" />
+            </button>
+            <button class="circle_button" onclick="history.forward();">
+                <img src="../media/icons/history_arrow_left.svg" alt="history_arrow" />
+            </button>
         </div>
         <a id="theme_switcher">
             <img src="../media/icons/menu_theme_switcher.svg" alt="theme_switcher" width="30vh"/>
