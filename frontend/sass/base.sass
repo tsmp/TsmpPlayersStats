@@ -5,14 +5,10 @@ $footer-text-color: #ffffff
 html
   font-family: 'Lato Regular', sans-serif
   font-size: 2vh
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: auto
   letter-spacing: 0.1vh
-
-@keyframes page_init_anim
-  0%
-    opacity: 0
-
-  100%
-    opacity: 1
+  line-height: 3vh
 
 body
   margin: 0
@@ -33,9 +29,12 @@ body
   opacity: 1
   z-index: 9999
 
+header
+  margin: 0 0 10vh 0
+
 .main
   margin: 3vh
-  min-height: 70vh
+  min-height: 76vh
 
 .players_found
   font-family: 'Lato Bold', sans-serif
@@ -74,6 +73,23 @@ button
   border-radius: 50%
   cursor: default
 
+header .circle_button
+  padding: 0.4vh
+  margin: 1vh 0.5vw 1vh 0.5vw
+
+  img
+    user-select: none
+    -moz-user-select: none
+    -webkit-user-drag: none
+    -webkit-user-select: none
+    -ms-user-select: none
+
+  &:active
+    background: #171717
+
+  &:active img
+    filter: invert(100%)
+
 .arrow_left
   img
     transform: translate(-10%, 0)
@@ -107,16 +123,16 @@ button
     -ms-user-select: none
 
   &:hover
-    box-shadow: -3px 3px 6px rgba(128, 128, 128, 0.53)
+    box-shadow: 3px 3px 6px rgba(128, 128, 128, 0.53)
 
   &:active
-    box-shadow: -5px 5px 7px gray
+    box-shadow: 5px 5px 7px gray
 
   &:active img
     filter: invert(100%)
     cursor: default
 
-.search_field
+.input_field
   height: 1vh
   padding: 1.5vh
   font-family: 'helvetica neue', sans-serif
@@ -140,63 +156,6 @@ button
     background: white
     border: 1px solid black
     box-shadow: 3px 3px 6px rgba(65, 65, 65, 0.5)
-
-.player_list
-  display: flex
-  flex-direction: column
-  align-content: center
-  justify-content: center
-  border: 1px solid gray
-  border-radius: 1vh
-  padding: 2vh
-  margin: 2vh 0 2vh 0
-
-.player_list_element
-  display: inline-flex
-  justify-content: space-between
-  padding: 1vh
-  color: #282e36
-  border-bottom: 1px solid gray
-
-.ple_info
-  display: flex
-  flex-direction: column
-  flex-wrap: wrap
-
-  a
-    font-family: 'Lato Regular', sans-serif
-    font-size: 2.2vh
-    padding: 0.5vh
-
-  a.player_id
-    &:before
-      font-family: 'Lato Bold', sans-serif
-      content: 'ID: '
-
-  a.player_hwid
-    &:before
-      font-family: 'Lato Bold', sans-serif
-      content: 'HWID: '
-
-  a.player_ip
-    &:before
-      font-family: 'Lato Bold', sans-serif
-      content: 'IP адрес: '
-
-  p
-    padding: 0.5vh
-    margin: 0
-    font-size: 2.2vh
-
-  p.player_nicknames
-    &:before
-      font-family: 'Lato Bold', sans-serif
-      content: 'Ники: '
-
-button.player_info
-  height: 5vh
-  min-width: 19vh
-  margin: auto 0 auto 0
 
 footer
   display: flex
@@ -249,12 +208,12 @@ footer .href
 
 .footer_line
   width: 70%
-  height: 0.1vh
+  height: 0.2vh
   background: -webkit-linear-gradient(left, $footer-background, #dedede, $footer-background)
   background: -o-linear-gradient(left, $footer-background, #dedede, $footer-background)
   margin: 1vh auto 1vh auto
 
-.company_desc
+.footer_desc
   color: #efefef
   text-align: center
   font-family: "Roboto Thin", sans-serif
@@ -262,4 +221,3 @@ footer .href
   margin: 0
   padding: 0.3vh 0 1.7vh 0
   letter-spacing: 0.25vh
-

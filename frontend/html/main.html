@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/anims.css">
+    <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" id="link_dark_theme">
+    <link rel="icon" type="image/x-icon" href="../media/icons/favicon.ico">
+    <title>База игроков</title>
+    <script type="text/css" id="dark_preloader_style">
+        #load_screen {
+            background-color: #171717;
+            color: white;
+        }
+
+        .spinner.spinner-1:before {
+            border-bottom-color: white;
+            border-right-color: white;
+            border-top-color: rgba(255, 255, 255, 0);
+            border-left-color: rgba(255, 255, 255, 0);
+        }
+
+        .spinner.spinner-1:after {
+            border-bottom-color: white;
+            border-right-color: white;
+            border-top-color: rgba(255, 255, 255, 0);
+            border-left-color: rgba(255, 255, 255, 0);
+        }
+    </script>
+</head>
+<body id="body">
+
+
+<div id="load_screen">
+    <div style="margin: 15% auto 0 auto">
+        <div style="margin: 0 auto 0 auto" class="spinner-block">
+            <div class="spinner spinner-1"></div>
+        </div>
+        <a style="font-size: 6vh; line-height: 7vh">Идет загрузка страницы, пожалуйста подождите...</a>
+    </div>
+</div>
+
+<header>
+    <form>
+        <div>
+            <div class="menu">
+                <a class="menu_logo_button logo_adapt_size" href="main.html"></a>
+                <a class="menu_element stat_adapt_size" href="players.html">Игровая статистика</a>
+                <label for="search_field"></label>
+                <input class="menu_element input_field search_adapt_size" type="text" name="search_field"
+                       id="search_field" placeholder="Поиск по никнейму, ip, hwid...">
+                <a type="button" class="menu_search_icon" id="search"></a>
+                <div style="margin: auto 1vh auto 1vh" class="menu_element menu_user_block user_adapt_size">
+                    <a style="margin: auto 2vh auto 1vh" class="menu_user_icon"></a>
+                    <a style="margin: auto 0 auto 0" id="user_name">Вы не авторизованы</a>
+                </div>
+                <a class="menu_logout_icon logout_adapt_size" href="login.html"></a>
+            </div>
+            <div class="buttons_history">
+                <button class="circle_button" onclick="history.back();">
+                    <img style="transform: scale(-1, 1);" src="../media/icons/history_arrow_left.svg" alt="history_arrow" />
+                </button>
+                <button class="circle_button" onclick="history.forward();">
+                    <img src="../media/icons/history_arrow_left.svg" alt="history_arrow" />
+                </button>
+            </div>
+            <a id="theme_switcher">
+                <img src="../media/icons/menu_theme_switcher.svg" alt="theme_switcher" width="30vh"/>
+            </a>
+        </div>
+    </form>
+</header>
+
+<div class="main" id="main">
+    <p class="players_found" id="results_cnt">Найдено игроков: 228</p>
+    <form>
+        <nav style="align-items: center">
+            <button type="button" class="circle_button arrow_left" name="page_go_back" onClick="PrevPage(this.form)">
+                <img src="../media/icons/arrow_left.svg" alt="arrow_left"/>
+            </button>
+            <a class="page_num"></a>
+            <label for="page_input"></label>
+            <input style="width: 20vh; font-size: 1.65vh" class="input_field page_input" id="page_input" type="text"
+                   name="page_input" placeholder="Введите номер страницы">
+            <button type="button" name="page_go" onClick="ChangePage(this.form)">Перейти</button>
+            <button type="button" class="circle_button arrow_right" name="page_go_forward"
+                    onClick="NextPage(this.form)">
+                <img src="../media/icons/arrow_left.svg" alt="arrow_left"/>
+            </button>
+        </nav>
+    </form>
+
+    <!-- List is here -->
+
+    <form id="last_nav">
+        <nav style="align-items: center">
+            <button type="button" class="circle_button arrow_left" name="page_go_back" onClick="PrevPage(this.form)">
+                <img src="../media/icons/arrow_left.svg" alt="arrow_left"/>
+            </button>
+            <a class="page_num"></a>
+            <label for="page_input_2"></label>
+            <input style="width: 20vh; font-size: 1.65vh" class="input_field" id="page_input_2" type="text"
+                   name="page_input" placeholder="Введите номер страницы">
+            <button type="button" name="page_go" onClick="ChangePage(this.form)">Перейти</button>
+            <button type="button" class="circle_button arrow_right" name="page_go_forward"
+                    onClick="NextPage(this.form)">
+                <img src="../media/icons/arrow_left.svg" alt="arrow_left"/>
+            </button>
+        </nav>
+    </form>
+</div>
+
+<footer>
+    <div class="footer_option_list">
+        <a class="href" style="display: inline-flex" href="https://discord.gg/D5nHxsygpc">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_discord.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Discord</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life-server.ru">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://team-stalker.ucoz.com">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Team-Stalker</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life.ucoz.net">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life (Старый)</span>
+        </a>
+    </div>
+    <div class="footer_line"></div>
+    <p class="footer_desc">Team-Stalker Multiplayer, 2023 г.</p>
+</footer>
+
+<!--<script type="text/javascript">
+    const style_off_block = document.getElementById("dark_preloader_style");
+    const style_block = document.createElement("style");
+    style_block.innerHTML = style_off_block.innerHTML;
+
+    for (var i = 0; i < style_off_block.attributes.length; i++) {
+        var attr = style_off_block.attributes[i];
+        style_block.setAttribute(attr.name, attr.value);
+    }
+    style_off_block.parentNode.replaceChild(style_block, style_off_block);
+</script>-->
+<script type="text/javascript" src="../js/theme_switcher.js"></script>
+<script type="text/javascript" src="../js/page_preloader.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+
+</body>
+</html>

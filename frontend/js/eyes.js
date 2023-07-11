@@ -2,14 +2,14 @@
 
 (function () {
 
-    var inputLogin = document.querySelector('.form__input--login');
-    var inputPassword = document.querySelector('.form__input--password');
+    var inputLogin = document.getElementById('login');
+    var inputPassword = document.getElementById('password');
 
-    var eyeFirstLeft = document.querySelector('.animation__eye--one-one');
-    var eyeFirstRight = document.querySelector('.animation__eye--one-two');
+    var eyeFirstLeft = document.querySelector('.watchers_anim__eye--one-one');
+    var eyeFirstRight = document.querySelector('.watchers_anim__eye--one-two');
 
-    var eyeSecondLeft = document.querySelector('.animation__eye--two-one');
-    var eyeSecondRight = document.querySelector('.animation__eye--two-two');
+    var eyeSecondLeft = document.querySelector('.watchers_anim__eye--two-one');
+    var eyeSecondRight = document.querySelector('.watchers_anim__eye--two-two');
 
     inputLogin.addEventListener('focus', firstFocusHandler);
     inputPassword.addEventListener('focus', firstFocusHandler);
@@ -22,23 +22,21 @@
     blurHandler();
     firstFocusHandler();
 
-    function firstFocusHandler() 
-    {
-        var animation = document.querySelector('.animation');
-        var animationVideo = document.querySelector('.animation__video');
-        var eye = document.querySelectorAll('.animation__eye');
+    function firstFocusHandler() {
+        var animation = document.querySelector('.watchers_anim');
+        var animationVideo = document.querySelector('.watchers_anim__video');
+        var eye = document.querySelectorAll('.watchers_anim__eye');
         var about = document.querySelector('.about');
 
-        for (var i = 0; i < eye.length; i++) 
-        {
+        for (var i = 0; i < eye.length; i++) {
             eye[i].style.display = 'block';
-            fadeIn(eye[i], 2000);
+            //fadeIn(eye[i], 2000);
         }
 
         animation.style.maxHeight = '374px';
         animationVideo.style.display = 'block';
-        fadeIn(animationVideo, 2000);
-        fadeIn(about, 2000);
+        //fadeIn(animationVideo, 2000);
+        //fadeIn(about, 2000);
         animationVideo.play();
 
         inputLogin.removeEventListener('focus', firstFocusHandler);
@@ -50,13 +48,14 @@
         //button.addEventListener('click', clickHandler);
     }
 
+    /*
     function fadeIn(elem, speed) {
         var inInterval = setInterval(function () {
             elem.style.opacity = Number(elem.style.opacity) + 0.02;
             if (elem.style.opacity >= 1)
                 clearInterval(inInterval);
         }, speed / 50);
-    }
+    }*/
 
     function fadeOut(elem, speed) {
         var outInterval = setInterval(function () {
@@ -69,8 +68,7 @@
         }, speed / 50);
     }
 
-    function focusHandler(evt) 
-    {
+    function focusHandler(evt) {
         evt.preventDefault();
         evt.stopPropagation();
         var length = evt.target.value.length;
@@ -84,33 +82,24 @@
         setPositionTwo(length);
     }
 
-    function setPositionOne(len) 
-    {
+    function setPositionOne(len) {
         if (len < 2) {
             setPosition('First', 56, 110, 101, 111);
-        }
-        else if (len < 3) {
+        } else if (len < 3) {
             setPosition('First', 57, 110, 102, 111);
-        }
-        else if (len < 4) {
+        } else if (len < 4) {
             setPosition('First', 58, 110, 103, 111);
-        }
-        else if (len < 5) {
+        } else if (len < 5) {
             setPosition('First', 59, 110, 104, 111);
-        }
-        else if (len < 6) {
+        } else if (len < 6) {
             setPosition('First', 60, 110, 104, 111);
-        }
-        else if (len < 7) {
+        } else if (len < 7) {
             setPosition('First', 61, 110, 105, 111);
-        }
-        else if (len < 8) {
+        } else if (len < 8) {
             setPosition('First', 62, 110, 106, 111);
-        }
-        else if (len < 9) {
+        } else if (len < 9) {
             setPosition('First', 63, 110, 107, 111);
-        }
-        else if (len > 12) {
+        } else if (len > 12) {
             setPosition('First', 64, 110, 108, 111);
         }
     }
@@ -118,35 +107,25 @@
     function setPositionTwo(len) {
         if (len < 2) {
             setPosition('Second', 245, 167, 290, 168);
-        }
-        else if (len < 3) {
+        } else if (len < 3) {
             setPosition('Second', 246, 168, 291, 169);
-        }
-        else if (len < 4) {
+        } else if (len < 4) {
             setPosition('Second', 247, 168, 292, 169);
-        }
-        else if (len < 5) {
+        } else if (len < 5) {
             setPosition('Second', 248, 168, 293, 169);
-        }
-        else if (len < 6) {
+        } else if (len < 6) {
             setPosition('Second', 249, 168, 294, 169);
-        }
-        else if (len < 7) {
+        } else if (len < 7) {
             setPosition('Second', 250, 168, 294, 169);
-        }
-        else if (len < 8) {
+        } else if (len < 8) {
             setPosition('Second', 250, 168, 294, 169);
-        }
-        else if (len === 11) {
+        } else if (len === 11) {
             setPosition('Second', 251, 168, 295, 169);
-        }
-        else if (len === 12) {
+        } else if (len === 12) {
             setPosition('Second', 252, 168, 296, 169);
-        }
-        else if (len === 13) {
+        } else if (len === 13) {
             setPosition('Second', 253, 168, 297, 169);
-        }
-        else if (len > 13) {
+        } else if (len > 13) {
             setPosition('Second', 254, 168, 298, 169);
         }
     }
@@ -162,7 +141,7 @@
     //     fadeOut(wrapper, 1000);
     // }
 
-    function setPosition(person, xLeft, yLeft, xRight, yRight) {        
+    function setPosition(person, xLeft, yLeft, xRight, yRight) {
         eval('eye' + person + 'Left').style.left = xLeft + 'px';
         eval('eye' + person + 'Left').style.top = yLeft + 'px';
         eval('eye' + person + 'Right').style.left = xRight + 'px';

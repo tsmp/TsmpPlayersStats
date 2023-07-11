@@ -31,7 +31,7 @@ body {
     display: none;
     width: 6px;
     height: 5px;
-    background-image: url("eye.png");
+    background-image: url("../media/images/eye.png");
     background-repeat: no-repeat;
     z-index: 1;
     opacity: 0;

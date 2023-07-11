@@ -16,11 +16,11 @@ var Load = function()
 function CreatePlayerStat(player) 
 {
     SetElemText("playerId", "Игрок " + PlayerId);
-    SetElemText("nicknames", player.nicknames);
-    SetElemText("kills", player.frags);
-    SetElemText("kd", player.kd.toFixed(2));
-    SetElemText("hoursIngame", player.hoursIngame);
-    SetElemText("bestWpn", player.favouriteWeapon);
+    SetElemText("nicknames", "Никнеймы:<br>" + player.nicknames);
+    SetElemText("kills", "Фраги:<br>" + player.frags);
+    SetElemText("kd", "K/D:<br>" + player.kd.toFixed(2));
+    SetElemText("hoursIngame", "Часов в игре:<br>" + player.hoursIngame);
+    SetElemText("bestWpn", "Любимое оружие:<br>" + player.favouriteWeapon);
 }
 
 function GetGameColText(gameData, index) {
@@ -39,18 +39,11 @@ function GetGameColText(gameData, index) {
 }
 
 function CreateGameEntry(container, gameData) {
-    const row = CreateElem("div", "row game-row", undefined);
+    const row = CreateElem("div", "table_row", undefined);
     const columnsCnt = 3;
 
-    for(let i = 0; i < columnsCnt; i++)
-    {
-        let classes = "col-xl-4 col-md-4 col-sm-4 game-col";
-
-        if(i + 1 == columnsCnt)
-            classes = "col-xl-4 col-md-4 col-sm-4 game-col-last";
-
-        const col = CreateElem("div", classes, row);
-        const textNode = CreateElem("h5", "text-center", col);
+    for(let i = 0; i < columnsCnt; i++) {
+        const textNode = CreateElem("div", "table_data", row);
         textNode.appendChild(document.createTextNode(GetGameColText(gameData, i)));
     }
 
@@ -60,7 +53,7 @@ function CreateGameEntry(container, gameData) {
 
 function CreateGamesList(games)
 {
-    const gamesContainer = document.getElementById("games-container");
+    const gamesContainer = document.getElementById("table_stats");
 
     for (let i = 0; i < games.length; i++)
         CreateGameEntry(gamesContainer, games[i]);

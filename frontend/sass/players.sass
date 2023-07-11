@@ -1,0 +1,76 @@
+$base-spacing-unit: 24px
+$half-spacing-unit: $base-spacing-unit / 2
+
+$color-alpha: #1772FF
+$color-form-highlight: #EEEEEE
+
+.table_stats
+  width: 90%
+  margin: 1vh auto 1vh auto
+  border: 1px solid $color-form-highlight
+
+.table_header
+  display: flex
+  width: 100%
+  font-family: 'Roboto', sans-serif
+  font-size: 2.6vh
+  background: #000
+  padding: ($half-spacing-unit * 1.5) 0
+
+.table_row
+  display: flex
+  width: 100%
+  font-family: 'Roboto', sans-serif
+  font-size: 2.5vh
+  background: #d3d3d3
+  padding: ($half-spacing-unit * 1.5) 0
+  transition: 0.3s ease-in-out
+
+  &:nth-of-type(odd)
+    background: $color-form-highlight
+
+  &:hover
+    filter: invert(100%)
+
+  &:active
+    filter: invert(80%)
+
+.table_row.table_no_click
+  &:hover
+    filter: invert(0%)
+
+.table_data, .header_item
+  flex: 1 1 20%
+  text-align: center
+  margin: auto 0 auto 0
+
+.header_item
+  text-transform: uppercase
+
+.filter_link
+  color: white
+  text-decoration: none
+  position: relative
+  display: inline-block
+  padding-left: $base-spacing-unit
+  padding-right: $base-spacing-unit
+
+  &::after
+    content: ''
+    position: absolute
+    right: -($half-spacing-unit * 1.5)
+    color: white
+    font-size: $half-spacing-unit
+    top: 50%
+    transform: translateY(-50%)
+
+  &.desc::after
+    content: '(desc)'
+
+  &.asc::after
+    content: '(asc)'
+
+h1
+  text-align: center
+  font-family: 'Lato Bold', sans-serif
+  margin: 5vh

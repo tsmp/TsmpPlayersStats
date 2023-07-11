@@ -5,6 +5,13 @@ $basic-spinner-dimensions: 125px
 $main-spinner-dimensions: $basic-spinner-dimensions - $border-width * 2
 $small-spinner-dimensions: $main-spinner-dimensions * 0.7
 
+@keyframes page_init_anim
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+
 .spinner-block
   width: $basic-spinner-dimensions
   text-align: center
@@ -63,3 +70,32 @@ $small-spinner-dimensions: $main-spinner-dimensions * 0.7
     top: ($main-spinner-dimensions - $small-spinner-dimensions) / 2
     left: ($main-spinner-dimensions - $small-spinner-dimensions) / 2
     animation: anti-rotate-animation 0.85s linear 0s infinite
+
+.watchers_anim
+  position: relative
+  max-height: 0
+
+  &__eye
+    display: block
+    position: absolute
+    width: 6px
+    height: 5px
+    background-image: url("../media/images/eye.png")
+    background-repeat: no-repeat
+    z-index: 1
+
+    &--one-one
+      left: 58px
+      top: 107px
+
+    &--one-two
+      left: 104px
+      top: 108px
+
+    &--two-one
+      left: 250px
+      top: 164px
+
+    &--two-two
+      left: 296px
+      top: 164px

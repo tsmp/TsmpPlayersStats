@@ -1,0 +1,83 @@
+.player_list
+  display: flex
+  flex-direction: column
+  align-content: center
+  justify-content: center
+  border: 1px solid gray
+  border-radius: 1vh
+  padding: 2vh
+  margin: 2vh 0 2vh 0
+
+.player_list_element
+  display: inline-flex
+  justify-content: space-between
+  padding: 1vh
+  color: #282e36
+  border-bottom: 1px solid gray
+
+.ple_info
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+
+  a
+    font-family: 'Lato Regular', sans-serif
+    font-size: 2.2vh
+    padding: 0.5vh
+
+  a.player_id
+    &:before
+      font-family: 'Lato Bold', sans-serif
+      content: 'ID: '
+
+  a.player_hwid
+    &:before
+      font-family: 'Lato Bold', sans-serif
+      content: 'HWID: '
+
+  a.player_ip
+    &:before
+      font-family: 'Lato Bold', sans-serif
+      content: 'IP адрес: '
+
+  p
+    padding: 0.5vh
+    margin: 0
+    font-size: 2.2vh
+
+  p.player_nicknames
+    &:before
+      font-family: 'Lato Bold', sans-serif
+      content: 'Ники: '
+
+button.player_info
+  height: 5vh
+  min-width: 19vh
+  margin: auto 0 auto 0
+
+//------------- костыльное дублирование ------------------//
+.input_field
+  height: 1vh
+  padding: 1.5vh
+  font-family: 'helvetica neue', sans-serif
+  font-size: 2vh
+  font-weight: normal
+  color: black
+  border: 1px solid gray
+  border-radius: 1vh
+  cursor: text
+  margin: auto 1vh auto 1vh
+  user-select: all
+
+  &:hover
+    color: #2d2d2d
+    background: white
+    border: 1px solid #464646
+    box-shadow: 1px 1px 5px rgba(114, 114, 114, 0.5)
+
+  &:focus
+    color: #2d2d2d
+    background: white
+    border: 1px solid black
+    box-shadow: 3px 3px 6px rgba(65, 65, 65, 0.5)
+//--------------------------------------------------------//

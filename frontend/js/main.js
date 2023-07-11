@@ -5,6 +5,11 @@ id = urlParams.get("id")
 maxPage = 1
 curPage = 1
 
+document.getElementById('search').addEventListener('click', function () {
+    var form = document.getElementById('menu_search_form');
+    Search(form);
+});
+
 var Load = function () {
     // Если не вошли!!!
     if (id == null) {
@@ -54,12 +59,6 @@ var Load = function () {
 
 
     // ------------------------------------------------------------------------------- //
-    window.addEventListener('load', function () {
-        const load_screen = document.getElementById('load_screen');
-        const page = document.getElementById('body');
-        load_screen.style.display = 'none';
-        page.style.animation = 'page_init_anim 0.5s ease-in-out forwards';
-    });
 
     const a_page_nums = document.querySelectorAll('a.page_num');
     a_page_nums.forEach((a) => {
@@ -71,12 +70,7 @@ var Load = function () {
         this.style.animation = 'search_icon_anim 0.3s forwards';
     });
 
-    document.getElementById('search').addEventListener('click', function () {
-        var form = document.getElementById('menu_search_form');
-        Search(form);
-    });
-
-// ------------------------------------------------------------------------------- //
+    // ------------------------------------------------------------------------------- //
 
 }
 
@@ -194,7 +188,7 @@ function MainPage() {
 }
 
 function Search(form) {
-    val = form.search_field.value;
+    const val = document.getElementById('search_field').value;
     console.log(val);
     urlParams.set(searchKey, val);
     urlParams.set(pageKey, "1");

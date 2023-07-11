@@ -23,21 +23,11 @@ function GetPlayerColText(playerData, index) {
 }
 
 function CreatePlayerEntry(container, playerData) {
-    const row = CreateElem("div", "row player-row", undefined);
+    const row = CreateElem("div", "table_row", undefined);
     const columnsCnt = 6;
 
-    for(let i = 0; i < columnsCnt; i++)
-    {
-        let classes = "col-xl-1 col-md-1 col-sm-1 player-col";
-
-        if(i == 1)
-            classes = "col-xl-7 col-md-7 col-sm-7 player-col";
-
-        if(i + 1 == columnsCnt)
-            classes = "col-xl-1 col-md-1 col-sm-1 player-col-last";
-
-        const col = CreateElem("div", classes, row);
-        const textNode = CreateElem("h5", "text-center", col);
+    for(let i = 0; i < columnsCnt; i++) {
+        const textNode = CreateElem("div", "table_data", row);
         textNode.appendChild(document.createTextNode(GetPlayerColText(playerData, i)));
     }
 
@@ -46,7 +36,7 @@ function CreatePlayerEntry(container, playerData) {
 }
 
 function CreatePlayersList(playersJSON) {
-    const playersContainer = document.getElementById("players-container");
+    const playersContainer = document.getElementById("table_stats");
 
     for (let i = 0; i < playersJSON.length; i++)
         CreatePlayerEntry(playersContainer, playersJSON[i]);

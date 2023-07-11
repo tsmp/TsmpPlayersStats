@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/players.css">
+    <link rel="stylesheet" type="text/css" href="../css/anims.css">
+    <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" id="link_dark_theme">
+    <link rel="icon" type="image/x-icon" href="../media/icons/favicon.ico">
+    <title>Игровая статистика</title>
+    <script type="text/css" id="dark_preloader_style">
+        #load_screen {
+            background-color: #171717;
+            color: white;
+        }
+
+        .spinner.spinner-1:before {
+            border-bottom-color: white;
+            border-right-color: white;
+            border-top-color: rgba(255, 255, 255, 0);
+            border-left-color: rgba(255, 255, 255, 0);
+        }
+        .spinner.spinner-1:after {
+            border-bottom-color: white;
+            border-right-color: white;
+            border-top-color: rgba(255, 255, 255, 0);
+            border-left-color: rgba(255, 255, 255, 0);
+        }
+    </script>
+</head>
+<body id="body">
+
+<div id="load_screen">
+    <div style="margin: 15% auto 0 auto">
+        <div style="margin: 0 auto 0 auto" class="spinner-block">
+            <div class="spinner spinner-1"></div>
+        </div>
+        <a style="font-size: 6vh">Идет загрузка страницы, пожалуйста подождите...</a>
+    </div>
+</div>
+
+<header>
+    <div>
+        <div class="menu">
+            <a class="menu_logo_button logo_adapt_size" href="main.html"></a>
+            <a class="menu_element main_adapt_size" href="main.html">Главная</a>
+            <a class="menu_element stat_adapt_size" href="players.html">Игровая статистика</a>
+            <div class="empty_adapt_size"></div>
+            <div style="margin: auto 1vh auto 1vh" class="menu_element menu_user_block user_adapt_size">
+                <a style="margin: auto 2vh auto 1vh" class="menu_user_icon"></a>
+                <a style="margin: auto 0 auto 0" id="user_name">Вы не авторизованы</a>
+            </div>
+            <a class="menu_logout_icon logout_adapt_size" href="login.html"></a>
+        </div>
+        <div class="buttons_history">
+            <button class="circle_button" onclick="history.back();">
+                <img style="transform: scale(-1, 1);" src="../media/icons/history_arrow_left.svg" alt="history_arrow" />
+            </button>
+            <button class="circle_button" onclick="history.forward();">
+                <img src="../media/icons/history_arrow_left.svg" alt="history_arrow" />
+            </button>
+        </div>
+        <a id="theme_switcher">
+            <img src="../media/icons/menu_theme_switcher.svg" alt="theme_switcher" width="30vh"/>
+        </a>
+    </div>
+</header>
+
+<div class="main" id="main">
+    <h1 class="">Рейтинг игроков</h1>
+    <div class="table_stats" id="table_stats">
+        <div class="table_header">
+            <div class="header_item filter_link">Место</div>
+            <div class="header_item filter_link">Никнеймы</div>
+            <div class="header_item filter_link">Фрагов</div>
+            <div class="header_item filter_link">K/D</div>
+            <div class="header_item filter_link">Артефактов</div>
+            <div class="header_item filter_link">Часов в игре</div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer_option_list">
+        <a class="href" style="display: inline-flex" href="https://discord.gg/D5nHxsygpc">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_discord.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Discord</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life-server.ru">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://team-stalker.ucoz.com">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Team-Stalker</span>
+        </a>
+        <a class="href" style="display: inline-flex" href="http://stalker-life.ucoz.net">
+            <img style="margin: auto 0 auto 0" src="../media/icons/footer_website.svg" alt="footer_discord"/>
+            <span style="margin: auto 0 auto 1vh;">Stalker-Life (Старый)</span>
+        </a>
+    </div>
+    <div class="footer_line"></div>
+    <p class="footer_desc">Team-Stalker Multiplayer, 2023 г.</p>
+</footer>
+
+<script type="text/javascript" src="../js/theme_switcher.js"></script>
+<script type="text/javascript" src="../js/page_preloader.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/players.js"></script>
+</body>
+</html>
