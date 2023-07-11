@@ -24,7 +24,7 @@ function CreateGameStat(game) {
 }
 
 function CreateWpnEntry(container, wpnData) {
-    const row = CreateElem("div", "table_row", undefined);
+    const row = CreateElem("div", "table_row table_no_click", undefined);
     const columnsCnt = 2;
 
     for(let i = 0; i < columnsCnt; i++)
