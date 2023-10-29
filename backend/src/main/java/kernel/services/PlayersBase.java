@@ -44,76 +44,98 @@ public class PlayersBase
         return go.getGameId();
     }
 
-    public int PlayerId(IpAddress ip, Player player, Nickname nickname)
+    private Integer FindPlayerByIp(String ip)
     {
-        Optional<IpAddress> findIp = ipAddressesRepoJPA.findById(ip.getAddress());
-        int playerId = 0;
-        int uid = 0;
+        Optional<IpAddress> findIp = ipAddressesRepoJPA.findById(ip);
 
-        if(player.getUID() != null)
-            uid = player.getUID();
+        if(findIp.isEmpty())
+            return 0;
 
-        if(!findIp.isEmpty())
-        {
-            IpAddress addr = findIp.get();
-            Integer iPlayer = addr.getPlayer();
+        IpAddress addr = findIp.get();
+        Integer iPlayer = addr.getPlayer();
 
-            if(iPlayer == null)
-                throw new RuntimeException("error! player by ip not found!");
+        if(iPlayer == null)
+            throw new RuntimeException("error! player by ip not found!");
 
-            playerId = iPlayer;
-        }
+        return iPlayer;
+    }
 
-        // если есть с таким uid но нет такого ip
-        if(uid != 0)
-        {
-            List<Integer> players = playersRepoJPA.SearchByUID(uid);
+    private Integer FindPlayerByUid(int Uid)
+    {
+        if(Uid == 0)
+            return 0;
 
-            if(!players.isEmpty())
-            {
-                if(playerId != 0 && playerId != players.get(0))
-                {
-                    IpAddress addr = findIp.get(); // переназначаем ip на игрока с uid
-                    addr.setPlayer(players.get(0));
-                    ipAddressesRepoJPA.save(addr);
-                }
+        List<Integer> players = playersRepoJPA.SearchByUID(Uid);
 
-                playerId = players.get(0);
-            }
-        }
+        if(players.isEmpty())
+            return 0;
 
-        if(playerId !=0)
-        {
-            Player pl = playersRepoJPA.getById(playerId);
+        return players.get(0);
+    }
 
-            if(pl.getUID() == null && uid !=0)
-            {
-                pl.setUID(uid);
-                playersRepoJPA.save(pl); // update entry with UID
-            }
-
-            return playerId; // already have player and ip
-        }
-        else
+    private Integer SaveNewPlayer(Player player, IpAddress ip)
+    {
+        if(player.getUID() == 0)
             player.setUID(null);
 
-        // add new player
-        if(playerId == 0)
-        {
-            Player saved = playersRepoJPA.save(player);
-            System.out.println("saved new player with id " + Integer.toString(saved.getPlayerId()));
-            playerId = saved.getPlayerId();
-        }
+        Player saved = playersRepoJPA.save(player);
+        System.out.println("saved new player with id " + Integer.toString(saved.getPlayerId()));
+        int playerId = saved.getPlayerId();
 
         // save ip
         ip.setPlayer(playerId);
         ipAddressesRepoJPA.save(ip);
+
         return playerId;
+    }
+
+    private Integer GetIdOfPlayerWithoutUid(IpAddress ip, Player player)
+    {
+        int playerId = FindPlayerByIp(ip.getAddress());
+
+        if(playerId != 0)
+            return playerId;
+
+        return SaveNewPlayer(player, ip);
+    }
+
+    public int GetIdOfPlayerWithUid(IpAddress ip, Player player)
+    {
+        final int uid = player.getUID();
+        final int playerByIp = FindPlayerByIp(ip.getAddress());
+        final int playerByUid = FindPlayerByUid(uid);
+
+        if(playerByIp == 0 && playerByUid == 0)
+            return SaveNewPlayer(player, ip);
+
+        if(playerByUid != 0)
+        {
+            if(playerByIp != 0 && playerByIp != playerByUid)
+                System.out.println("WARNING: player by ip is not equal to player by uid");
+
+            return playerByUid;
+        }
+
+        // playerByIp != 0
+        Player pl = playersRepoJPA.findById(playerByIp).get();
+
+        // У него уже есть UID и он отличается, интересно, значит точно другой игрок (ip ему перетрем)
+        if(pl.getUID() != null && pl.getUID() != uid)
+        {
+            System.out.println("WARNING: player by ip has different uid");
+            return SaveNewPlayer(player, ip);
+        }
+
+        // Cчитаем что тот же товарищ, если нашелся по ip и у него нет uid (или совпадает с нашим)
+        pl.setUID(uid);
+        playersRepoJPA.save(pl); // Зададим ему UID
+        return playerByIp;
     }
 
     public void AddPlayer(IpAddress ip, Player player, Nickname nickname)
     {
-        int playerId = PlayerId(ip, player, nickname);
+        final boolean hasUid = player.getUID() != null && player.getUID() != 0;
+        final int playerId = hasUid ? GetIdOfPlayerWithUid(ip, player) : GetIdOfPlayerWithoutUid(ip, player);
 
         nickname.setPlayerId(playerId);
 
