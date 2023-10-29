@@ -18,7 +18,7 @@ function CreateGameStat(game) {
     SetElemText("kills", "Фраги:<br>" + game.kills);
     SetElemText("killsAi", "Убийства НПС:<br>" + game.killsAi);
     SetElemText("deaths", "Смерти:<br>" + game.deaths);
-    SetElemText("kd", "K/D:<br>" + game.kd.toFixed(2));
+    SetElemText("kd", "K/D:<br>" + (game.kd != null ? game.kd.toFixed(2) : "-"));
     SetElemText("hoursIngame", "Часов в игре:<br>" + game.hoursIngame.toFixed(2));
     SetElemText("killsOneLife", "Убийств за одну жизнь:<br>" + game.killsOneLife);
 }
