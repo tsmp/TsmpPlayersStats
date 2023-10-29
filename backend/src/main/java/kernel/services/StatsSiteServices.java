@@ -125,7 +125,14 @@ public class StatsSiteServices
         res.setFrags(gamesRepoJpa.sumPlayerFrags(puid));
         res.setArts(gamesRepoJpa.sumPlayerArts(puid));
         res.setHoursIngame(gamesRepoJpa.sumPlayerMinutesIngame(puid) / 60);
-        res.setFavouriteWeapon(weaponRepoJpa.findById(hitRepoJpa.bestWeaponId(puid)).get().getName());
+
+        String bestWpn = "-";
+        Integer bestWpnId = hitRepoJpa.bestWeaponId(puid);
+
+        if(bestWpnId != null)
+            bestWpn = weaponRepoJpa.findById(bestWpnId).get().getName();
+
+        res.setFavouriteWeapon(bestWpn);
 
         final int deaths = gamesRepoJpa.sumPlayerDeaths(puid);
         if (deaths != 0)
