@@ -76,12 +76,18 @@ public class StatsSiteServices
 
             PlayersStatsResponse response = new PlayersStatsResponse();
             response.setNicknames(GetPlayerNicknames(pid));
-            response.setFrags(gamesRepoJpa.sumPlayerFrags(puid));
-            response.setArts(gamesRepoJpa.sumPlayerArts(puid));
-            response.setHoursIngame(gamesRepoJpa.sumPlayerMinutesIngame(puid) / 60);
 
-            final int deaths = gamesRepoJpa.sumPlayerDeaths(puid);
-            if(deaths != 0)
+            final Integer fragsCnt = gamesRepoJpa.sumPlayerFrags(puid);
+            response.setFrags(fragsCnt != null ? fragsCnt : 0);
+
+            final Integer artsCnt = gamesRepoJpa.sumPlayerArts(puid);
+            response.setArts(artsCnt != null ? artsCnt : 0);
+
+            final Integer minInGame = gamesRepoJpa.sumPlayerMinutesIngame(puid);
+            response.setHoursIngame(minInGame != null ? minInGame / 60 : 0);
+
+            final Integer deaths = gamesRepoJpa.sumPlayerDeaths(puid);
+            if(deaths != null && deaths != 0)
                 response.setKd((float)response.getFrags() / deaths);
 
             response.setNum(counter);
