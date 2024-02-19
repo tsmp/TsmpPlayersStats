@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: @spring.profiles.active@
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/PlayersStats
@@ -11,12 +9,3 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
----
-spring:
-  profiles: prod
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://212.22.93.198:5432/CheatersDB
-    username: postgres
-    password: nmtprG

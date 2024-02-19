@@ -130,12 +130,15 @@ public class SiteServices
             pl.nicknames = new ArrayList<>();
             //pl.hwid = "NO HWID";
             pl.playerId = player.getPlayerId();
+            List<String> names = nicknamesRepoJPA.searchByPlayerId(pl.playerId);
 
-            for(Nickname name: player.getNicknames())
-                pl.nicknames.add(name.getNickname());
+            for(String name: names)
+                pl.nicknames.add(name);
 
-            for(IpAddress addr: player.getAddresses())
-                pl.addresses.add(addr.getAddress());
+            List<String> addresses = ipAddressesRepoJPA.searchByPlayerId(pl.playerId);
+
+            for(String addr: addresses)
+                pl.addresses.add(addr);
 
             res.players.add(pl);
         }

@@ -2,7 +2,7 @@ package kernel.controllers.RequestsLogger;
 
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class BaseRequestLogger

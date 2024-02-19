@@ -4,7 +4,7 @@
 //import lombok.NoArgsConstructor;
 //import lombok.Setter;
 //
-//import javax.persistence.*;
+//import jakarta.persistence.*;
 //
 //@Entity
 //@Table(name = "k_banned_cheaters")

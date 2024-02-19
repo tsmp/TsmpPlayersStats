@@ -140,18 +140,15 @@ public class PlayersBase
         nickname.setPlayerId(playerId);
 
         Player fromBase = playersRepoJPA.getById(playerId);
-        Set<Nickname> namesSet = fromBase.getNicknames();
+        List<String> names = nicknamesRepoJPA.searchByPlayerId(playerId);
 
-        if(namesSet != null)
+        if(names != null)
         {
-            List<Nickname> names = new ArrayList<>(namesSet);
-
-            for (int ii = 0; ii < names.size(); ii++) // TODO: Optimize
+            for (String Name: names) // TODO: Optimize
             {
-                String name1 = names.get(ii).getNickname();
                 String name2 = nickname.getNickname();
 
-                if(name1.equals(name2))
+                if(Name.equals(name2))
                     return;
             }
         }

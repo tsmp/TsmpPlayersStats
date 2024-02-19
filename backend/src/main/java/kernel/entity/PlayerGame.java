@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "k_player_game")
@@ -15,7 +15,7 @@ public class PlayerGame // Класс, соответствующий запис
 {
     public static String TYPE_NAME = "name_t";
 
-    @javax.persistence.Id
+    @jakarta.persistence.Id
     @Column(name = "player_game_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "player_game_id_seq")
     @SequenceGenerator(name = "player_game_id_seq",sequenceName = "player_game_id_seq", allocationSize = 1)
