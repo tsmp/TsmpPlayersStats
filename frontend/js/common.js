@@ -1,5 +1,5 @@
 // common
-const servicesUrl = "http://194.147.90.72:8080/";
+const servicesUrl = "http://212.22.93.24:8080/";
 
 function toPage(pageUrl) {
 	location = pageUrl;
