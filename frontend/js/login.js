@@ -10,7 +10,7 @@ function pasuser(form) {
         log = logg.value
         psw = psww.value
 
-        url = servicesUrl + "/PlayersSite/v1/Authorize"
+        url = servicesUrl + "PlayersSite/v1/Authorize"
         loginParam = "?login="
         passwordParam = "&password="
 

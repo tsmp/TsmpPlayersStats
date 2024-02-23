@@ -38,11 +38,11 @@ var Load = function () {
     }
 
     // Установить имя пользователя
-    nameRequest = servicesUrl + "/PlayersSite/v1/MyName?key=" + id;
+    nameRequest = servicesUrl + "PlayersSite/v1/MyName?key=" + id;
     user = httpGet(nameRequest);
     document.getElementById('user_name').innerHTML = user.responseText
 
-    searchReq = servicesUrl + "/PlayersSite/v1/SearchPlayers?key=" + id + "&search=" + encodeURIComponent(search) + "&page=" + curPage
+    searchReq = servicesUrl + "PlayersSite/v1/SearchPlayers?key=" + id + "&search=" + encodeURIComponent(search) + "&page=" + curPage
 
     //alert(searchReq)
     M = httpGet(searchReq)

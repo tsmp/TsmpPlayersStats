@@ -17,14 +17,14 @@ var Load = function () {
     }
 
     // Установить имя пользователя
-    nameRequest = servicesUrl + "/PlayersSite/v1/MyName?key=" + id;
+    nameRequest = servicesUrl + "PlayersSite/v1/MyName?key=" + id;
     user = httpGet(nameRequest);
     document.getElementById('user_name').innerHTML = user.responseText
 
     // Установить id пользователя
     document.getElementById('player_id').innerHTML = "Игрок: " + PlayerId
 
-    getInfoReq = servicesUrl + "/PlayersSite/v1/GetPlayerInfo?key=" + id + "&playerId=" + PlayerId;
+    getInfoReq = servicesUrl + "PlayersSite/v1/GetPlayerInfo?key=" + id + "&playerId=" + PlayerId;
     //alert(getInfoReq)
     M = httpGet(getInfoReq)
 
@@ -147,10 +147,10 @@ function httpGet(theUrl) {
 
 function OnSaveClick(noteId, text) {
     if (noteId === -1) {
-        req = servicesUrl + "/PlayersSite/v1/addNote?key=" + id + "&playerId=" + PlayerId + "&text=" + text;
+        req = servicesUrl + "PlayersSite/v1/addNote?key=" + id + "&playerId=" + PlayerId + "&text=" + text;
         M = httpGet(req);
     } else {
-        req = servicesUrl + "/PlayersSite/v1/editNote?key=" + id + "&note=" + noteId + "&text=" + text;
+        req = servicesUrl + "PlayersSite/v1/editNote?key=" + id + "&note=" + noteId + "&text=" + text;
         M = httpGet(req);
     }
     RefreshPage();
@@ -158,7 +158,7 @@ function OnSaveClick(noteId, text) {
 
 function OnDelClick(noteId, text) {
     if (noteId != -1) {
-        req = servicesUrl + "/PlayersSite/v1/delNote?key=" + id + "&note=" + noteId;
+        req = servicesUrl + "PlayersSite/v1/delNote?key=" + id + "&note=" + noteId;
         M = httpGet(req);
     }
     RefreshPage();
